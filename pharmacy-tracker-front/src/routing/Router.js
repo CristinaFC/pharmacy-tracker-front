@@ -6,6 +6,7 @@ import Routing from './Routing';
 
 import PharmacyAccountForm from '../pharmacies/pharmacyAccountForm';
 import PharmacyProfile from '../pharmacies/pharmacyProfile';
+import PharmacyUpdate from '../pharmacies/pharmacyUpdate';
 
 class RouterComponent extends Component {
   render() {
@@ -17,6 +18,7 @@ class RouterComponent extends Component {
         <Routes>
             <Route path={Routing.signInPharmacy} element={<PharmacyAccountForm />}/>
             <Route path={Routing.pharmacies} element={<PharmacyProfile />}/>
+            <Route path={Routing.updatePharmacy} element={<PharmacyUpdate />}/>
 
         </Routes>
         

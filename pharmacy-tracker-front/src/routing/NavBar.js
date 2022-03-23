@@ -19,6 +19,11 @@ const NavBar = () => {
             Sign in
           </Link>
         </li>
+        <li>
+          <Link className="nav-link" to={Routing.updatePharmacy}>
+            Modify data
+          </Link>
+        </li>
       </ul>
     </nav>
   );

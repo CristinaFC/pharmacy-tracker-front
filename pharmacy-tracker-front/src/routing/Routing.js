@@ -8,6 +8,7 @@ export default class Routing {
     static pharmacies = '/pharmacies';
     static signInOptions = '/signInOptions';
     static signInPharmacy = '/signInPharmacy';
+    static updatePharmacy = '/updatePharmacy'
     
 }
   
