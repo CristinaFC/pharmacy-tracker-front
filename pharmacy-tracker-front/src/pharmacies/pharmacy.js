@@ -1,4 +1,3 @@
-import React from 'react';
 
 class Pharmacy {
     constructor(address, city, location, owner, phone, eClosing, eOpening, mClosing,mOpening, nPharmacy){

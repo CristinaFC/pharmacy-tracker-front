@@ -34,13 +34,18 @@ class PharmacyProfile extends Component {
     
     render() {
         const {datos} = this.state;
-        
+        const {location} = this.state.datos;
         return(
             <div>
                 <ul>
                     <li>Nº Pharmacy: {datos.nPharmacy}</li>
                     <li>Address: {datos.address}</li>
                     <li>City: {datos.city}</li>
+                    <li>Location: </li>
+                        {
+                        location ? location['latitude'] : null} { }
+                        {
+                        location ? location['longitude'] : null}
                     <li>Owner: {datos.owner}</li>
                     <li>Phone: {datos.phone}</li>
                     <li>Morning Opening: {datos.mOpening}</li>

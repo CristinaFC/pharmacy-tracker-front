@@ -1,5 +1,4 @@
 import './App.css';
-import PharmaciesContainer from './pharmacies/pharmacyAccountForm';
 import RouterComponent from './routing/Router';
 
 function App() {
