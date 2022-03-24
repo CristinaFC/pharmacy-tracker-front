@@ -5,9 +5,18 @@ export default class Routing {
     static nowhere = '#';
   
     /** NavBar **/
-    static pharmacies = '/pharmacies';
+    static login = '/login';
+    static searchResults = 'searchResults';
+
+    /**Login **/
     static signInOptions = '/signInOptions';
     static signInPharmacy = '/signInPharmacy';
-    
+    static signInUser = '/signInUser';
+
+    /** Pharmacy role**/
+    static myProfile = '/myProfile';
+    static editProfile = '/editProfile';
+    static deleteProfile = '/deleteProfile';
+    //static map = '/map';
 }
   

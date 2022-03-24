@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { db } from '../firebase/firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore/lite';
 import { pharmacyConverter } from './pharmacy';
+import { EditProfileButton } from '../components/EditProfileButton';
+import { DeleteProfileButton } from '../components/DeleteProfileButton';
 
 class PharmacyProfile extends Component {
     constructor(props) {
@@ -34,20 +36,32 @@ class PharmacyProfile extends Component {
     
     render() {
         const {datos} = this.state;
-        
+        const {location} = this.state.datos;
         return(
             <div>
-                <ul>
-                    <li>Nº Pharmacy: {datos.nPharmacy}</li>
-                    <li>Address: {datos.address}</li>
-                    <li>City: {datos.city}</li>
-                    <li>Owner: {datos.owner}</li>
-                    <li>Phone: {datos.phone}</li>
-                    <li>Morning Opening: {datos.mOpening}</li>
-                    <li>Morning Closing: {datos.mClosing}</li>
-                    <li>Evening Opening: {datos.eOpening}</li>
-                    <li>Evening Closing: {datos.eClosing}</li>
-                </ul>
+                <div>
+                    <ul>
+                        <li>Nº Pharmacy: {datos.nPharmacy}</li>
+                        <li>Address: {datos.address}</li>
+                        <li>City: {datos.city}</li>
+                        <li>Location: </li>
+                            {
+                            location ? location['latitude'] : ""} { }
+                            {
+                            location ? location['longitude'] : ""}
+                        <li>Owner: {datos.owner}</li>
+                        <li>Phone: {datos.phone}</li>
+                        <li>Morning Opening: {datos.mOpening}</li>
+                        <li>Morning Closing: {datos.mClosing}</li>
+                        <li>Evening Opening: {datos.eOpening}</li>
+                        <li>Evening Closing: {datos.eClosing}</li>
+                    </ul>
+                </div>
+                <div>
+                    <EditProfileButton />
+                    <DeleteProfileButton />
+                </div>
+                
             </div>
         );
     };    
