@@ -4,8 +4,10 @@ import { NavBar } from './NavBar';
 
 import Routing from './Routing';
 
-import PharmacyAccountForm from '../pharmacies/pharmacyAccountForm';
 import PharmacyProfile from '../pharmacies/pharmacyProfile';
+import PharmacyUpdate from '../pharmacies/pharmacyUpdate';
+import Home from '../home/home';
+import PharmacyDelete from '../pharmacies/pharmacyDelete';
 
 class RouterComponent extends Component {
   render() {
@@ -15,13 +17,18 @@ class RouterComponent extends Component {
         <NavBar />
         
         <Routes>
-            <Route path={Routing.signInPharmacy} element={<PharmacyAccountForm />}/>
-            <Route path={Routing.pharmacies} element={<PharmacyProfile />}/>
+          {/** HOME **/}
+            <Route path={Routing.home} element={<Home />}/>
+
+            {/** Pharmacy Role **/}
+            <Route path={Routing.myProfile} element={<PharmacyProfile />}/>
+            <Route path={Routing.editProfile} element={<PharmacyUpdate />}/>
+            <Route path={Routing.deleteProfile} element={<PharmacyDelete />}/>
+
+            {/** User Role **/}
 
         </Routes>
-        
-        {/** MODALS **/}
-        </BrowserRouter>
+      </BrowserRouter>
     );
   }
 }

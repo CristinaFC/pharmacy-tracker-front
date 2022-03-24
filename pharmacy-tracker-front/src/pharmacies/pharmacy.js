@@ -32,7 +32,6 @@ export const pharmacyConverter = {
     },
     fromFirestore: (snapshot, options) => {
         const data = snapshot.data(options);
-        console.log('data',data);
         return new Pharmacy(data.Address, data.City, data.Location, data.Owner, data.Phone, data.eClosing, data.eOpening, data.mClosing, data.mOpening, data.nPharmacy);
     }
 };

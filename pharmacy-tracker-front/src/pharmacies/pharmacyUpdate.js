@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { db } from '../firebase/firebaseConfig';
-import { setDoc, doc } from 'firebase/firestore/lite';
+import { getDoc, doc, setDoc } from 'firebase/firestore/lite';
 import { pharmacyConverter } from './pharmacy';
 import Pharmacy from './pharmacy';
+import { ProfileButton } from '../components/ProfileButton';
 
-class PharmacyAccountForm extends Component {
+class PharmacyUpdate extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,14 +23,46 @@ class PharmacyAccountForm extends Component {
             mOpening: '',
             nPharmacy: '',
         };
-        
     }
 
+    async componentDidMount() {
+        try {
+            //Obtengo los datos de la BD que lo convierte a objeto Pharmacy (en este caso la farmacia llamada 1)
+            const docRef = doc(db, "pharmacies", "1").withConverter(pharmacyConverter);
+            const docSnap = await getDoc(docRef);
+            const pharmacy = docSnap.data();
+            this.setState({
+                address: pharmacy.address,
+                city: pharmacy.city,
+                location: {
+                    latitude: pharmacy.location.latitude,
+                    longitude: pharmacy.location.longitude,
+                },
+                owner: pharmacy.owner,
+                phone: pharmacy.phone,
+                eClosing: pharmacy.eClosing,
+                eOpening: pharmacy.eOpening,
+                mClosing: pharmacy.mClosing,
+                mOpening: pharmacy.eOpening,
+                nPharmacy: pharmacy.nPharmacy,
+            });
+
+            if (docSnap.exists()) {
+                console.log("Document data:", pharmacy);
+            } else {
+                console.log("No such document!");
+            }
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    }
+    
     render() {
-        
-        return (
+        return (            
             <div className={'pharmaciesFormContainer'}>
-                <h1>Sign In</h1>
+                <h1>Edit profile</h1>
+                
+                <ProfileButton />
                 <form className={'pharmacyForm'} onSubmit={(e) => this.handleSubmit(e)}>
                 <div class="mb-3">
                     <label for="exampleInput1" class="form-label">Address:</label>
@@ -41,11 +74,11 @@ class PharmacyAccountForm extends Component {
                 </div>
                 <div class="mb-3">
                     <label for="exampleInput1" class="form-label">Latitude:</label>
-                    <input type="number" step="any" class="form-control" id="exampleInput1" value={this.state.location.latitude} name="latitude" onChange={(e) => this.handleChangeLocation(e)} required/>
+                    <input type="number" step="any" class="form-control" id="exampleInput1" value={this.state.location ? this.state.location['latitude'] : ""} name="latitude" onChange={(e) => this.handleChangeLocation(e)} required/>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInput1" class="form-label">Longitude:</label>
-                    <input type="number" step="any" class="form-control" id="exampleInput1" value={this.state.location.longitude} name="longitude" onChange={(e) => this.handleChangeLocation(e)} required/>
+                    <input type="number" step="any" class="form-control" id="exampleInput1" value={this.state.location ? this.state.location['longitude'] : ""} name="longitude" onChange={(e) => this.handleChangeLocation(e)} required/>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInput1" class="form-label">Owner:</label>
@@ -75,7 +108,7 @@ class PharmacyAccountForm extends Component {
                     <label for="exampleInputPassword1" class="form-label">Nº Pharmacy:</label>
                     <input type="number" class="form-control" id="exampleInputPassword1" value={this.state.nPharmacy} name="nPharmacy" onChange={(e) => this.handleChange(e)} required/>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             
             </div>
@@ -101,9 +134,9 @@ class PharmacyAccountForm extends Component {
 
     async handleSubmit (e) {
         e.preventDefault();
+
         try {
-    
-            const ref = doc(db, "pharmacies", this.state.nPharmacy).withConverter(pharmacyConverter);
+            const ref = doc(db, "pharmacies", "1").withConverter(pharmacyConverter);
             await setDoc(ref, new Pharmacy(this.state.address, this.state.city, this.state.location, this.state.owner, this.state.phone, this.state.eClosing, this.state.eOpening, this.state.mClosing, this.state.mOpening, this.state.nPharmacy));
             
         } catch (e) {
@@ -122,10 +155,9 @@ class PharmacyAccountForm extends Component {
             mOpening: '',
             nPharmacy: '',
         });
-    };
+    };   
 }
-export default PharmacyAccountForm;
 
 
 
-
+export default PharmacyUpdate;
