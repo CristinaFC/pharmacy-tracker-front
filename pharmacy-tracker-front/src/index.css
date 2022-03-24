@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -19,5 +20,106 @@ code {
   display: flex;
   flex-direction: column;
   padding: 2%;
+}
+
+/** BUTTONS **/
+.edit-button {
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #10D502;
+  border-radius: 5px;
+  color: #10D502;
+  margin: 2px;
+  text-align: center;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.link .edit-button:hover{
+  background-color: #10D502;
+  transition: all 0.3s ease;
+  border-radius: 0.25rem;
+  color: #fff;
+}
+
+.delete-button {
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #f44336;
+  border-radius: 5px;
+  color: #f44336;
+  margin: 2px;
+  text-align: center;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.link .delete-button:hover{
+  background-color: #f44336;
+  transition: all 0.3s ease;
+  border-radius: 0.25rem;
+  color: #fff;
+}
+
+
+.profile-button {
+  background-color: #fff;
+  border: 1px solid;
+  border-color: gray;
+  border-radius: 5px;
+  color: gray;
+  margin: 2px;
+  text-align: center;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.link .profile-button:hover{
+  background-color: gray;
+  transition: all 0.3s ease;
+  border-radius: 0.25rem;
+  color: #fff;
+}
+
+/** NAVBAR **/
+.nav-item .nav-link {
+  color: #ffffff;
+}
+
+.nav-item .nav-link:hover {
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  border-radius: 0.25rem;
+  color: #10D502;
+}
+
+.fa-li {
+  position: relative;
+  left: 0;
+}
+
+.navbar-brand {
+  padding: 10px;
+  color: #fff;
+  text-align: center;
+}
+
+.navbar-brand:hover {
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  border-radius: 0.25rem;
+  color: #10D502;
+}
+
+.nav-item {
+  width: 65px;
+}
+
+.nav-item .nav-link {
+  color: #fff;
+}
+
+.navbar  {
+  background-color: #10D502;
 }
 

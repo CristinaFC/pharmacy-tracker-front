@@ -3,6 +3,7 @@ import { db } from '../firebase/firebaseConfig';
 import { getDoc, doc, setDoc } from 'firebase/firestore/lite';
 import { pharmacyConverter } from './pharmacy';
 import Pharmacy from './pharmacy';
+import { ProfileButton } from '../components/ProfileButton';
 
 class PharmacyUpdate extends Component {
     constructor(props) {
@@ -59,7 +60,9 @@ class PharmacyUpdate extends Component {
     render() {
         return (            
             <div className={'pharmaciesFormContainer'}>
-                <h1>Update Pharmacy</h1>
+                <h1>Edit profile</h1>
+                
+                <ProfileButton />
                 <form className={'pharmacyForm'} onSubmit={(e) => this.handleSubmit(e)}>
                 <div class="mb-3">
                     <label for="exampleInput1" class="form-label">Address:</label>

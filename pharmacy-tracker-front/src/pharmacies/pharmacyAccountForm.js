@@ -26,10 +26,11 @@ class PharmacyAccountForm extends Component {
     }
 
     render() {
+        
         return (
             <div className={'pharmaciesFormContainer'}>
                 <h1>Sign In</h1>
-                <form class="pharmacyForm" onSubmit={(e) => this.handleSubmit(e)}>
+                <form className={'pharmacyForm'} onSubmit={(e) => this.handleSubmit(e)}>
                 <div class="mb-3">
                     <label for="exampleInput1" class="form-label">Address:</label>
                     <input type="text" class="form-control" id="exampleInput1" value={this.state.address} name="address" onChange={(e) =>  this.handleChange(e)} required/>
