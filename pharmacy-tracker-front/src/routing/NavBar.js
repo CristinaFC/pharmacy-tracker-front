@@ -7,21 +7,23 @@ import Routing from './Routing';
 
 const NavBar = () => {
   return (
-    <nav class="navbar navbar-expand-lg ">
+    <nav class="navbar navbar-expand-lg">
       <div class="container">
           <Link class="navbar-brand" to={Routing.home}>
             <strong class="title">Pharmacy Tracker</strong>
           </Link>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="d-flex align-items-center w-100 form-search">
-            <div class="input-group">
-              <input type="search" class="form-control" placeholder="Search" aria-label="Search" />
-            </div>
-            <a href="#!" class="text-white"><i class="fas fa-search ps-3"></i></a>
-          </form>
-          <ul class="navbar-nav ms-3">
+          <ul class="navbar-nav ms-5">
             <li class="nav-item" >
-              <Link class="nav-link d-flex align-items-center" to={Routing.myProfile}>Sign In</Link>
+              <Link class="nav-link" to={Routing.myProfile}>Profile</Link>
+            </li>
+          </ul>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form class="ms-5 d-flex form-search">
+            <input type="search" class="form-control" placeholder="Search" aria-label="Search"/>
+          </form>
+          <ul class="navbar-nav ms-5">
+            <li class="nav-item" >
+              <Link class="nav-link" to={Routing.myProfile}>Sign In</Link>
             </li>
           </ul>
         </div>

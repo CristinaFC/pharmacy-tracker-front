@@ -12,15 +12,6 @@ code {
     monospace;
 }
 
-.pharmacyForm {
-  width: 30%;
-  justify-content: center;
-  align-items: left;
-  display: flex;
-  flex-direction: column;
-  padding: 2%;
-}
-
 /** BUTTONS **/
 .edit-button {
   background-color: #fff;
@@ -88,6 +79,27 @@ code {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
+/** ACCOUNT UPDATE **/
+.account-update {
+  position: relative;
+  max-width: 900px;
+  margin: 100px auto 100px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.account-update form {
+  padding: 20px;
+}
+
+.account-update label {
+  font-weight: bold;
+  color: #7ED1A7;
+}
+
+div.row {
+  margin: 10px;
+}
 
 /** NAVBAR **/
 .nav-item .nav-link {
@@ -98,7 +110,7 @@ code {
   background-color: #ffffff;
   transition: all 0.3s ease;
   border-radius: 0.25rem;
-  color: #10D502;
+  color: #7ED1A7;
 }
 
 .navbar-brand {
@@ -111,7 +123,7 @@ code {
   background-color: #ffffff;
   transition: all 0.3s ease;
   border-radius: 0.25rem;
-  color: #10D502;
+  color: #7ED1A7;
 }
 
 .nav-item {
@@ -123,6 +135,6 @@ code {
 }
 
 .navbar  {
-  background-color: #10D502;
+  background-color: #7ED1A7;
 }
 
