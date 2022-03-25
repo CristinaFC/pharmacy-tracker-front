@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -61,7 +60,6 @@ code {
   color: #fff;
 }
 
-
 .profile-button {
   background-color: #fff;
   border: 1px solid;
@@ -81,6 +79,16 @@ code {
   color: #fff;
 }
 
+/** ACCOUNT FORM **/
+.account-form {
+  position: relative;
+  max-width: 400px;
+  margin: 100px auto 100px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+
 /** NAVBAR **/
 .nav-item .nav-link {
   color: #ffffff;
@@ -91,11 +99,6 @@ code {
   transition: all 0.3s ease;
   border-radius: 0.25rem;
   color: #10D502;
-}
-
-.fa-li {
-  position: relative;
-  left: 0;
 }
 
 .navbar-brand {

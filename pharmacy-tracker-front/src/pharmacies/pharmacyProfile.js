@@ -4,6 +4,7 @@ import { doc, getDoc } from 'firebase/firestore/lite';
 import { pharmacyConverter } from './pharmacy';
 import { EditProfileButton } from '../components/EditProfileButton';
 import { DeleteProfileButton } from '../components/DeleteProfileButton';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class PharmacyProfile extends Component {
     constructor(props) {
@@ -39,29 +40,25 @@ class PharmacyProfile extends Component {
         const {location} = this.state.datos;
         return(
             <div>
-                <div>
-                    <ul>
-                        <li>Nº Pharmacy: {datos.nPharmacy}</li>
-                        <li>Address: {datos.address}</li>
-                        <li>City: {datos.city}</li>
-                        <li>Location: </li>
-                            {
-                            location ? location['latitude'] : ""} { }
-                            {
-                            location ? location['longitude'] : ""}
-                        <li>Owner: {datos.owner}</li>
-                        <li>Phone: {datos.phone}</li>
-                        <li>Morning Opening: {datos.mOpening}</li>
-                        <li>Morning Closing: {datos.mClosing}</li>
-                        <li>Evening Opening: {datos.eOpening}</li>
-                        <li>Evening Closing: {datos.eClosing}</li>
-                    </ul>
-                </div>
-                <div>
-                    <EditProfileButton />
-                    <DeleteProfileButton />
-                </div>
-                
+                <ul class="list-group account-form">
+                    <li class="list-group-item active">Nº Pharmacy: {datos.nPharmacy}</li>
+                    <li class="list-group-item">Address: {datos.address}</li>
+                    <li class="list-group-item">City: {datos.city}</li>
+                    <li class="list-group-item">Location:
+                        { location ? " " + location['latitude'] : "" }
+                        { location ? " " + location['longitude'] : "" }
+                    </li>
+                    <li class="list-group-item">Owner: {datos.owner}</li>
+                    <li class="list-group-item">Phone: {datos.phone}</li>
+                    <li class="list-group-item">Morning Opening: {datos.mOpening}</li>
+                    <li class="list-group-item">Morning Closing: {datos.mClosing}</li>
+                    <li class="list-group-item">Evening Opening: {datos.eOpening}</li>
+                    <li class="list-group-item">Evening Closing: {datos.eClosing}</li>
+                    <li class="list-group-item">
+                        <EditProfileButton />
+                        <DeleteProfileButton />
+                    </li>
+                </ul>
             </div>
         );
     };    
