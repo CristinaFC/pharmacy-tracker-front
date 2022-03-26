@@ -6,6 +6,7 @@ export default class Routing {
   
     /** NavBar **/
     static login = '/login';
+    static register = '/register';
     static searchResults = 'searchResults';
 
     /**Login **/

@@ -9,6 +9,7 @@ import PharmacyUpdate from '../pharmacies/pharmacyUpdate';
 import Home from '../home/home';
 import PharmacyDelete from '../pharmacies/pharmacyDelete';
 import Login from '../login/login';
+import Register from '../components/Register';
 
 class RouterComponent extends Component {
   render() {
@@ -28,6 +29,7 @@ class RouterComponent extends Component {
 
             {/** User Role **/}
             <Route path={Routing.login} element={<Login />}/>
+            <Route path={Routing.register} element={<Register/>}/>
 
         </Routes>
       </BrowserRouter>
