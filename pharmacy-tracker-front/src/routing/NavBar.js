@@ -1,48 +1,71 @@
-import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component,  } from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Routing from './Routing';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../firebase/firebaseConfig';
+import { useAuth } from '../context/authContext';
 
 
 
-class NavBar extends Component {
+export function NavBar(){
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {}
-    };
+  const {user, logout, loading } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
   }
-
-  componentDidMount() {
-    this.authListener();
-  }
-  authListener() {
-    onAuthStateChanged(auth, (user) => {
-      if(user) {
-        this.setState({user: user});
-      }else {
-        this.setState({user: null});
-      }
-    });
-  }
-
-  render() {
-    const {user} = this.state;
-    console.log(user);  
-    return ( 
+  return ( 
       <div>
-        {user ?  <NavBarAuthUser /> : <NavBarNonAuthUser />}
+        {user ?  <NavBarAuthUser user = {user} /> : <NavBarNonAuthUser />}
       </div>
       
     );
-   
-  }
 }
+// class NavBar extends Component {
+
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       user: '',
+//       logout: '',
+//     }
+//   }
+
+//   componentDidMount() {
+//     this.authListener();
+//   }
+//   authListener() {
+//     onAuthStateChanged(auth, (user) => {
+//       if(user) {
+//         this.setState({user: user});
+//       }else {
+//         this.setState({user: null});
+//       }
+//     });
+//   }
+
+//   render() {
+//     const Session = () => {
+//       const {user, logout} = useAuth();
+//     }
+
+//     const handleLogout = async() => {
+//       await Session.logout();
+//     } 
+//     return ( 
+//       <div>
+//         {user ?  <NavBarAuthUser /> : <NavBarNonAuthUser />}
+//       </div>
+      
+//     );
+   
+//   }
+// }
 
 const NavBarNonAuthUser = () => {
 
@@ -73,13 +96,13 @@ const NavBarNonAuthUser = () => {
 };
   
 
-const NavBarAuthUser = () => {
+const NavBarAuthUser = (user) => {
 
   return(
     <nav class="navbar navbar-expand-lg">
       <div class="container">
           <Link class="navbar-brand" to={Routing.myProfile}>
-            <strong class="title">Pharmacy Tracker</strong>
+            <strong class="title">Pharmacy Tracker </strong>
           </Link>
           <ul class="navbar-nav ms-5">
             <li class="nav-item" >

@@ -5,7 +5,7 @@ import Routing from "../routing/Routing";
 import {Link} from 'react-router-dom';
 
 
-class Login extends Component {
+class DifferentLogin extends Component {
 
     user = React.createRef();
     password = React.createRef();
@@ -67,4 +67,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default DifferentLogin;

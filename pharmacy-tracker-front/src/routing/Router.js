@@ -3,12 +3,13 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import NavBar from './NavBar';
 
 import Routing from './Routing';
+import { ProtectedRoute } from './ProtectedRoute';
 
 import PharmacyProfile from '../pharmacies/pharmacyProfile';
 import PharmacyUpdate from '../pharmacies/pharmacyUpdate';
 import Home from '../home/home';
 import PharmacyDelete from '../pharmacies/pharmacyDelete';
-import Login from '../login/login';
+import Login from '../components/Login';
 import Register from '../components/Register';
 
 class RouterComponent extends Component {
@@ -21,14 +22,17 @@ class RouterComponent extends Component {
         <Routes>
           {/** HOME **/}
             <Route path={Routing.home} element={<Home />}/>
+            
 
             {/** Pharmacy Role **/}
-            <Route path={Routing.myProfile} element={<PharmacyProfile />}/>
-            <Route path={Routing.editProfile} element={<PharmacyUpdate />}/>
-            <Route path={Routing.deleteProfile} element={<PharmacyDelete />}/>
+            <ProtectedRoute>
+              <Route path={Routing.myProfile} element={<PharmacyProfile />}/>
+              <Route path={Routing.editProfile} element={<PharmacyUpdate />}/>
+              <Route path={Routing.deleteProfile} element={<PharmacyDelete />}/>
+            </ProtectedRoute>
 
             {/** User Role **/}
-            <Route path={Routing.login} element={<Login />}/>
+            <Route path={Routing.login} element={<Login/>}/>
             <Route path={Routing.register} element={<Register/>}/>
 
         </Routes>

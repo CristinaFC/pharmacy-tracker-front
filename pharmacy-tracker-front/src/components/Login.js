@@ -2,14 +2,14 @@ import React, {useState} from 'react'
 import  { useAuth } from '../context/authContext';
 import {useNavigate } from 'react-router-dom';
 
-export default function Register() {
+export default function Login() {
     
     const [user, setUser ] = useState({
         email: '',
         password: '',
     });
 
-    const {signup} = useAuth();
+    const {login} = useAuth();
     const navigate = useNavigate();
     const [error, setError] = useState();
 
@@ -21,7 +21,7 @@ export default function Register() {
         e.preventDefault()
         setError('');
         try {
-            await signup(user.email, user.password);
+            await login(user.email, user.password);
             navigate('/');
         } catch(error) {
             setError(error.message);
@@ -41,7 +41,7 @@ export default function Register() {
                 <input type="password" name="password" id="password"
                 onChange={handleChange}/>
 
-                <button> Register </button>
+                <button> Login </button>
             </form>
         </div>
   )
