@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import MapView from '../map/MapView';
+import { useAuth } from '../context/authContext'
 
-class Home extends Component {
-    render() {
-        return (
-            <div>
-                <MapView />
-            </div>
-        );
-    }
+
+export function Home() {
+    const {user} = useAuth();
+
+    return (
+        <div>
+            <MapView/>
+        </div>
+    );
 }
-
 
 export default Home;

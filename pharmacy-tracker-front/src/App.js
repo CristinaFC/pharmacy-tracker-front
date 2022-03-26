@@ -2,6 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import { auth } from './firebase/firebaseConfig';
 import RouterComponent from './routing/Router';
+import { AuthProvider } from './context/authContext';
 
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -31,7 +32,9 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <RouterComponent />
+        <AuthProvider>
+          <RouterComponent />
+        </AuthProvider>
       </div>
     );
   };
