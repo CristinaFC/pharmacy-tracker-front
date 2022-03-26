@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { NavBar } from './NavBar';
+import NavBar from './NavBar';
 
 import Routing from './Routing';
 
@@ -8,6 +8,7 @@ import PharmacyProfile from '../pharmacies/pharmacyProfile';
 import PharmacyUpdate from '../pharmacies/pharmacyUpdate';
 import Home from '../home/home';
 import PharmacyDelete from '../pharmacies/pharmacyDelete';
+import Login from '../login/login';
 
 class RouterComponent extends Component {
   render() {
@@ -26,6 +27,7 @@ class RouterComponent extends Component {
             <Route path={Routing.deleteProfile} element={<PharmacyDelete />}/>
 
             {/** User Role **/}
+            <Route path={Routing.login} element={<Login />}/>
 
         </Routes>
       </BrowserRouter>

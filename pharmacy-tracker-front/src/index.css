@@ -70,6 +70,40 @@ code {
   color: #fff;
 }
 
+.mail-input {
+  width: 30%;
+  border: none;
+  border-bottom: 1px solid #7ED1A7;
+  margin-bottom: 2%;
+}
+
+.password-input {
+  width: 30%;
+  border: none;
+  border-bottom: 1px solid #7ED1A7;
+  margin-bottom: 2%;
+}
+
+.login-button {
+  width: 30%;
+  background-color: #7ED1A7;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  padding: 5px;
+  margin: 5px;
+}
+
+.login-container {
+  display: block;
+  width: 100%;
+}
+
+.forget-password-container {
+  display: inline-flexbox;
+  font-size: 10px;
+}
+
 /** ACCOUNT FORM **/
 .account-form {
   position: relative;
