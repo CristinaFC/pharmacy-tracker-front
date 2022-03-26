@@ -22,14 +22,9 @@ class RouterComponent extends Component {
         <Routes>
           {/** HOME **/}
             <Route path={Routing.home} element={<Home />}/>
-            
-
-            {/** Pharmacy Role **/}
-            <ProtectedRoute>
-              <Route path={Routing.myProfile} element={<PharmacyProfile />}/>
-              <Route path={Routing.editProfile} element={<PharmacyUpdate />}/>
-              <Route path={Routing.deleteProfile} element={<PharmacyDelete />}/>
-            </ProtectedRoute>
+            <Route path={Routing.myProfile} element= {<ProtectedRoute> <PharmacyProfile /></ProtectedRoute>}/>
+            <Route path={Routing.editProfile} element={<ProtectedRoute><PharmacyUpdate /></ProtectedRoute>}/>
+            <Route path={Routing.deleteProfile} element={<ProtectedRoute><PharmacyDelete /></ProtectedRoute>}/>
 
             {/** User Role **/}
             <Route path={Routing.login} element={<Login/>}/>

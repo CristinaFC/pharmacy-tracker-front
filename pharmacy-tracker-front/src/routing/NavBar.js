@@ -108,6 +108,9 @@ const NavBarAuthUser = (user) => {
             <li class="nav-item" >
               <Link class="nav-link" to={Routing.myProfile}>Profile</Link>
             </li>
+            <li class="nav-item" >
+              <Link class="nav-link" to={Routing.editProfile}>Edit profile</Link>
+            </li>
           </ul>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <form class="ms-5 d-flex form-search">
