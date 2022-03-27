@@ -2,7 +2,7 @@ import {createContext, useContext, useEffect, useState} from 'react';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from 'firebase/auth';
 import { auth, db} from '../firebase/firebaseConfig';
 import { doc, setDoc } from 'firebase/firestore/lite';
-import { GeoPoint } from 'firebase/firestore';
+import { GeoPoint } from 'firebase/firestore/lite';
 
 export const authContext = createContext();
 
@@ -21,23 +21,15 @@ export function AuthProvider ({children}) {
     .then(cred => {
         const newUserRef = doc(db, `users/${cred.user.uid}`);
         const newPharmacyRef = doc(db, `pharmacies/${cred.user.uid}`);
+        const point = new GeoPoint(28.105557, -15.422794);
         setDoc(newUserRef, {uid: cred.user.uid, email: email, name:"Prueba"});
         //LA FARMACIA SE TIENE QUE CREAR POR ESTE MOMENTO CON LOCATION PUESTO, SI NO, EL MAPA DA FALLO
         //PORQUE FALTA UNA COMPROBACION DE QUE SI UNA FARMACIA NO TIENE LOCATION, NO CREE EL MARKER,
         //ESTE FALLO DARÁ UNA PANTALLA PRINCIPAL BLANCA Y NULLPOINTERS
         setDoc(newPharmacyRef, 
-            {uid: cred.user.uid, 
-            email: email, 
-            Address: '',
-            City: '',
-            Location: new GeoPoint(28.105557, -15.422794),
-            Owner: '',
-            Phone: '',
-            eClosing: '',
-            eOpening: '',
-            mClosing: '',
-            mOpening: '',
-            nPharmacy: ''});
+            {uid: cred.user.uid,email: email, Address: '',City: '',Location: point ,Owner:'', Phone: '',eClosing: '',
+            eOpening: '', mClosing: '', mOpening: '', nPharmacy: ''
+        });
     });
     
     // .then()(cred =>
