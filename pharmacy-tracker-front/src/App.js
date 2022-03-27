@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { auth } from './firebase/firebaseConfig';
 import RouterComponent from './routing/Router';
 import { AuthProvider } from './context/authContext';

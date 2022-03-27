@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 
 import Routing from './Routing';
 import { ProtectedRoute } from './ProtectedRoute';
+import { UserProtectedRoute } from './UserProtectedRoute';
 
 import PharmacyProfile from '../pharmacies/pharmacyProfile';
 import PharmacyUpdate from '../pharmacies/pharmacyUpdate';
@@ -28,7 +29,7 @@ class RouterComponent extends Component {
 
             {/** User Role **/}
             <Route path={Routing.login} element={<Login/>}/>
-            <Route path={Routing.register} element={<Register/>}/>
+            <Route path={Routing.register} element={<UserProtectedRoute><Register/></UserProtectedRoute>}/>
 
         </Routes>
       </BrowserRouter>

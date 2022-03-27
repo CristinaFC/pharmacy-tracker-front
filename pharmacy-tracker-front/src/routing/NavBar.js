@@ -9,9 +9,7 @@ import { auth } from '../firebase/firebaseConfig';
 import { useAuth } from '../context/authContext';
 
 
-
 export function NavBar(){
-
   const {user, logout, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -19,13 +17,14 @@ export function NavBar(){
     await logout();
     navigate("/");
   }
-  return ( 
+  return (
       <div>
-        {user ?  <NavBarAuthUser user = {user} /> : <NavBarNonAuthUser />}
+        {user ?  <NavBarAuthUser /> : <NavBarNonAuthUser />}
       </div>
       
     );
 }
+
 // class NavBar extends Component {
 
 //   constructor(props) {
@@ -96,7 +95,7 @@ const NavBarNonAuthUser = () => {
 };
   
 
-const NavBarAuthUser = (user) => {
+const NavBarAuthUser = () => {
 
   return(
     <nav class="navbar navbar-expand-lg">
@@ -116,7 +115,7 @@ const NavBarAuthUser = (user) => {
           <form class="ms-5 d-flex form-search">
             <input type="search" class="form-control" placeholder="Search" aria-label="Search"/>
           </form>
-          <ul class="navbar-nav ms-5">
+          <ul class="navbar-nav ms-5">  
             <li class="nav-item" >
               <button onClick={() => auth.signOut()}>
                 <Link class="nav-link" to={Routing.home}>Log out</Link>

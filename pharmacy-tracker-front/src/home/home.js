@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MapView from '../map/MapView';
-import { useAuth } from '../context/authContext'
+import { useAuth } from '../context/authContext';
 
 
 export function Home() {
