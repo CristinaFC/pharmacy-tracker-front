@@ -1,48 +1,51 @@
-import React, {useState} from 'react'
-import  { useAuth } from '../context/authContext';
-import {useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useAuth } from '../context/authContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
-    
-    const [user, setUser ] = useState({
+
+    const [user, setUser] = useState({
         email: '',
         password: '',
     });
 
-    const {signup} = useAuth();
+    const { signup } = useAuth();
     const navigate = useNavigate();
     const [error, setError] = useState();
 
-    const handleChange = ({target: {name, value}}) => {
-        setUser({...user, [name]: value})
+    const handleChange = ({ target: { name, value } }) => {
+        setUser({ ...user, [name]: value })
     };
 
-    const handleSubmit = async (e)  => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         setError('');
         try {
             await signup(user.email, user.password);
             navigate('/');
-        } catch(error) {
+        } catch (error) {
             setError(error.message);
         }
     }
 
     return (
-        <div>
+        <div class="account-form">
             {error && <p>{error.message}</p>}
-
             <form onSubmit={handleSubmit}>
-                <label htmlor="email">Email</label>
-                <input type="email" name="email"
-                onChange={handleChange}/>
-
-                <label htmlor="email">Password</label>
-                <input type="password" name="password" id="password"
-                onChange={handleChange}/>
-
-                <button> Register </button>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" name="email" onChange={handleChange} />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" name="password" id="password" onChange={handleChange} />
+                    </div>
+                </div>
+                <button type="submit" class="btn-register">Register</button>
             </form>
         </div>
-  )
+    )
 }

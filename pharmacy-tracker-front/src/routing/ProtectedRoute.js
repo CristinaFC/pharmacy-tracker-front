@@ -4,11 +4,8 @@ import {Navigate } from 'react-router-dom';
 import Routing from './Routing';
 
 export function ProtectedRoute  ({children}) {
-    const { user, loading } = useAuth();
-    
+    const { user } = useAuth();
     // if (loading) return <Navigate to={Routing.login}/>
     if (!user) return <Navigate to={Routing.login}/>
-
     return <>{children}</>;
-
 }
