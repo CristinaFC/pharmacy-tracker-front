@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MapView from '../map/MapView';
-import { useAuth } from '../context/authContext';
-
 
 export function Home() {
-    const { user } = useAuth();
-
     return (
         <div>
-            <MapView/>
+            <MapView />
         </div>
     );
 }

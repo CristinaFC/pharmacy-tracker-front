@@ -3,7 +3,7 @@ export default class Routing {
     static home = '/';
     static id = ':id';
     static nowhere = '#';
-  
+
     /** NavBar **/
     static login = '/login';
     static register = '/register';
@@ -20,4 +20,3 @@ export default class Routing {
     static deleteProfile = '/deleteProfile';
     //static map = '/map';
 }
-  

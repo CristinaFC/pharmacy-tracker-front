@@ -1,28 +1,28 @@
-import React, { Component,  } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Routing from './Routing';
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../firebase/firebaseConfig';
 import { useAuth } from '../context/authContext';
 
 
-export function NavBar(){
-  const {user, logout, loading } = useAuth();
+export function NavBar() {
+  const { user } = useAuth();
+  /*const { user, logout } = useAuth();
   const navigate = useNavigate();
-
   const handleLogout = async () => {
     await logout();
     navigate("/");
-  }
+  }*/
+
   return (
-      <div>
-        {user ?  <NavBarAuthUser /> : <NavBarNonAuthUser />}
-      </div>
-      
-    );
+    <div>
+      {user ? <NavBarAuthUser /> : <NavBarNonAuthUser />}
+    </div>
+
+  );
 }
 
 // class NavBar extends Component {
@@ -60,9 +60,9 @@ export function NavBar(){
 //       <div>
 //         {user ?  <NavBarAuthUser /> : <NavBarNonAuthUser />}
 //       </div>
-      
+
 //     );
-   
+
 //   }
 // }
 
@@ -71,17 +71,17 @@ const NavBarNonAuthUser = () => {
   return (
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-          <Link class="navbar-brand" to={Routing.home}>
-            <strong class="title">Pharmacy Tracker</strong>
-          </Link>
-          <ul class="navbar-nav ms-5">
-            <li class="nav-item" >
-              <Link class="nav-link" to={Routing.myProfile}>Profile</Link>
-            </li>
-          </ul>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <Link class="navbar-brand" to={Routing.home}>
+          <strong class="title">Pharmacy Tracker</strong>
+        </Link>
+        <ul class="navbar-nav ms-5">
+          <li class="nav-item" >
+            <Link class="nav-link" to={Routing.myProfile}>Profile</Link>
+          </li>
+        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <form class="ms-5 d-flex form-search">
-            <input type="search" class="form-control" placeholder="Search" aria-label="Search"/>
+            <input type="search" class="form-control" placeholder="Search" aria-label="Search" />
           </form>
           <ul class="navbar-nav ms-5">
             <li class="nav-item" >
@@ -90,42 +90,41 @@ const NavBarNonAuthUser = () => {
           </ul>
         </div>
       </div>
-    </nav> 
+    </nav>
   );
 };
-  
+
 
 const NavBarAuthUser = () => {
 
-  return(
+  return (
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-          <Link class="navbar-brand" to={Routing.myProfile}>
-            <strong class="title">Pharmacy Tracker </strong>
-          </Link>
-          <ul class="navbar-nav ms-5">
-            <li class="nav-item" >
-              <Link class="nav-link" to={Routing.myProfile}>Profile</Link>
-            </li>
-            <li class="nav-item" >
-              <Link class="nav-link" to={Routing.editProfile}>Edit profile</Link>
-            </li>
-          </ul>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <Link class="navbar-brand" to={Routing.myProfile}>
+          <strong class="title">Pharmacy Tracker </strong>
+        </Link>
+        <ul class="navbar-nav ms-5">
+          <li class="nav-item" >
+            <Link class="nav-link" to={Routing.myProfile}>Profile</Link>
+          </li>
+          <li class="nav-item" >
+            <Link class="nav-link" to={Routing.editProfile}>Edit profile</Link>
+          </li>
+        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <form class="ms-5 d-flex form-search">
-            <input type="search" class="form-control" placeholder="Search" aria-label="Search"/>
+            <input type="search" class="form-control" placeholder="Search" aria-label="Search" />
           </form>
-          <ul class="navbar-nav ms-5">  
+          <ul class="navbar-nav ms-5">
             <li class="nav-item" >
               <button onClick={() => auth.signOut()}>
                 <Link class="nav-link" to={Routing.home}>Log out</Link>
               </button>
-              
             </li>
           </ul>
         </div>
       </div>
-    </nav> 
+    </nav>
   );
 };
 
