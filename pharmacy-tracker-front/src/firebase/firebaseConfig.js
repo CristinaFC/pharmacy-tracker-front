@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore/lite";
 import 'firebase/auth';
+import 'firebase/firestore';
 import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -20,3 +21,23 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+
+export const createUserDocument = async (user, additionalData) => {
+  if (!user) return;
+
+  const userRef = db.doc(`users/${user.uid}`);
+  const snapshot = await userRef.get();
+
+  if (!snapshot.exists) {
+    const {email} = user;
+
+    try {
+      userRef.set({
+        email,
+      })
+    } catch (error) {
+      console.log('Error in creating user', error);
+    }
+  }
+}
