@@ -3,6 +3,7 @@ import { db } from '../firebase/firebaseConfig';
 import { getDoc, doc, setDoc } from 'firebase/firestore/lite';
 import { pharmacyConverter } from './pharmacy';
 import Pharmacy from './pharmacy';
+import { getAuth } from 'firebase/auth';
 
 class PharmacyUpdate extends Component {
     constructor(props) {
@@ -26,8 +27,10 @@ class PharmacyUpdate extends Component {
 
     async componentDidMount() {
         try {
+            //Recoger el uid de la farmacia logeada
+            const currentUser = getAuth().currentUser.uid;
             //Obtengo los datos de la BD que lo convierte a objeto Pharmacy (en este caso la farmacia llamada 1)
-            const docRef = doc(db, "pharmacies", "1").withConverter(pharmacyConverter);
+            const docRef = doc(db, "pharmacies", currentUser).withConverter(pharmacyConverter);
             const docSnap = await getDoc(docRef);
             const pharmacy = docSnap.data();
             this.setState({
