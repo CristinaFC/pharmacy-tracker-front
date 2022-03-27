@@ -16,10 +16,12 @@ export function AuthProvider ({children}) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const signup = (email, password) => createUserWithEmailAndPassword(auth, email, password).then(cred => {
-        console.log(cred.user);
-        const newUserRef = doc(db, `pharmacies/${cred.user.uid}`);
-        setDoc(newUserRef, {email: email});
+    const signup = (email, password) => createUserWithEmailAndPassword(auth, email, password)
+    .then(cred => {
+        const newUserRef = doc(db, `users/${cred.user.uid}`);
+        const newPharmacyRef = doc(db, `pharmacies/${cred.user.uid}`);
+        setDoc(newUserRef, {uid: cred.user.uid, email: email, name:"Prueba"});
+        setDoc(newPharmacyRef, {uid: cred.user.uid, owner: email});
     });
     
     // .then()(cred =>
