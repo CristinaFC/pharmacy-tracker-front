@@ -1,7 +1,7 @@
 import {createContext, useContext, useEffect, useState} from 'react';
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from 'firebase/auth';
 import { auth, db} from '../firebase/firebaseConfig';
-import { doc, setDoc } from 'firebase/firestore/lite';
+import { doc, setDoc, getFirestore } from 'firebase/firestore/lite';
 
 export const authContext = createContext();
 
@@ -17,9 +17,9 @@ export function AuthProvider ({children}) {
     const [loading, setLoading] = useState(true);
 
     const signup = (email, password) => createUserWithEmailAndPassword(auth, email, password).then(cred => {
-        console(cred.user);
-        const newUserRef =doc(db, "pharmacies", cred);
-        setDoc (newUserRef, cred);
+        console.log(cred.user);
+        const newUserRef = doc(db, `pharmacies/${cred.user.uid}`);
+        setDoc(newUserRef, {email: email});
     });
     
     // .then()(cred =>
