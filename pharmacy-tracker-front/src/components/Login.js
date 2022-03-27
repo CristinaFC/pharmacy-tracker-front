@@ -24,7 +24,8 @@ export default function Login() {
             await login(user.email, user.password);
             navigate('/');
         } catch (error) {
-            setError(error.message);
+            //setError(error.message);
+            setError("Invalid mail or password");
         }
     }
 
@@ -44,6 +45,7 @@ export default function Login() {
                         <input type="password" name="password" id="password" onChange={handleChange} />
                     </div>
                 </div>
+                {error ? <div><span>{error}</span></div> : ""}
                 <button type="submit" class="btn-login">Login</button>
             </form>
         </div>
