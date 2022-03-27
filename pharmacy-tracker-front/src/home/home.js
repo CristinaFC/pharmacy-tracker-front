@@ -3,7 +3,7 @@ import MapView from '../map/MapView';
 
 export function Home() {
     return (
-        <div>
+        <div class="home-view">
             <MapView />
         </div>
     );

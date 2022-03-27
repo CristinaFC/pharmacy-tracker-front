@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { auth } from './firebase/firebaseConfig';
 import RouterComponent from './routing/Router';
 import { AuthProvider } from './context/authContext';
-
 import { onAuthStateChanged } from "firebase/auth";
 
 class App extends Component {

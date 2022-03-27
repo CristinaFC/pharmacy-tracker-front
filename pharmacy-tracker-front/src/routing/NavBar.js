@@ -74,18 +74,16 @@ const NavBarNonAuthUser = () => {
         <Link class="navbar-brand" to={Routing.home}>
           <strong class="title">Pharmacy Tracker</strong>
         </Link>
-        <ul class="navbar-nav ms-5">
-          <li class="nav-item" >
-            <Link class="nav-link" to={Routing.myProfile}>Profile</Link>
-          </li>
-        </ul>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <form class="ms-5 d-flex form-search">
             <input type="search" class="form-control" placeholder="Search" aria-label="Search" />
           </form>
           <ul class="navbar-nav ms-5">
-            <li class="nav-item" >
-              <Link class="nav-link" to={Routing.login}>Login</Link>
+            <li class="nav-item top-r" >
+              <Link class="nav-login" to={Routing.login}>Login</Link>
+            </li>
+            <li class="nav-item top-r" >
+              <Link class="nav-register" to={Routing.register}>Register</Link>
             </li>
           </ul>
         </div>
@@ -105,10 +103,10 @@ const NavBarAuthUser = () => {
         </Link>
         <ul class="navbar-nav ms-5">
           <li class="nav-item" >
-            <Link class="nav-link" to={Routing.myProfile}>Profile</Link>
+            <Link class="nav-profile" to={Routing.myProfile}>Profile</Link>
           </li>
           <li class="nav-item" >
-            <Link class="nav-link" to={Routing.editProfile}>Edit profile</Link>
+            <Link class="nav-edit-profile" to={Routing.editProfile}>Edit Profile</Link>
           </li>
         </ul>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -117,9 +115,7 @@ const NavBarAuthUser = () => {
           </form>
           <ul class="navbar-nav ms-5">
             <li class="nav-item" >
-              <button onClick={() => auth.signOut()}>
-                <Link class="nav-link" to={Routing.home}>Log out</Link>
-              </button>
+              <Link class="nav-logout" onClick={() => auth.signOut()} to={Routing.home}>Log out</Link>
             </li>
           </ul>
         </div>

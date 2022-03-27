@@ -104,6 +104,38 @@ code {
   font-size: 10px;
 }
 
+.btn-login {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  color: #fff;
+  background-color: #7AD8DE;
+  border-color: #7AD8DE;
+}
+
+.btn-register {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  color: #fff;
+  background-color: #80E896;
+  border-color: #80E896;
+}
+
 /** ACCOUNT FORM **/
 .account-form {
   position: relative;
@@ -135,12 +167,85 @@ div.row {
   margin: 10px;
 }
 
-/** NAVBAR **/
-.nav-item .nav-link {
-  color: #ffffff;
+/** REGISTER & LOGIN FORM **/
+.account-form {
+  position: relative;
+  max-width: auto;
+  margin: 100px auto 100px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.nav-item .nav-link:hover {
+.account-form form {
+  padding: 20px;
+}
+
+.account-form label {
+  font-weight: bold;
+  color: #7ED1A7;
+}
+
+div.row {
+  margin: 10px;
+}
+
+/** NAVBAR **/
+.nav-item .nav-login {
+  background-color: #7AD8DE;
+  color: #fff;
+  margin: 0 10px;
+  border-radius: 0.25rem;
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: color .15s ease-in-out;
+}
+
+.nav-item .nav-register {
+  background-color: #80E896;
+  color: #fff;
+  margin: 0 10px;
+  border-radius: 0.25rem;
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: color .15s ease-in-out;
+}
+
+.nav-item .nav-logout {
+  background-color: #E67C6E;
+  color: #fff;
+  margin: 0 10px;
+  border-radius: 0.25rem;
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: color .15s ease-in-out;
+}
+
+.nav-item .nav-profile {
+  background-color: #6EE6AA;
+  color: #fff;
+  margin: 0 10px;
+  border-radius: 0.25rem;
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: color .15s ease-in-out;
+}
+
+.nav-item .nav-edit-profile {
+  background-color: #6EE6AA;
+  color: #fff;
+  margin: 0 10px;
+  border-radius: 0.25rem;
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: color .15s ease-in-out;
+}
+
+.nav-item a:hover {
   background-color: #ffffff;
   transition: all 0.3s ease;
   border-radius: 0.25rem;
@@ -158,14 +263,6 @@ div.row {
   transition: all 0.3s ease;
   border-radius: 0.25rem;
   color: #7ED1A7;
-}
-
-.nav-item {
-  width: 65px;
-}
-
-.nav-item .nav-link {
-  color: #fff;
 }
 
 .navbar  {
