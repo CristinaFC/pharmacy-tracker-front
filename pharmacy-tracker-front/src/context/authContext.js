@@ -21,7 +21,19 @@ export function AuthProvider ({children}) {
         const newUserRef = doc(db, `users/${cred.user.uid}`);
         const newPharmacyRef = doc(db, `pharmacies/${cred.user.uid}`);
         setDoc(newUserRef, {uid: cred.user.uid, email: email, name:"Prueba"});
-        setDoc(newPharmacyRef, {uid: cred.user.uid, owner: email});
+        setDoc(newPharmacyRef, 
+            {uid: cred.user.uid, 
+            email: email, 
+            Address: '',
+            City: '',
+            Location: '',
+            Owner: '',
+            Phone: '',
+            eClosing: '',
+            eOpening: '',
+            mClosing: '',
+            mOpening: '',
+            nPharmacy: ''});
     });
     
     // .then()(cred =>
@@ -29,17 +41,6 @@ export function AuthProvider ({children}) {
     //     return db.collection('pharmacies').doc(cred.user.uid).set({
     //         uid: cred.user.uid,
     //         email: cred.user.email,
-    //         address: '',
-    //         city: '',
-    //         location: '',
-    //         owner: '',
-    //         phone: '',
-    //         eClosing: '',
-    //         eOpening: '',
-    //         mClosing: '',
-    //         mOpening: '',
-    //         nPharmacy: '',
-
     //     });
     
 
