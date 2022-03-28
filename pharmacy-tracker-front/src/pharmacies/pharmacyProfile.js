@@ -5,6 +5,7 @@ import { pharmacyConverter } from './pharmacy';
 import { EditProfileButton } from '../components/EditProfileButton';
 import { DeleteProfileButton } from '../components/DeleteProfileButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { getAuth } from 'firebase/auth';
 
 class PharmacyProfile extends Component {
     constructor(props) {
@@ -16,8 +17,10 @@ class PharmacyProfile extends Component {
 
     async componentDidMount() {
         try {
+            //Recoger el uid de la farmacia logeada
+            const currentUser = getAuth().currentUser.uid;
             //Obtengo los datos de la BD que lo convierte a objeto Pharmacy (en este caso la farmacia llamada 1)
-            const docRef = doc(db, "pharmacies", "1").withConverter(pharmacyConverter);
+            const docRef = doc(db, "pharmacies", currentUser).withConverter(pharmacyConverter);
             const docSnap = await getDoc(docRef);
             const pharmacy = docSnap.data();
 

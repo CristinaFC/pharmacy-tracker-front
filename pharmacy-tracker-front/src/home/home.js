@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MapView from '../map/MapView';
 
-class Home extends Component {
-    render() {
-        return (
-            <div>
-                <MapView />
-            </div>
-        );
-    }
+export function Home() {
+    return (
+        <div class="home-view">
+            <MapView />
+        </div>
+    );
 }
-
 
 export default Home;

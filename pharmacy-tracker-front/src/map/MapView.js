@@ -22,7 +22,7 @@ class MapView extends Component {
   }
 
   render() {
-    const styleMap = { "width": "50%", "height": "50vh", "margin": "5%" }
+    const styleMap = { "width": "50%", "height": "50vh", "margin": "5% auto" }
     let marks = [];
     const { pharmacies } = this.state;
     pharmacies.map((pharmacy) => {
