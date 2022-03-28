@@ -22,7 +22,9 @@ class PharmacyUpdate extends Component {
             mClosing: '',
             mOpening: '',
             nPharmacy: '',
+            message: '',
         };
+
     }
 
     async componentDidMount() {
@@ -129,6 +131,7 @@ class PharmacyUpdate extends Component {
                             <input type="number" class="form-control" id="inputNPharmacy" value={this.state.nPharmacy} name="nPharmacy" onChange={(e) => this.handleChange(e)} required />
                         </div>
                     </div>
+                    {this.state.message ? <div><span>{this.state.message}</span></div> : ""}
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
@@ -154,27 +157,18 @@ class PharmacyUpdate extends Component {
 
     async handleSubmit(e) {
         e.preventDefault();
-
+        
         try {
-            const ref = doc(db, "pharmacies", "1").withConverter(pharmacyConverter);
+            const currentUser = getAuth().currentUser.uid;
+            const ref = doc(db, "pharmacies", currentUser).withConverter(pharmacyConverter);
             await setDoc(ref, new Pharmacy(this.state.address, this.state.city, this.state.location, this.state.owner, this.state.phone, this.state.eClosing, this.state.eOpening, this.state.mClosing, this.state.mOpening, this.state.nPharmacy));
+            this.setState({
+                message: 'Profile updated',
+            })
 
         } catch (e) {
             console.error("Error adding document: ", e);
         }
-
-        this.setState({
-            address: '',
-            city: '',
-            location: '',
-            owner: '',
-            phone: '',
-            eClosing: '',
-            eOpening: '',
-            mClosing: '',
-            mOpening: '',
-            nPharmacy: '',
-        });
     };
 }
 

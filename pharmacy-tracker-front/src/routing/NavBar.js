@@ -10,12 +10,6 @@ import { useAuth } from '../context/authContext';
 
 export function NavBar() {
   const { user } = useAuth();
-  /*const { user, logout } = useAuth();
-  const navigate = useNavigate();
-  const handleLogout = async () => {
-    await logout();
-    navigate("/");
-  }*/
 
   return (
     <div>
@@ -24,47 +18,6 @@ export function NavBar() {
 
   );
 }
-
-// class NavBar extends Component {
-
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       user: '',
-//       logout: '',
-//     }
-//   }
-
-//   componentDidMount() {
-//     this.authListener();
-//   }
-//   authListener() {
-//     onAuthStateChanged(auth, (user) => {
-//       if(user) {
-//         this.setState({user: user});
-//       }else {
-//         this.setState({user: null});
-//       }
-//     });
-//   }
-
-//   render() {
-//     const Session = () => {
-//       const {user, logout} = useAuth();
-//     }
-
-//     const handleLogout = async() => {
-//       await Session.logout();
-//     } 
-//     return ( 
-//       <div>
-//         {user ?  <NavBarAuthUser /> : <NavBarNonAuthUser />}
-//       </div>
-
-//     );
-
-//   }
-// }
 
 const NavBarNonAuthUser = () => {
 
