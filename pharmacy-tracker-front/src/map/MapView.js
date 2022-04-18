@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import React, { Component, useState } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
 import { getDocs, collection } from "firebase/firestore/lite";
@@ -25,9 +25,31 @@ class MapView extends Component {
     const styleMap = { "width": "50%", "height": "50vh", "margin": "5% auto" }
     let marks = [];
     const { pharmacies } = this.state;
-    pharmacies.map((pharmacy) => {
+    pharmacies.forEach((pharmacy) => {
       marks.push({ "address": pharmacy.Address, "position": [pharmacy.Location.latitude, pharmacy.Location.longitude], "nPharmacy": "Nº " + pharmacy.nPharmacy, "owner": pharmacy.Owner });
     });
+
+
+
+    function LocationMarker() {
+      const [position, setPosition] = useState(null)
+      const map = useMapEvents({
+        click() {
+          map.locate()
+        },
+        locationfound(e) {
+          setPosition(e.latlng)
+          map.flyTo(e.latlng, 17)
+        },
+      })
+    
+      return position === null ? null : (
+        <Marker position={position} icon ={myIcon}>
+          <Popup>You are here</Popup>
+        </Marker>
+      )
+    }
+
 
     return (
       <MapContainer
@@ -47,6 +69,7 @@ class MapView extends Component {
               {location.address}
             </Popup>
           </Marker>))}
+        <LocationMarker/>
       </MapContainer>
     )
   }
