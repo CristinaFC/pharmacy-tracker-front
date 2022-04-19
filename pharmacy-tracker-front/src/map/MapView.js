@@ -37,6 +37,7 @@ class MapView extends Component {
       marks.push({ "address": pharmacy.Address, "position": [pharmacy.Location.latitude, pharmacy.Location.longitude], "nPharmacy": "Nº " + pharmacy.nPharmacy, "owner": pharmacy.Owner });
     });
 
+
     /*
       const showMyLocation = () => {
         const mapRef = useRef();
@@ -54,8 +55,6 @@ class MapView extends Component {
     */
 
     var userPos;
-    var latUser;
-    var lgnUser;
 
     function LocationMarker() {
 
@@ -84,10 +83,42 @@ class MapView extends Component {
 
     function setUserLocation(position) {
       userPos = position;
-      latUser = userPos.lat;
-      lgnUser = userPos.lng;
     }
 
+
+    function getNearbyPharmacy() {
+      var pharmacyLat;
+      var pharmacyLng;
+      var tempDist;
+      var dist;
+      var theta;
+      var pharmacyTarget;
+
+
+      marks.forEach((pharmacy) => {
+        pharmacyLat = pharmacy.position[0];
+        pharmacyLng = pharmacy.position[1];
+        theta = userPos.lng - pharmacyLng;
+        tempDist = Math.sin(deg2rad(userPos.lat)) * Math.sin(deg2rad(pharmacyLat)) + Math.cos(deg2rad(userPos.lat)) * Math.cos(deg2rad(pharmacyLat)) * Math.cos(deg2rad(theta))
+        tempDist = rad2deg(tempDist);
+        tempDist = tempDist * 60 * 1.1515;
+        console.log(tempDist);
+        if (tempDist > dist || dist == null) {
+          dist = tempDist
+          pharmacyTarget = pharmacy;
+        }
+      });
+      console.log(pharmacyTarget);
+      return dist;
+    }
+
+    function deg2rad(deg) {
+      return (deg * Math.PI / 180.0);
+    }
+
+    function rad2deg(rad) {
+      return (rad * 180.0 / Math.PI);
+    }
 
     return (
       <>
@@ -112,7 +143,7 @@ class MapView extends Component {
        
       </MapContainer>
        <p>La ubicacion del usuario es {userPos}</p>
-        <button onClick={LocationMarker}>
+        <button onClick={getNearbyPharmacy}>
             Find Nearest Stations
         </button>
       </> 
