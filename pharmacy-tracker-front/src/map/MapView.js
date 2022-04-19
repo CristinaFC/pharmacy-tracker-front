@@ -54,6 +54,8 @@ class MapView extends Component {
     */
 
     var userPos;
+    var latUser;
+    var lgnUser;
 
     function LocationMarker() {
 
@@ -66,8 +68,7 @@ class MapView extends Component {
           setPosition(e.latlng)
           map.flyTo(e.latlng, 17)
           console.log(e.latlng)
-         userPos=e.latlng;
-         console.log(userPos)
+          setUserLocation(e.latlng);
         },
         
       })
@@ -79,6 +80,12 @@ class MapView extends Component {
         </Marker>
         
       )
+    }
+
+    function setUserLocation(position) {
+      userPos = position;
+      latUser = userPos.lat;
+      lgnUser = userPos.lng;
     }
 
 
