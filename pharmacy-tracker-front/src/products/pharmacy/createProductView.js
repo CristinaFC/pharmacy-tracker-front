@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ImageUpload from 'image-upload-react';
 import 'image-upload-react/dist/index.css';
-import CategoriesSelector from '../components/CategoriesSelector';
+import CategoriesSelector from '../../components/CategoriesSelector';
 
 
 class CreateProductView extends Component

@@ -78,6 +78,20 @@ code {
   width: 180px;
 }
 
+/** PHARMACY PRODUCTS**/
+.myProducts-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+}
+.myProducts-container h1, table {
+  margin-top: 3%;
+}
+
+
 
 /** BUTTONS **/
 .edit-button {
