@@ -70,6 +70,9 @@ const NavBarAuthUser = () => {
             <li class="nav-item" >
               <Link class="nav-logout" onClick={() => auth.signOut()} to={Routing.home}>Log out</Link>
             </li>
+            <li class="nav-item" >
+              <Link class="nav-products"  to={Routing.myProducts}>Products</Link>
+            </li>
           </ul>
         </div>
       </div>
