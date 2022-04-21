@@ -13,13 +13,14 @@ import PharmacyUpdate from '../pharmacies/pharmacyUpdate';
 import PharmacyDelete from '../pharmacies/pharmacyDelete';
 
 /** PRODUCTS **/
-import CreateProductView from '../products/pharmacy/createProductView';
+import MyProductsView from '../products/pharmacy/myProductsView';
+import EditProductView from '../products/pharmacy/editProductView';
+
 
 /** NAVBAR **/
 import Home from '../home/home';
 import Login from '../components/Login';
 import Register from '../components/Register';
-import MyProductsView from '../products/pharmacy/myProductsView';
 
 class RouterComponent extends Component
 {
@@ -40,6 +41,7 @@ class RouterComponent extends Component
           <Route path={Routing.register} element={<UserProtectedRoute><Register /> </UserProtectedRoute>} />
           {/** Pharmacy Role **/}
           <Route path={Routing.myProducts} element={<MyProductsView />} />
+          <Route path={Routing.editProduct} element={<EditProductView />} />
         </Routes>
       </BrowserRouter>
     );

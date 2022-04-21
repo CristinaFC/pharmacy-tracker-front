@@ -1,4 +1,5 @@
-export default class Routing {
+export default class Routing
+{
     /** App **/
     static home = '/';
     static id = ':id';
@@ -19,5 +20,6 @@ export default class Routing {
     static editProfile = '/editProfile';
     static deleteProfile = '/deleteProfile';
     static myProducts = '/myProducts'
+    static editProduct = '/editProduct';
     //static map = '/map';
 }

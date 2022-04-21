@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { getDocs, doc, collection } from 'firebase/firestore/lite';
-import { db } from '../firebase/firebaseConfig';
+import { getCategories } from '../database/functions';
 
 class CategoriesSelector extends Component 
 {
@@ -16,16 +15,12 @@ class CategoriesSelector extends Component
     {
         try
         {
-            const docRef = collection(db, 'categories');
-            const docSnap = await getDocs(docRef);
-
-            const categories = [];
-            docSnap.forEach((doc) => categories.push(doc.data()));
+            const categories = await getCategories();
 
             this.setState({ categories: categories });
         } catch (e)
         {
-            console.error("Error adding document: ", e);
+            console.error("Error reading categories: ", e);
         }
     }
 
@@ -34,7 +29,7 @@ class CategoriesSelector extends Component
         const { categories } = this.state;
         return (
             <div>
-                <select class="categories-select" >
+                <select class="categories-select" disabled >
                     {categories.map((category) => <option> {category.name}</option>)}
                 </select>
             </div >

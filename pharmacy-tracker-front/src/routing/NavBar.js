@@ -8,7 +8,8 @@ import { auth } from '../firebase/firebaseConfig';
 import { useAuth } from '../context/authContext';
 
 
-export function NavBar() {
+export function NavBar()
+{
   const { user } = useAuth();
 
   return (
@@ -19,7 +20,8 @@ export function NavBar() {
   );
 }
 
-const NavBarNonAuthUser = () => {
+const NavBarNonAuthUser = () =>
+{
 
   return (
     <nav class="navbar navbar-expand-lg">
@@ -46,7 +48,8 @@ const NavBarNonAuthUser = () => {
 };
 
 
-const NavBarAuthUser = () => {
+const NavBarAuthUser = () =>
+{
 
   return (
     <nav class="navbar navbar-expand-lg">
@@ -59,7 +62,7 @@ const NavBarAuthUser = () => {
             <Link class="nav-profile" to={Routing.myProfile}>Profile</Link>
           </li>
           <li class="nav-item" >
-            <Link class="nav-edit-profile" to={Routing.editProfile}>Edit Profile</Link>
+            <Link class="nav-products" to={Routing.myProducts}>Products</Link>
           </li>
         </ul>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -70,9 +73,7 @@ const NavBarAuthUser = () => {
             <li class="nav-item" >
               <Link class="nav-logout" onClick={() => auth.signOut()} to={Routing.home}>Log out</Link>
             </li>
-            <li class="nav-item" >
-              <Link class="nav-products"  to={Routing.myProducts}>Products</Link>
-            </li>
+
           </ul>
         </div>
       </div>

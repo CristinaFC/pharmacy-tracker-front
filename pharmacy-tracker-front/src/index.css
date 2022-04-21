@@ -78,6 +78,10 @@ code {
   width: 180px;
 }
 
+.product-stock {
+  width: 400px;
+}
+
 /** PHARMACY PRODUCTS**/
 .myProducts-container {
   display: flex;
@@ -311,7 +315,7 @@ div.row {
   transition: color .15s ease-in-out;
 }
 
-.nav-item .nav-profile {
+.nav-item .nav-profile, .nav-products {
   background-color: #6EE6AA;
   color: #fff;
   margin: 0 10px;
