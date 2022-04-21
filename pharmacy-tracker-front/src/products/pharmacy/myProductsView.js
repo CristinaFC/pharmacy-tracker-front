@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
 import { getAuth } from 'firebase/auth';
 import { getPharmacyProducts, getProducts } from '../../database/functions';
+import editIcon from '../../assets/icons/editar.png';
+import deleteIcon from '../../assets/icons/delete.png';
+import
+{
+    MDBBtn,
+    MDBModal,
+    MDBModalDialog,
+    MDBModalContent,
+    MDBModalHeader,
+    MDBModalTitle,
+    MDBModalBody,
+    MDBModalFooter
+
+} from 'mdb-react-ui-kit';
+
+import CreateProductView from './createProductView';
+
 
 class MyProductsView extends Component
 {
@@ -10,9 +27,25 @@ class MyProductsView extends Component
         super(props);
         this.state = {
             products: [],
-            productsDescription: []
+            productsDescription: [],
+            editModal: false,
+            deleteModal: false,
         };
     }
+
+
+    toggleShowEdit()
+    {
+        const cModal = this.state.editModal;
+        this.setState({ editModal: !cModal });
+    }
+
+    toggleShowDelete()
+    {
+        const cModal = this.state.deleteModal;
+        this.setState({ deleteModal: !cModal });
+    }
+
 
     async compareProductsId(keys = [])
     {
@@ -43,12 +76,15 @@ class MyProductsView extends Component
         }
     }
 
+
     render()
     {
-        const { products, productsDescription } = this.state;
+        const { products, productsDescription, editModal, deleteModal } = this.state;
+
         return (
             <div class="myProducts-container">
                 <h1>Products</h1>
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -57,10 +93,12 @@ class MyProductsView extends Component
                             <th scope="col">Description</th>
                             <th scope="col">Price</th>
                             <th scope="col">Stock</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+
                         </tr>
                     </thead>
                     <tbody>
-
                         {productsDescription.map((product, key) =>
                             <tr>
                                 <th scope="row">{key + 1}</th>
@@ -68,13 +106,58 @@ class MyProductsView extends Component
                                 <td>{product.description}</td>
                                 <td>{products != null ? products[product.id].price : ""}</td>
                                 <td>{products != null ? products[product.id].stock : ""}</td>
+                                <td>
+                                    <MDBBtn onClick={() => this.toggleShowEdit()} color='link' >
+                                        <img src={editIcon} alt="Edit" class="edit-icon" />
+                                    </MDBBtn>
+                                </td>
+                                <td>
+                                    <MDBBtn onClick={() => this.toggleShowDelete()} color='link' >
+                                        <img src={deleteIcon} alt="Delete" class="delete-icon" />
+                                    </MDBBtn>
+                                </td>
                             </tr>
                         )}
                     </tbody>
 
                 </table>
-
-            </div>
+                <>
+                    <MDBModal tabIndex='-1' show={editModal}>
+                        <MDBModalDialog centered size="lg">
+                            <MDBModalContent>
+                                <MDBModalHeader>
+                                    <MDBModalTitle> Edit Product</MDBModalTitle>
+                                    <MDBBtn className='btn-close' color='none' onClick={() => this.toggleShowEdit()}></MDBBtn>
+                                </MDBModalHeader>
+                                <MDBModalBody>
+                                    <CreateProductView />
+                                </MDBModalBody>
+                            </MDBModalContent>
+                        </MDBModalDialog>
+                    </MDBModal>
+                </>
+                <>
+                    <MDBModal tabIndex='-1' show={deleteModal}>
+                        <MDBModalDialog centered size="lg">
+                            <MDBModalContent>
+                                <MDBModalHeader>
+                                    <MDBModalTitle>Delete Product</MDBModalTitle>
+                                    <MDBBtn className='btn-close' color='none' onClick={() => this.toggleShowDelete()}></MDBBtn>
+                                </MDBModalHeader>
+                                <MDBModalBody>
+                                    <p>Are you sure you want to delete this product?</p>
+                                </MDBModalBody>
+                                <MDBModalFooter>
+                                    <MDBBtn color='secondary' onClick={() => this.toggleShowDelete()}>
+                                        Close
+                                    </MDBBtn>
+                                    <MDBBtn color='danger'>Delete</MDBBtn>
+                                </MDBModalFooter>
+                            </MDBModalContent>
+                        </MDBModalDialog>
+                    </MDBModal>
+                </>
+            </div >
 
         );
 

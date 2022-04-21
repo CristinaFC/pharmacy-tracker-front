@@ -29,7 +29,6 @@ class CreateProductView extends Component
 
         return (
             <div>
-                <h3> Create Product</h3>
                 <h6>Set data and save</h6>
                 <form class="wrapper">
 
@@ -69,7 +68,6 @@ class CreateProductView extends Component
                                 <input type="number" class="product-price" id="ProductPrice" />
                             </div>
                         </div>
-
                         <button type="submit" class="btn-add-product">Add product</button>
                     </aside>
                 </form>

@@ -91,6 +91,13 @@ code {
   margin-top: 3%;
 }
 
+/** ICONS **/
+.delete-icon, .edit-icon {
+ width: 20px;
+ height: 20px;
+}
+
+
 
 
 /** BUTTONS **/
