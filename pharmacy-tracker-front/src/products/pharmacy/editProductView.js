@@ -89,7 +89,9 @@ class EditProductView extends Component
                         <div class="category-price-container">
                             <div class="">
                                 <label for="ProductCategory" class="form-label">Category</label><br />
-                                <CategoriesSelector />
+                                {product.category != null
+                                    ? <CategoriesSelector categoryId={product.category} isAlreadySelected={true} />
+                                    : <CategoriesSelector isAlreadySelected={false} />}
                             </div>
                             <div class="">
                                 <label for="ProductPrice" class="form-label">Price</label><br />
@@ -111,15 +113,6 @@ class EditProductView extends Component
         );
 
     }
-
-    /**componentWillUnmount()
-    {
-        this.setState({
-            price: 0,
-            stock: 0,
-        });
-    }*/
-
 }
 
 

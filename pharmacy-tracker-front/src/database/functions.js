@@ -2,6 +2,69 @@ import { getDoc, doc, getDocs, collection, updateDoc, deleteField } from 'fireba
 import { db } from '../firebase/firebaseConfig';
 
 
+export const deletePharmacyProduct = async (pharmacyId, product) =>
+{
+    try
+    {
+        const ref = doc(db, 'pharmacies', pharmacyId);
+
+        await updateDoc(ref, {
+            [`products.${product}`]: deleteField()
+        });
+
+
+    } catch (e)
+    {
+        console.error("Error deleting product: ", e);
+    }
+}
+
+export const editPharmacyProduct = async (id, price = 0, stock = 0, productId) =>
+{
+    try
+    {
+
+        const ref = doc(db, "pharmacies", id);
+        await updateDoc(ref, {
+
+            products: {
+                [`${productId}`]: {
+                    price,
+                    stock
+                },
+            }
+        });
+
+    } catch (e)
+    {
+        console.error("Error editing product: ", e);
+    }
+}
+
+export const getCateogryById = async (id) =>
+{
+    try
+    {
+        const docRef = doc(db, "categories", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists())
+        {
+            const category = docSnap.data();
+            return category.name
+        } else
+        {
+            console.log("No such document!");
+        }
+
+    } catch (e)
+    {
+        console.error("Error getting category by id: ", e);
+    }
+
+}
+
+
 export const getProducts = async () =>
 {
     try
@@ -57,42 +120,7 @@ export const getCategories = async () =>
     }
 }
 
-export const editPharmacyProduct = async (id, price = 0, stock = 0, productId) =>
-{
-    try
-    {
-
-        const ref = doc(db, "pharmacies", id);
-        await updateDoc(ref, {
-
-            products: {
-                [`${productId}`]: {
-                    price,
-                    stock
-                },
-            }
-        });
-
-    } catch (e)
-    {
-        console.error("Error editing product: ", e);
-    }
-}
 
 
-export const deletePharmacyProduct = async (pharmacyId, product) =>
-{
-    try
-    {
-        const ref = doc(db, 'pharmacies', pharmacyId);
-
-        await updateDoc(ref, {
-            [`products.${product}`]: deleteField()
-        });
 
 
-    } catch (e)
-    {
-        console.error("Error deleting product: ", e);
-    }
-}

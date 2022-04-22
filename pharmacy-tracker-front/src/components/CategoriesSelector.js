@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getCategories } from '../database/functions';
+import { getCategories, getCateogryById } from '../database/functions';
 
 class CategoriesSelector extends Component 
 {
@@ -8,29 +8,36 @@ class CategoriesSelector extends Component
         super(props);
         this.state = {
             categories: [],
+            category: ''
         }
     }
 
-    async componentDidMount()
+    async componentWillReceiveProps(nextProps)
     {
-        try
-        {
-            const categories = await getCategories();
+        const { categoryId } = nextProps;
 
-            this.setState({ categories: categories });
-        } catch (e)
+        const categories = await getCategories();
+        let category = '';
+        if (categoryId != null)
         {
-            console.error("Error reading categories: ", e);
+            category = await getCateogryById(categoryId);
         }
+
+        this.setState({ categories, category });
     }
+
 
     render()
     {
-        const { categories } = this.state;
+        const { categories, category } = this.state;
+        const { isAlreadySelected } = this.props;
         return (
             <div>
-                <select class="categories-select" disabled >
-                    {categories.map((category) => <option> {category.name}</option>)}
+                <select class="categories-select" disabled={isAlreadySelected} >
+                    {isAlreadySelected
+                        ? <option selected >{category}</option>
+                        : categories.map((category) => <option> {category.name}</option>)}
+
                 </select>
             </div >
         );
