@@ -3,12 +3,8 @@ import ImageUpload from 'image-upload-react';
 import 'image-upload-react/dist/index.css';
 import CategoriesSelector from '../../components/CategoriesSelector';
 import { getAuth } from 'firebase/auth';
-import { editPharmacyProduct } from '../../database/functions';
 
-
-
-
-import { getDoc, doc, setDoc, getDocs, writeBatch, collection } from 'firebase/firestore/lite';
+import { doc, writeBatch } from 'firebase/firestore/lite';
 import { db } from '../../firebase/firebaseConfig';
 class EditProductView extends Component
 {
@@ -16,14 +12,23 @@ class EditProductView extends Component
     constructor(props)
     {
         super(props);
+
         this.state = {
             imageSrc: '',
-            show: false,
             price: 0,
             stock: 0,
         };
     }
 
+    componentWillReceiveProps(nextProps)
+    {
+        const { pharmacyProductData = '' } = nextProps;
+        this.setState({
+            price: pharmacyProductData.price,
+            stock: pharmacyProductData.stock
+        });
+
+    }
 
     handleImageSelect = (e) =>
     {
@@ -49,8 +54,6 @@ class EditProductView extends Component
             [name]: e.target.value,
         });
 
-        console.log('price', this.state.price);
-        console.log('stock', this.state.stock);
         const currentUser = getAuth().currentUser.uid;
 
         const batch = writeBatch(db);
@@ -102,13 +105,15 @@ class EditProductView extends Component
                             </div>
                             <div class="">
                                 <label for="ProductPrice" class="form-label">Price</label><br />
-                                <input type="number" name="price" class="product-price" id="ProductPrice" />
+                                <input type="number" name="price" class="product-price" id="ProductPrice"
+                                    value={this.state.price} onChange={(e) => this.handleChange(e)} />
 
                             </div>
                         </div>
                         <div class="">
                             <label for="ProductStock" class="form-label">Stock</label><br />
-                            <input type="number" name="stock" class="product-stock" id="ProductStock" />
+                            <input type="number" name="stock" class="product-stock" id="ProductStock"
+                                value={this.state.stock} onChange={(e) => this.handleChange(e)} />
                         </div>
                         <button type="submit" class="btn-add-product">Update</button>
                     </aside>
@@ -117,6 +122,14 @@ class EditProductView extends Component
 
         );
 
+    }
+
+    componentWillUnmount()
+    {
+        this.setState({
+            price: 0,
+            stock: 0,
+        });
     }
 
 }

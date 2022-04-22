@@ -31,6 +31,7 @@ class MyProductsView extends Component
             editModal: false,
             deleteModal: false,
             actualProduct: [],
+            pharmacyProductData: [],
         };
     }
 
@@ -42,16 +43,16 @@ class MyProductsView extends Component
         const cModal = this.state.deleteModal;
         this.setState({
             deleteModal: !cModal,
-
         });
     }
 
-    toggleShowEdit(product)
+    toggleShowEdit(product, pharmacyProductData)
     {
         const cModal = this.state.editModal;
         this.setState({
             editModal: !cModal,
             actualProduct: product,
+            pharmacyProductData
         });
     }
 
@@ -94,10 +95,32 @@ class MyProductsView extends Component
         }
     }
 
+    products(pharmacyProductData, productData = [], key)
+    {
+        return (
+            <tr>
+                <th scope="row">{key + 1}</th>
+                <td>{pharmacyProductData.name}</td>
+                <td>{pharmacyProductData.description}</td>
+                <td>{productData.price}</td>
+                <td>{productData.stock}</td>
+                <td>
+                    <MDBBtn onClick={() => this.toggleShowEdit(pharmacyProductData, productData)} color='link' >
+                        <img src={editIcon} alt="Edit" class="edit-icon" />
+                    </MDBBtn>
+                </td>
+                <td>
+                    <MDBBtn onClick={() => this.toggleShowDelete(pharmacyProductData)} color='link' >
+                        <img src={deleteIcon} alt="Delete" class="delete-icon" />
+                    </MDBBtn>
+                </td>
+            </tr>
+        );
+    }
 
     render()
     {
-        const { products, productsDescription, editModal, deleteModal } = this.state;
+        const { products = [], productsDescription, editModal, deleteModal } = this.state;
 
         return (
             <div class="myProducts-container">
@@ -117,30 +140,10 @@ class MyProductsView extends Component
                         </tr>
                     </thead>
                     <tbody>
-                        {productsDescription.map((product, key) =>
-                            <tr>
-                                <th scope="row">{key + 1}</th>
-                                <td>{product.name}</td>
-                                <td>{product.description}</td>
-                                <td>{products != null ? products[product.id].price : ""}</td>
-                                <td>{products != null ? products[product.id].stock : ""}</td>
-                                <td>
-                                    <MDBBtn onClick={() => this.toggleShowEdit(product)} color='link' >
-                                        <img src={editIcon} alt="Edit" class="edit-icon" />
-                                    </MDBBtn>
-                                </td>
-                                <td>
-                                    <MDBBtn onClick={() => this.toggleShowDelete(product)} color='link' >
-                                        <img src={deleteIcon} alt="Delete" class="delete-icon" />
-                                    </MDBBtn>
-                                </td>
-                            </tr>
-                        )}
+                        {productsDescription.map((product, key) => this.products(product, products[product.id], key))}
                     </tbody>
 
                 </table>
-
-                {console.log('this.state.actualProduct.', this.state.actualProduct)}
                 <>
                     <MDBModal tabIndex='-1' show={editModal}>
                         <MDBModalDialog centered size="lg">
@@ -150,7 +153,7 @@ class MyProductsView extends Component
                                     <MDBBtn className='btn-close' color='none' onClick={() => this.toggleShowEdit()}></MDBBtn>
                                 </MDBModalHeader>
                                 <MDBModalBody>
-                                    <EditProductView product={this.state.actualProduct} />
+                                    <EditProductView product={this.state.actualProduct} pharmacyProductData={this.state.pharmacyProductData} />
                                 </MDBModalBody>
                             </MDBModalContent>
                         </MDBModalDialog>
