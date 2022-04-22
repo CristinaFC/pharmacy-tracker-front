@@ -1,4 +1,4 @@
-import { getDoc, doc, setDoc, getDocs, writeBatch, collection, updateDoc, deleteField } from 'firebase/firestore/lite';
+import { getDoc, doc, getDocs, collection, updateDoc, deleteField } from 'firebase/firestore/lite';
 import { db } from '../firebase/firebaseConfig';
 
 
@@ -61,12 +61,17 @@ export const editPharmacyProduct = async (id, price = 0, stock = 0, productId) =
 {
     try
     {
-        /** Check */
 
-        const batch = writeBatch(db);
-        const ref = doc(db, "pharmacies", id, "products", productId);
+        const ref = doc(db, "pharmacies", id);
+        await updateDoc(ref, {
 
-        batch.update(ref, { "price": price, "stock": stock });
+            products: {
+                [`${productId}`]: {
+                    price,
+                    stock
+                },
+            }
+        });
 
     } catch (e)
     {

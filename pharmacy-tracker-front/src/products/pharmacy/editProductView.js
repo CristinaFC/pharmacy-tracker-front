@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import ImageUpload from 'image-upload-react';
 import 'image-upload-react/dist/index.css';
 import CategoriesSelector from '../../components/CategoriesSelector';
+import { editPharmacyProduct } from '../../database/functions';
+
 import { getAuth } from 'firebase/auth';
 
-import { doc, writeBatch } from 'firebase/firestore/lite';
-import { db } from '../../firebase/firebaseConfig';
 class EditProductView extends Component
 {
 
@@ -46,22 +46,10 @@ class EditProductView extends Component
         });
     }
 
-    _editProduct(e)
+    async _editProduct(e)
     {
-        const name = e.target.name;
-
-        this.setState({
-            [name]: e.target.value,
-        });
-
         const currentUser = getAuth().currentUser.uid;
-
-        const batch = writeBatch(db);
-        const ref = doc(db, "pharmacies", currentUser, "products", this.props.product.id);
-
-        batch.update(ref, { "price": this.state.price, "stock": this.state.stock });
-        //editPharmacyProduct(currentUser, this.state.price, this.state.stock, this.props.product.id);
-
+        await editPharmacyProduct(currentUser, parseInt(this.state.price), parseInt(this.state.stock), this.props.product.id);
     }
 
     render()
@@ -124,13 +112,13 @@ class EditProductView extends Component
 
     }
 
-    componentWillUnmount()
+    /**componentWillUnmount()
     {
         this.setState({
             price: 0,
             stock: 0,
         });
-    }
+    }*/
 
 }
 

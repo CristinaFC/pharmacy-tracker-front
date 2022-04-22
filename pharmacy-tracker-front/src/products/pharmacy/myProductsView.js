@@ -55,13 +55,8 @@ class MyProductsView extends Component
         deletePharmacyProduct(currentUser, this.state.actualProduct.id);
         const cModal = this.state.deleteModal;
         this.pharmacyProducts();
-        //const myProducts = await getPharmacyProducts(currentUser);
-        //const keys = Object.keys(myProducts);
-        //
-        //const pharmacyProductsDescription = await this.compareProductsId(keys);
         this.setState({
             deleteModal: !cModal,
-            //productsDescription: pharmacyProductsDescription,
         });
     }
 
@@ -103,12 +98,6 @@ class MyProductsView extends Component
         try
         {
             this.pharmacyProducts();
-            //const currentUser = getAuth().currentUser.uid;
-            //const myProducts = await getPharmacyProducts(currentUser);
-            //const keys = Object.keys(myProducts);
-
-            //const pharmacyProductsDescription = await this.compareProductsId(keys);
-            //this.setState({ products: myProducts });
         } catch (e)
         {
             console.error("Error reading document: ", e);
