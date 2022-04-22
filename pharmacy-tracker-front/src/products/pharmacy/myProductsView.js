@@ -35,14 +35,33 @@ class MyProductsView extends Component
         };
     }
 
-
-    deleteProduct()
+    async pharmacyProducts()
     {
-        const currentUser = getAuth().currentUser.uid;;
+        const currentUser = getAuth().currentUser.uid;
+
+        const myProducts = await getPharmacyProducts(currentUser);
+        const keys = Object.keys(myProducts);
+
+        const pharmacyProductsDescription = await this.compareProductsId(keys);
+        this.setState({
+            productsDescription: pharmacyProductsDescription,
+            products: myProducts
+        });
+    }
+
+    async deleteProduct()
+    {
+        const currentUser = getAuth().currentUser.uid;
         deletePharmacyProduct(currentUser, this.state.actualProduct.id);
         const cModal = this.state.deleteModal;
+        this.pharmacyProducts();
+        //const myProducts = await getPharmacyProducts(currentUser);
+        //const keys = Object.keys(myProducts);
+        //
+        //const pharmacyProductsDescription = await this.compareProductsId(keys);
         this.setState({
             deleteModal: !cModal,
+            //productsDescription: pharmacyProductsDescription,
         });
     }
 
@@ -79,16 +98,17 @@ class MyProductsView extends Component
 
     }
 
-    async componentDidMount()
+    async componentWillMount()
     {
         try
         {
-            const currentUser = getAuth().currentUser.uid;
-            const myProducts = await getPharmacyProducts(currentUser);
-            const keys = Object.keys(myProducts);
+            this.pharmacyProducts();
+            //const currentUser = getAuth().currentUser.uid;
+            //const myProducts = await getPharmacyProducts(currentUser);
+            //const keys = Object.keys(myProducts);
 
-            const pharmacyProductsDescription = await this.compareProductsId(keys);
-            this.setState({ productsDescription: pharmacyProductsDescription, products: myProducts });
+            //const pharmacyProductsDescription = await this.compareProductsId(keys);
+            //this.setState({ products: myProducts });
         } catch (e)
         {
             console.error("Error reading document: ", e);

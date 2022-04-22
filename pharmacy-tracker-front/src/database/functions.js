@@ -79,15 +79,15 @@ export const deletePharmacyProduct = async (pharmacyId, product) =>
 {
     try
     {
+        const ref = doc(db, 'pharmacies', pharmacyId);
 
-        /** Check */
-        const ref = doc(db, 'pharmacies', pharmacyId, "products", product);
-
-        await updateDoc(ref, { price: deleteField() });
+        await updateDoc(ref, {
+            [`products.${product}`]: deleteField()
+        });
 
 
     } catch (e)
     {
-        console.error("Error editing product: ", e);
+        console.error("Error deleting product: ", e);
     }
 }
