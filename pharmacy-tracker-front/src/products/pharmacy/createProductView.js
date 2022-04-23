@@ -71,7 +71,7 @@ class CreateProductView extends Component
                             <div class="">
                                 <label for="ProductCategory" class="form-label">Products</label><br />
                                 <select class="products-select" name="productId" onChange={(e) => this.handleChange(e)} >
-                                    <option value="undefined" selected>Select a product</option>
+                                    <option value="undefined" selected disabled hidden>Select a product</option>
                                     {
                                         products.map((product) => <option value={product.id}>{product.name}</option>)
                                     }
