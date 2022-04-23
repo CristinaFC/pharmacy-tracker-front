@@ -57,7 +57,7 @@ class MapView extends Component {
     */
 
     var userPos;
-
+      
     function LocationMarker() {
       const [positionx, setPosition] = useState(null)
       const map = useMapEvents({
@@ -72,7 +72,7 @@ class MapView extends Component {
         },
         
       })
-
+      
       return positionx === null ? null : (
         
         <Marker position={positionx} icon ={myPos}>
@@ -81,7 +81,18 @@ class MapView extends Component {
         
       )
     }
+    function showNearestPharmacy(){
+      var closestPharmacy = getNearbyPharmacy()
+      var str = JSON.stringify(closestPharmacy.address);
+      console.log(str);
+      alert('La farmacia más cerca es: ' + str);
+    }
 
+    function showUserPos(){
+      var str = JSON.stringify(userPos);
+      console.log(str);
+      alert('La posicion del usuario es: ' + str);
+    }
     function setUserLocation(position) {
       userPos = position;
     }
@@ -110,7 +121,7 @@ class MapView extends Component {
         }
       });
       console.log(pharmacyTarget);
-      return dist;
+      return pharmacyTarget;
     }
 
     function deg2rad(deg) {
@@ -140,15 +151,15 @@ class MapView extends Component {
               {location.address}
             </Popup>
           </Marker>))}
-        <LocationMarker/>
-       
+        <LocationMarker/> 
       </MapContainer>
+      
        {/* <p>La ubicacion del usuario es {userPos.lat +  ' , ' + userPos.lng}</p> */}
        <div id="buttons" className="mx-0">
-       <button id="location" onClick={LocationMarker}>
+       <button id="location" onClick={showUserPos}>
             Get Location
         </button>
-        <button id="nearby" onClick={getNearbyPharmacy}>
+        <button id="nearby" onClick={showNearestPharmacy}>
             Find Nearest Stations
         </button>
         </div>
