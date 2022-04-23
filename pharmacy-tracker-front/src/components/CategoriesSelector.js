@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getCategories, getCateogryById } from '../database/functions';
+import { getCategories, getCategoryById } from '../database/functions';
 
 class CategoriesSelector extends Component 
 {
@@ -20,7 +20,7 @@ class CategoriesSelector extends Component
         let category = '';
         if (categoryId != null)
         {
-            category = await getCateogryById(categoryId);
+            category = await getCategoryById(categoryId);
         }
 
         this.setState({ categories, category });

@@ -1,5 +1,28 @@
-import { getDoc, doc, getDocs, collection, updateDoc, deleteField } from 'firebase/firestore/lite';
+import { getDoc, doc, getDocs, collection, updateDoc, deleteField, setDoc } from 'firebase/firestore/lite';
 import { db } from '../firebase/firebaseConfig';
+
+
+export const addPharmacyProduct = async (currentUser, productId, price = 0, stock = 0) =>
+{
+    try
+    {
+
+        const ref = doc(db, 'pharmacies', currentUser);
+        await setDoc(ref, {
+            products: {
+                [`${productId}`]: {
+                    price: price,
+                    stock: stock
+                }
+            }
+        }, { merge: true });
+
+    } catch (e)
+    {
+        console.log(price, stock, productId);
+        console.error("Error adding product: ", e);
+    }
+}
 
 
 export const deletePharmacyProduct = async (pharmacyId, product) =>
@@ -33,7 +56,7 @@ export const editPharmacyProduct = async (id, price = 0, stock = 0, productId) =
                     stock
                 },
             }
-        });
+        }, { merge: true });
 
     } catch (e)
     {
@@ -41,7 +64,24 @@ export const editPharmacyProduct = async (id, price = 0, stock = 0, productId) =
     }
 }
 
-export const getCateogryById = async (id) =>
+export const getCategories = async () =>
+{
+    try
+    {
+        const docRef = collection(db, 'categories');
+        const docSnap = await getDocs(docRef);
+
+        const categories = [];
+        docSnap.forEach((doc) => categories.push(doc.data()));
+
+        return categories;
+    } catch (e)
+    {
+        console.error("Error reading categories: ", e);
+    }
+}
+
+export const getCategoryById = async (id) =>
 {
     try
     {
@@ -64,6 +104,21 @@ export const getCateogryById = async (id) =>
 
 }
 
+export const getPharmacyProducts = async (id) =>
+{
+    try
+    {
+        const docRef = doc(db, 'pharmacies', id);
+        const docSnap = await getDoc(docRef);
+        const products = docSnap.data().products;
+        return products;
+
+    } catch (e)
+    {
+        console.log(e);
+    }
+
+}
 
 export const getProducts = async () =>
 {
@@ -87,38 +142,9 @@ export const getProducts = async () =>
 
 }
 
-export const getPharmacyProducts = async (id) =>
-{
-    try
-    {
-        const docRef = doc(db, 'pharmacies', id);
-        const docSnap = await getDoc(docRef);
-        const products = docSnap.data().products;
-        return products;
 
-    } catch (e)
-    {
-        console.log(e);
-    }
 
-}
 
-export const getCategories = async () =>
-{
-    try
-    {
-        const docRef = collection(db, 'categories');
-        const docSnap = await getDocs(docRef);
-
-        const categories = [];
-        docSnap.forEach((doc) => categories.push(doc.data()));
-
-        return categories;
-    } catch (e)
-    {
-        console.error("Error reading categories: ", e);
-    }
-}
 
 
 

@@ -20,6 +20,7 @@ export default class Routing
     static editProfile = '/editProfile';
     static deleteProfile = '/deleteProfile';
     static myProducts = '/myProducts'
+    static addProduct = '/addProduct';
     static editProduct = '/editProduct';
     //static map = '/map';
 }

@@ -15,6 +15,7 @@ import PharmacyDelete from '../pharmacies/pharmacyDelete';
 /** PRODUCTS **/
 import MyProductsView from '../products/pharmacy/myProductsView';
 import EditProductView from '../products/pharmacy/editProductView';
+import CreateProductView from '../products/pharmacy/createProductView';
 
 
 /** NAVBAR **/
@@ -42,6 +43,7 @@ class RouterComponent extends Component
           {/** Pharmacy Role **/}
           <Route path={Routing.myProducts} element={<MyProductsView />} />
           <Route path={Routing.editProduct} element={<EditProductView />} />
+          <Route path={Routing.addProduct} element={<CreateProductView />} />
         </Routes>
       </BrowserRouter>
     );

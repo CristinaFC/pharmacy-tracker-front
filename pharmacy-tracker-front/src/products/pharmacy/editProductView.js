@@ -6,6 +6,9 @@ import { editPharmacyProduct } from '../../database/functions';
 
 import { getAuth } from 'firebase/auth';
 
+import Routing from '../../routing/Routing';
+import { Link } from 'react-router-dom';
+
 class EditProductView extends Component
 {
 
@@ -22,13 +25,15 @@ class EditProductView extends Component
 
     componentWillReceiveProps(nextProps)
     {
-        const { pharmacyProductData = '' } = nextProps;
+        const { product = '' } = nextProps;
         this.setState({
-            price: pharmacyProductData.price,
-            stock: pharmacyProductData.stock
+            price: product.price,
+            stock: product.stock
         });
 
     }
+
+    /**Handlers */
 
     handleImageSelect = (e) =>
     {
@@ -46,20 +51,30 @@ class EditProductView extends Component
         });
     }
 
-    async _editProduct(e)
+    /**Product methods */
+    async editProduct()
     {
+
         const currentUser = getAuth().currentUser.uid;
+
         await editPharmacyProduct(currentUser, parseInt(this.state.price), parseInt(this.state.stock), this.props.product.id);
+
+        this.props.handle();
+
+        <Link to={Routing.myProducts} />
+
     }
+
 
     render()
     {
         const { product = '' } = this.props;
 
         return (
+
             <div>
                 <h6>Set data and save</h6>
-                <form class="wrapper" onSubmit={(e) => this._editProduct(e)}>
+                <div class="wrapper">
                     <aside class="aside aside-1">
                         <div>
                             <label for="formFileSm" class="form-label">Select Image</label>
@@ -105,10 +120,11 @@ class EditProductView extends Component
                             <input type="number" name="stock" class="product-stock" id="ProductStock"
                                 value={this.state.stock} onChange={(e) => this.handleChange(e)} />
                         </div>
-                        <button type="submit" class="btn-add-product">Update</button>
+                        <button type="submit" class="btn-add-product" onClick={() => this.editProduct()}>Update</button>
                     </aside>
-                </form>
+                </div>
             </div >
+
 
         );
 

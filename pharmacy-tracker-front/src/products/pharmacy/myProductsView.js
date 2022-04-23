@@ -17,6 +17,8 @@ import
 } from 'mdb-react-ui-kit';
 
 import EditProductView from './editProductView';
+import CreateProductView from './createProductView';
+
 
 
 class MyProductsView extends Component
@@ -25,101 +27,179 @@ class MyProductsView extends Component
     constructor(props)
     {
         super(props);
+
         this.state = {
             products: [],
-            productsDescription: [],
-            editModal: false,
+            addModal: false,
             deleteModal: false,
+            editModal: false,
             actualProduct: [],
-            pharmacyProductData: [],
+            imageSrc: '',
+            price: 0,
+            stock: 0,
         };
     }
 
-    async pharmacyProducts()
-    {
-        const currentUser = getAuth().currentUser.uid;
-
-        const myProducts = await getPharmacyProducts(currentUser);
-        const keys = Object.keys(myProducts);
-
-        const pharmacyProductsDescription = await this.compareProductsId(keys);
-        this.setState({
-            productsDescription: pharmacyProductsDescription,
-            products: myProducts
-        });
-    }
-
-    async deleteProduct()
-    {
-        const currentUser = getAuth().currentUser.uid;
-        deletePharmacyProduct(currentUser, this.state.actualProduct.id);
-        const cModal = this.state.deleteModal;
-        this.pharmacyProducts();
-        this.setState({
-            deleteModal: !cModal,
-        });
-    }
-
-    toggleShowEdit(product, pharmacyProductData)
-    {
-        const cModal = this.state.editModal;
-        this.setState({
-            editModal: !cModal,
-            actualProduct: product,
-            pharmacyProductData
-        });
-    }
-
-    toggleShowDelete(product)
-    {
-        const cModal = this.state.deleteModal;
-        this.setState({
-            deleteModal: !cModal,
-            actualProduct: product,
-        });
-    }
-
-
-    async compareProductsId(keys = [])
-    {
-        const allProducts = await getProducts();
-        const pharmacyProducts = [];
-        keys.forEach((key) =>
-        {
-            pharmacyProducts.push(allProducts.find(p => p.id === key));
-        }
-        )
-        return pharmacyProducts;
-
-    }
 
     async componentWillMount()
     {
         try
         {
             this.pharmacyProducts();
+
+            console.log('currentUser', this.state.currentUser);
         } catch (e)
         {
             console.error("Error reading document: ", e);
         }
     }
 
-    products(pharmacyProductData, productData = [], key)
+
+    /** Opening and closing modals*/
+    toggleShowEdit(product)
     {
+        const cModal = this.state.editModal;
+
+        this.setState({
+            editModal: !cModal,
+        });
+
+        if (product != null)
+        {
+            this.setState({
+                actualProduct: product,
+                price: product.price,
+                stock: product.stock,
+            });
+        }
+    }
+
+    toggleShowDelete(product)
+    {
+        const cModal = this.state.deleteModal;
+        this.pharmacyProducts();
+        this.setState({
+            deleteModal: !cModal,
+            actualProduct: product,
+        });
+    }
+
+    toggleShowAdd()
+    {
+        const cModal = this.state.addModal;
+        this.pharmacyProducts();
+        this.setState({
+            addModal: !cModal
+        });
+    }
+
+
+    async closeEditModal()
+    {
+
+        const cModal = this.state.editModal;
+
+        this.pharmacyProducts();
+
+        this.setState({
+            editModal: !cModal,
+        });
+
+    }
+
+
+    /**Handlers */
+
+    handleChange = (e) =>
+    {
+        const name = e.target.name;
+
+        this.setState({
+            [name]: e.target.value,
+        });
+    }
+
+
+    /**Pharmacy methods */
+
+    /**Get actual pharmacy products */
+    async pharmacyProducts()
+    {
+        const currentUser = getAuth().currentUser.uid;
+
+        const pharmacyProducts = await getPharmacyProducts(currentUser);
+
+        await this.getAllPharmacyProductsInformation(pharmacyProducts);
+
+    }
+
+
+    /**Get pharmacy products information */
+
+    async getAllPharmacyProductsInformation(pharmacyProducts)
+    {
+        const allProducts = await getProducts();
+        const keys = Object.keys(pharmacyProducts);
+        const products = [];
+
+        keys.forEach((key) =>
+        {
+            allProducts.map((product) =>
+            {
+                if (product.id === key)
+                {
+                    const p = {
+                        id: product.id,
+                        name: product.name,
+                        description: product.description,
+                        category: product.category,
+                        price: pharmacyProducts[key].price,
+                        stock: pharmacyProducts[key].stock
+                    }
+                    products.push(p);
+                }
+            })
+
+        });
+
+        this.setState({ products });
+
+    }
+
+
+    /**Delete pharmacy product */
+    async deleteProduct()
+    {
+        const currentUser = getAuth().currentUser.uid;
+
+        await deletePharmacyProduct(currentUser, this.state.actualProduct.id);
+
+        this.pharmacyProducts();
+
+        const cModal = this.state.deleteModal;
+
+        this.setState({
+            deleteModal: !cModal,
+        });
+    }
+
+    dataTable(product, key)
+    {
+
         return (
             <tr>
                 <th scope="row">{key + 1}</th>
-                <td>{pharmacyProductData.name}</td>
-                <td>{pharmacyProductData.description}</td>
-                <td>{productData.price}</td>
-                <td>{productData.stock}</td>
+                <td>{product.name}</td>
+                <td>{product.description}</td>
+                <td>{product.price}</td>
+                <td>{product.stock}</td>
                 <td>
-                    <MDBBtn onClick={() => this.toggleShowEdit(pharmacyProductData, productData)} color='link' >
+                    <MDBBtn onClick={() => this.toggleShowEdit(product)} color='link' >
                         <img src={editIcon} alt="Edit" class="edit-icon" />
                     </MDBBtn>
                 </td>
                 <td>
-                    <MDBBtn onClick={() => this.toggleShowDelete(pharmacyProductData)} color='link' >
+                    <MDBBtn onClick={() => this.toggleShowDelete(product)} color='link' >
                         <img src={deleteIcon} alt="Delete" class="delete-icon" />
                     </MDBBtn>
                 </td>
@@ -127,14 +207,21 @@ class MyProductsView extends Component
         );
     }
 
+
     render()
     {
-        const { products = [], productsDescription, editModal, deleteModal } = this.state;
+        const { products = [], addModal, editModal, deleteModal, actualProduct } = this.state;
 
         return (
             <div class="myProducts-container">
-                <h1>Products</h1>
-
+                <div class="title-container">
+                    <div class="title">
+                        <h1>Products</h1>
+                    </div>
+                    <div class="add-button">
+                        <button onClick={() => this.toggleShowAdd()} type="submit" class="btn-add-product">Add new product</button>
+                    </div>
+                </div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -145,14 +232,14 @@ class MyProductsView extends Component
                             <th scope="col">Stock</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
-
                         </tr>
                     </thead>
                     <tbody>
-                        {productsDescription.map((product, key) => this.products(product, products[product.id], key))}
+                        {products.map((product, key) => this.dataTable(product, key))}
                     </tbody>
-
                 </table>
+
+                {/**Edit product Modal */}
                 <>
                     <MDBModal tabIndex='-1' show={editModal}>
                         <MDBModalDialog centered size="lg">
@@ -162,12 +249,15 @@ class MyProductsView extends Component
                                     <MDBBtn className='btn-close' color='none' onClick={() => this.toggleShowEdit()}></MDBBtn>
                                 </MDBModalHeader>
                                 <MDBModalBody>
-                                    <EditProductView product={this.state.actualProduct} pharmacyProductData={this.state.pharmacyProductData} />
+                                    <EditProductView product={this.state.actualProduct} handle={() => this.closeEditModal()} />
                                 </MDBModalBody>
                             </MDBModalContent>
                         </MDBModalDialog>
                     </MDBModal>
                 </>
+
+                {/** DELETE PRODUCT MODAL */}
+
                 <>
                     <MDBModal tabIndex='-1' show={deleteModal}>
                         <MDBModalDialog centered size="lg">
@@ -189,10 +279,24 @@ class MyProductsView extends Component
                         </MDBModalDialog>
                     </MDBModal>
                 </>
-            </div >
-
+                {/** ADD PRODUCT MODAL */}
+                <>
+                    <MDBModal tabIndex='-1' show={addModal}>
+                        <MDBModalDialog centered size="lg">
+                            <MDBModalContent>
+                                <MDBModalHeader>
+                                    <MDBModalTitle>Add Product</MDBModalTitle>
+                                    <MDBBtn className='btn-close' color='none' onClick={() => this.toggleShowAdd()}></MDBBtn>
+                                </MDBModalHeader>
+                                <MDBModalBody>
+                                    <CreateProductView handle={() => this.toggleShowAdd()} />
+                                </MDBModalBody>
+                            </MDBModalContent>
+                        </MDBModalDialog>
+                    </MDBModal>
+                </>
+            </div>
         );
-
     }
 }
 

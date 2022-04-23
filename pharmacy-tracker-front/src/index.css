@@ -95,6 +95,16 @@ code {
   margin-top: 3%;
 }
 
+.title-container {
+  margin-top: 3%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 /** ICONS **/
 .delete-icon, .edit-icon {
  width: 20px;
