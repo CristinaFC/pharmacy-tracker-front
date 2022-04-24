@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
-import L from 'leaflet';
+import L, { Map } from 'leaflet';
+import { useMap, MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 //import useGeoLocation from "hooks/useGeoLocation";
 import { getDocs, collection } from "firebase/firestore/lite";
@@ -23,16 +23,15 @@ var myPos = L.icon({
 });
 
 class MapView extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       pharmacies: [],
+      mapRef: []
     };
   }
-
   render() {
-    const styleMap = {"width": "50%", "height": "50vh", "margin-left":"5%",  "margin-top":"5%"}
+    const styleMap = {"width": "50%", "height": "50vh", "margin-left":"2%",  "margin-top":"2%"}
     let marks = [];
     const { pharmacies } = this.state;
     pharmacies.forEach((pharmacy) => {
@@ -58,6 +57,12 @@ class MapView extends Component {
 
     var userPos;
 
+    function NearbyPharmacy() {
+      const pharmacy = GetNearbyPharmacy();
+      var map = useMap();
+      map.flyTo(pharmacy.position);
+    }
+
     function LocationMarker() {
       const [positionx, setPosition] = useState(null)
       const map = useMapEvents({
@@ -70,7 +75,6 @@ class MapView extends Component {
           console.log(e.latlng)
           setUserLocation(e.latlng);
         },
-        
       })
 
       return positionx === null ? null : (
@@ -80,14 +84,15 @@ class MapView extends Component {
         </Marker>
         
       )
+
+      
     }
 
     function setUserLocation(position) {
       userPos = position;
     }
 
-
-    function getNearbyPharmacy() {
+    function GetNearbyPharmacy() {
       var pharmacyLat;
       var pharmacyLng;
       var tempDist;
@@ -103,14 +108,13 @@ class MapView extends Component {
         tempDist = Math.sin(deg2rad(userPos.lat)) * Math.sin(deg2rad(pharmacyLat)) + Math.cos(deg2rad(userPos.lat)) * Math.cos(deg2rad(pharmacyLat)) * Math.cos(deg2rad(theta))
         tempDist = rad2deg(tempDist);
         tempDist = tempDist * 60 * 1.1515;
-        console.log(tempDist);
         if (tempDist > dist || dist == null) {
           dist = tempDist
           pharmacyTarget = pharmacy;
         }
       });
-      console.log(pharmacyTarget);
-      return dist;
+
+      return pharmacyTarget;
     }
 
     function deg2rad(deg) {
@@ -126,7 +130,8 @@ class MapView extends Component {
       <MapContainer
         style={styleMap}
         center={[28.112067, -15.439845,]}
-        zoom={13}>
+        zoom={13}
+        id="map">
 
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -141,23 +146,32 @@ class MapView extends Component {
             </Popup>
           </Marker>))}
         <LocationMarker/>
-       
       </MapContainer>
        {/* <p>La ubicacion del usuario es {userPos.lat +  ' , ' + userPos.lng}</p> */}
        <div id="buttons" className="mx-0">
-       <button id="location" onClick={LocationMarker}>
-            Get Location
-        </button>
-        <button id="nearby" onClick={getNearbyPharmacy}>
-            Find Nearest Stations
-        </button>
+        {/* <button id="location" onClick={LocationMarker}>
+              Get Location
+          </button> */}
+          <button id="nearby" onClick={NearbyPharmacy}>
+              Find near pharmacy
+          </button>
         </div>
+        {/* <div class="sidebar" id="sidebar">
+          {marks.map((location) => (
+          <div class="fila">
+            <h2 id="rutas"> {location.address} </h2>
+            <div id="buttonsPharmacy">
+              <button id="route"> Route </button>
+              <button id="products"> Products </button>
+            </div>
+            <hr></hr>
+          </div>
+          ))}
+        </div> */}
       </> 
     )
     
   }
-
- 
 
   async componentDidMount() {
     try {
@@ -169,7 +183,7 @@ class MapView extends Component {
       });
 
       this.setState({
-        pharmacies: pharmacyList,
+        pharmacies: pharmacyList
       });
     } catch (e) {
       console.error("Error adding document: ", e);
