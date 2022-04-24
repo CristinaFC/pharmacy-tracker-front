@@ -76,7 +76,7 @@ class MapView extends Component {
           setUserLocation(e.latlng);
         },
       })
-
+      
       return positionx === null ? null : (
         
         <Marker position={positionx} icon ={myPos}>
@@ -87,7 +87,18 @@ class MapView extends Component {
 
       
     }
+    function showNearestPharmacy(){
+      var closestPharmacy = GetNearbyPharmacy()
+      var str = JSON.stringify(closestPharmacy.address);
+      console.log(str);
+      alert('La farmacia más cerca es: ' + str);
+    }
 
+    function showUserPos(){
+      var str = JSON.stringify(userPos);
+      console.log(str);
+      alert('La posicion del usuario es: ' + str);
+    }
     function setUserLocation(position) {
       userPos = position;
     }
@@ -113,7 +124,6 @@ class MapView extends Component {
           pharmacyTarget = pharmacy;
         }
       });
-
       return pharmacyTarget;
     }
 
@@ -147,6 +157,7 @@ class MapView extends Component {
           </Marker>))}
         <LocationMarker/>
       </MapContainer>
+      
        {/* <p>La ubicacion del usuario es {userPos.lat +  ' , ' + userPos.lng}</p> */}
        <div id="buttons" className="mx-0">
         {/* <button id="location" onClick={LocationMarker}>
@@ -156,7 +167,7 @@ class MapView extends Component {
               Find near pharmacy
           </button>
         </div>
-        {/* <div class="sidebar" id="sidebar">
+        <div class="sidebar" id="sidebar">
           {marks.map((location) => (
           <div class="fila">
             <h2 id="rutas"> {location.address} </h2>
@@ -167,7 +178,7 @@ class MapView extends Component {
             <hr></hr>
           </div>
           ))}
-        </div> */}
+        </div>
       </> 
     )
     
