@@ -11,6 +11,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#sidebar {
+  margin-left: 120vh;
+  z-index: 2;
+  position: absolute;
+  top: 10%;
+  width: 40%;
+  max-width: 40%;
+  text-align: left;
+}
+
+#rutas {
+  font-size: 1rem;
+  width: 150px;
+}
+
+#buttons {
+  text-align: left;
+  padding-left: 40vh;
+  margin-top: 5vh;
+}
+#buttons > button{
+  margin-left: 5vh;
+}
+#buttonsPharmacy {
+  margin-left: 25vh;
+}
+#buttonsPharmacy > button {
+  margin-left: 5vh;
+}
+
 
 /** BUTTONS **/
 .edit-button {
