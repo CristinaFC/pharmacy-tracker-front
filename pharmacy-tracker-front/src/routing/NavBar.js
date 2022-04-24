@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -6,10 +6,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Routing from './Routing';
 import { auth } from '../firebase/firebaseConfig';
 import { useAuth } from '../context/authContext';
+import { getDocs, collection } from "firebase/firestore/lite";
+import { db } from "../firebase/firebaseConfig";
 
 
 export function NavBar() {
+  // const { query, setQuery } = useState(""); 
   const { user } = useAuth();
+
+  // useEffect(() => {
+  //   if (value.length > 0) {
+
+  //   }
+  // }, [value])
+
 
   return (
     <div>
@@ -29,7 +39,8 @@ const NavBarNonAuthUser = () => {
         </Link>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <form class="ms-5 d-flex form-search">
-            <input type="search" class="form-control" placeholder="Search" aria-label="Search" />
+            <input type="search" class="form-control" placeholder="Search" aria-label="Search"
+            />
           </form>
           <ul class="navbar-nav ms-5">
             <li class="nav-item top-r" >
