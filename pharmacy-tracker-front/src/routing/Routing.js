@@ -19,8 +19,15 @@ export default class Routing
     static myProfile = '/myProfile';
     static editProfile = '/editProfile';
     static deleteProfile = '/deleteProfile';
+
+    static registerpharm = '/registerpharm';
+
     static myProducts = '/myProducts'
     static addProduct = '/addProduct';
     static editProduct = '/editProduct';
+
     //static map = '/map';
+
+    /** User role */
+    static compareprice = '/compareprice';
 }

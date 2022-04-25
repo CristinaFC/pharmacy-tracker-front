@@ -22,6 +22,8 @@ import CreateProductView from '../products/pharmacy/createProductView';
 import Home from '../home/home';
 import Login from '../components/Login';
 import Register from '../components/Register';
+import RegisterPharm from '../components/RegisterPharm';
+import ComparePrice from '../components/ComparePrice';
 
 class RouterComponent extends Component
 {
@@ -39,11 +41,15 @@ class RouterComponent extends Component
           <Route path={Routing.deleteProfile} element={<ProtectedRoute><PharmacyDelete /> </ProtectedRoute>} />
           {/** User Role **/}
           <Route path={Routing.login} element={<Login />} />
-          <Route path={Routing.register} element={<UserProtectedRoute><Register /> </UserProtectedRoute>} />
+          <Route path={Routing.register} element={<UserProtectedRoute><Register /></UserProtectedRoute>} />
+          <Route path={Routing.compareprice} element={<UserProtectedRoute><ComparePrice /></UserProtectedRoute>} />
+
           {/** Pharmacy Role **/}
+          <Route path={Routing.registerpharm} element={<UserProtectedRoute><RegisterPharm /></UserProtectedRoute>} />
           <Route path={Routing.myProducts} element={<MyProductsView />} />
           <Route path={Routing.editProduct} element={<EditProductView />} />
           <Route path={Routing.addProduct} element={<CreateProductView />} />
+
         </Routes>
       </BrowserRouter>
     );

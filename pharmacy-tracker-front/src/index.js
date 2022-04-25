@@ -5,9 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
+  // <FirebaseAppProvider firebaseConfig={firebaseConfig} >
+
   <React.StrictMode>
     <App />
   </React.StrictMode>,
+  // </FirebaseAppProvider>,
   document.getElementById('root')
 );
 

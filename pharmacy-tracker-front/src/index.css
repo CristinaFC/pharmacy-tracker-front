@@ -260,21 +260,42 @@ code {
   text-decoration: none;
   vertical-align: middle;
   user-select: none;
-  border: 1px solid transparent;
+  border: 1px solid #7ED1A7;
+  border-radius: 5px;
   padding: 0.375rem 0.75rem;
-  border-radius: 0.25rem;
   color: #fff;
-  background-color: #80E896;
-  border-color: #80E896;
+  background-color: #7ED1A7;
+  width: 500px;
+  height: 45px;
+  margin-top: 39px;
+  margin-right: 10px;
 }
 
 /** ACCOUNT FORM **/
 .account-form {
   position: relative;
-  max-width: 400px;
-  margin: 100px auto 100px;
+  /*max-width: 550px;*/
+  margin: 65px auto 100px;
   text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.Rrow{
+  max-width: 500px;
+}
+
+.title{
+  margin-bottom: 50px;
+}
+
+.last-row{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.radios{
+  display: flex;
+  align-items: center;
 }
 
 /** ACCOUNT UPDATE **/
@@ -295,21 +316,40 @@ code {
   color: #7ED1A7;
 }
 
-div.row {
+/*div.row {
   margin: 10px;
-}
+}*/
 
 /** REGISTER & LOGIN FORM **/
 .account-form {
   position: relative;
   max-width: auto;
-  margin: 100px auto 100px;
+  margin: 50px auto 83px;
   text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  /*box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);*/
+}
+
+.magic2{
+  display: block;
+  margin-left: 31%;
+}
+
+#reg1{
+  /*display: none;*/
+  display: block;
+  margin-left: 31%;
+}
+
+.title{
+  text-align: start;
+}
+
+.radios > input{
+  margin-right: 10px;
 }
 
 .account-form form {
-  padding: 20px;
+  /*padding: 20px;*/
 }
 
 .account-form label {
@@ -317,8 +357,9 @@ div.row {
   color: #7ED1A7;
 }
 
-div.row {
-  margin: 10px;
+.inputRegister {
+  width: 500px;
+  margin-bottom: 20px;
 }
 
 /** NAVBAR **/
@@ -400,4 +441,3 @@ div.row {
 .navbar  {
   background-color: #7ED1A7;
 }
-

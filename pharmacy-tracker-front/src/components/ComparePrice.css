@@ -1,0 +1,81 @@
+body.active-modal {
+    overflow-y: hidden;
+}
+
+.btn-modal {
+    padding: 10px 20px;
+    display: block;
+    margin: 100px auto 0;
+    font-size: 18px;
+}
+
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    display: block;
+}
+
+.overlay {
+    background: rgba(49,49,49,0.8);
+}
+.modal-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #ffffff;
+    padding: 14px 28px;
+    border-radius: 3px;
+    max-width: 813px;
+    min-width: 453px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 2px 2px;
+    width: 27px;
+    height: 27px;
+    border: none;
+    font-size: 17px;
+    margin: 0;
+}
+
+.content{
+    margin-top: 5%;
+    display: flex;
+}
+
+.img{
+    max-width: 292px;
+    max-height: 292px;
+}
+
+.list{
+    display: flex;
+    justify-content: space-between;
+    max-height: 56px;
+    margin-bottom: 20px;
+}
+
+.left{
+    width: 50%;
+}
+
+.rigth{
+    width: 50%;
+}
+
+.links{
+    display: flex;
+    width: 30%;
+    justify-content: space-around;
+    align-items: flex-end;
+}
