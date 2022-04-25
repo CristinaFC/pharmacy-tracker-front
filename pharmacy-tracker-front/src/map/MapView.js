@@ -90,15 +90,6 @@ class MapView extends Component {
       myMap.flyTo(userPos)
     }
 
-    function RoutePharmacy() {
-      var route = [
-        [userPos],
-        [20.000, 20.00],
-      ]
-      var path = L.polyline(route, {color: 'red'});
-      console.log(path)
-    }
-
     // function showNearestPharmacy(){
     //   var closestPharmacy = GetNearbyPharmacy()
     //   var str = JSON.stringify(closestPharmacy.address);
@@ -187,8 +178,8 @@ class MapView extends Component {
           <div class="fila">
             <h2 id="rutas"> {location.address} </h2>
             <div id="buttonsPharmacy">
-              <button id="route" onClick={RoutePharmacy}> Route </button>
-              <button id="products"> Products </button>
+              {/* <button id="route"> Route </button>
+              <button id="products"> Products </button> */}
             </div>
             <hr></hr>
           </div>
