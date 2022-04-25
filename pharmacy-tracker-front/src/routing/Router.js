@@ -12,6 +12,8 @@ import Home from '../home/home';
 import PharmacyDelete from '../pharmacies/pharmacyDelete';
 import Login from '../components/Login';
 import Register from '../components/Register';
+import RegisterPharm from '../components/RegisterPharm';
+import ComparePrice from '../components/ComparePrice';
 
 class RouterComponent extends Component {
   render() {
@@ -28,6 +30,8 @@ class RouterComponent extends Component {
           {/** User Role **/}
           <Route path={Routing.login} element={<Login />} />
           <Route path={Routing.register} element={<UserProtectedRoute><Register /></UserProtectedRoute>} />
+          <Route path={Routing.compareprice} element={<UserProtectedRoute><ComparePrice /></UserProtectedRoute>} />
+          <Route path={Routing.registerpharm} element={<UserProtectedRoute><RegisterPharm /></UserProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     );

@@ -128,21 +128,22 @@ code {
   text-decoration: none;
   vertical-align: middle;
   user-select: none;
-  border: 1px solid transparent;
+  border: 1px solid #7ED1A7;
+  border-radius: 5px;
   padding: 0.375rem 0.75rem;
-  border-radius: 0.25rem;
   color: #fff;
-  background-color: #80E896;
-  border-color: #80E896;
+  background-color: #7ED1A7;
+  width: 490px;
+  height: 45px;
+  margin-top: 39px;
 }
 
 /** ACCOUNT FORM **/
 .account-form {
   position: relative;
-  max-width: 400px;
+  max-width: 550px;
   margin: 100px auto 100px;
   text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 /** ACCOUNT UPDATE **/
@@ -163,9 +164,9 @@ code {
   color: #7ED1A7;
 }
 
-div.row {
+/*div.row {
   margin: 10px;
-}
+}*/
 
 /** REGISTER & LOGIN FORM **/
 .account-form {
@@ -173,7 +174,11 @@ div.row {
   max-width: auto;
   margin: 100px auto 100px;
   text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  /*box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);*/
+}
+
+.title{
+  text-align: start;
 }
 
 .account-form form {
@@ -185,8 +190,9 @@ div.row {
   color: #7ED1A7;
 }
 
-div.row {
-  margin: 10px;
+.inputRegister {
+  width: 500px;
+  margin-top: 30px;
 }
 
 /** NAVBAR **/
@@ -268,4 +274,3 @@ div.row {
 .navbar  {
   background-color: #7ED1A7;
 }
-

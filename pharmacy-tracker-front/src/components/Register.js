@@ -1,51 +1,89 @@
-import React, { useState } from 'react'
-import { useAuth } from '../context/authContext';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import 'firebase/auth';
+import { useFirebaseApp } from 'reactfire';
+import {createUserWithEmailAndPassword} from 'firebase/auth'
+
+import { auth, createUserDocument } from '../firebase/firebaseConfig';
+
 
 export default function Register() {
 
-    const [user, setUser] = useState({
-        email: '',
-        password: '',
-    });
+    const [ fullname, setFullName ] = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
 
-    const { signup } = useAuth();
-    const navigate = useNavigate();
-    const [error, setError] = useState();
+    // const firebase = useFirebaseApp(); 
 
-    const handleChange = ({ target: { name, value } }) => {
-        setUser({ ...user, [name]: value })
-    };
+    // const validatePassword = () => {
+    //     let isValid = true
+    //     if (password !== '' && confirmPassword !== ''){
+    //       if (password !== confirmPassword) {
+    //         isValid = false
+    //         setError('Passwords does not match')
+    //       }
+    //     }
+    //     return isValid
+    //   }
 
-    const handleSubmit = async (e) => {
+      const register = e => {
+
+        
+
+        console.log("submiting values")
         e.preventDefault()
-        setError('');
-        try {
-            await signup(user.email, user.password);
-            navigate('/');
-        } catch (error) {
-            setError(error.message);
-        }
-    }
+        // setError('')
+        // if(validatePassword()) {
+          // Create a new user with email and password using firebase
+            createUserWithEmailAndPassword(auth, email, password)
+            .then((res) => {
+                debugger
+                const user = {
+                    uid: res.user.uid,
+                    email: email,
+                    name: fullname,
+                    role: "normal"
+                }
+                createUserDocument(user)
+                console.log(res.user)
+              })
+            .catch(err => console.log(err.message))
+        // }
+        setEmail('')
+        setPassword('')
+        // setConfirmPassword('')
+      }
+
+    // const submit = async ()=> {
+    //     //await firebase.auth().createUserWithEmailAndPassword(auth,email,password);
+    //     createUserWithEmailAndPassword(auth, email, password)
+    //     .then((res) => {
+    //         console.log(res.user)
+    //         })
+    //     .catch(err => console.log(err.message))
+    // }
 
     return (
         <div class="account-form">
-            {error && <p>{error.message}</p>}
-            <form onSubmit={handleSubmit}>
-                <div class="form-group row">
-                    <label for="email" class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10">
-                        <input type="email" name="email" onChange={handleChange} />
-                    </div>
+            <form onSubmit={register}>
+                <div class='title'>
+                    <h1>Create Account</h1>
                 </div>
                 <div class="form-group row">
-                    <label for="password" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" name="password" id="password" onChange={handleChange} />
-                    </div>
+                        <input class="inputRegister" type="text" name="Name" placeholder='Full Name' onChange={ (ev)=> setFullName(ev.target.value)} />
+                </div>
+                <div class="form-group row">
+                        <input class="inputRegister" type="email" name="email" placeholder='Email' onChange={(ev)=> setEmail(ev.target.value)} />
+                </div>
+                <div class="form-group row">
+                        <input class="inputRegister" type="password" name="password" id="password" placeholder='Password' onChange={(ev)=> setPassword(ev.target.value)} />
                 </div>
                 <button type="submit" class="btn-register">Register</button>
+                
             </form>
         </div>
+
+        
     )
 }
+
+
