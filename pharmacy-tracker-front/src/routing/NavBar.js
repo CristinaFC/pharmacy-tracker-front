@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -6,8 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Routing from './Routing';
 import { auth } from '../firebase/firebaseConfig';
 import { useAuth } from '../context/authContext';
-import { getDocs, collection } from "firebase/firestore/lite";
-import { db } from "../firebase/firebaseConfig";
+
 
 
 export function NavBar() {

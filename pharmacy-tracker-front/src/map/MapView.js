@@ -1,8 +1,7 @@
 import React, { Component, useState } from "react";
-import L, { Map } from 'leaflet';
-import { useMap, MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
+import L from 'leaflet';
+import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-//import useGeoLocation from "hooks/useGeoLocation";
 import { getDocs, collection } from "firebase/firestore/lite";
 import { db } from "../firebase/firebaseConfig";
 
@@ -56,12 +55,7 @@ class MapView extends Component {
     */
 
     var userPos;
-
-    function NearbyPharmacy() {
-      const pharmacy = GetNearbyPharmacy();
-      var map = useMap();
-      map.flyTo(pharmacy.position);
-    }
+    var myMap;
 
     function LocationMarker() {
       const [positionx, setPosition] = useState(null)
@@ -71,6 +65,7 @@ class MapView extends Component {
         },
         locationfound(e) {
           setPosition(e.latlng)
+          setMap(map)
           map.flyTo(e.latlng, 17)
           console.log(e.latlng)
           setUserLocation(e.latlng);
@@ -84,23 +79,44 @@ class MapView extends Component {
         </Marker>
         
       )
-
-      
-    }
-    function showNearestPharmacy(){
-      var closestPharmacy = GetNearbyPharmacy()
-      var str = JSON.stringify(closestPharmacy.address);
-      console.log(str);
-      alert('La farmacia más cerca es: ' + str);
     }
 
-    function showUserPos(){
-      var str = JSON.stringify(userPos);
-      console.log(str);
-      alert('La posicion del usuario es: ' + str);
+    function NearbyPharmacy() {
+      const pharmacy = GetNearbyPharmacy();
+      myMap.flyTo(pharmacy.position);
     }
+
+    function MoveToLocation() {
+      myMap.flyTo(userPos)
+    }
+
+    function RoutePharmacy() {
+      var route = [
+        [userPos],
+        [20.000, 20.00],
+      ]
+      var path = L.polyline(route, {color: 'red'});
+      console.log(path)
+    }
+
+    // function showNearestPharmacy(){
+    //   var closestPharmacy = GetNearbyPharmacy()
+    //   var str = JSON.stringify(closestPharmacy.address);
+    //   console.log(str);
+    //   alert('La farmacia más cerca es: ' + str);
+    // }
+
+    // function showUserPos(){
+    //   var str = JSON.stringify(userPos);
+    //   console.log(str);
+    //   alert('La posicion del usuario es: ' + str);
+    // }
+
     function setUserLocation(position) {
       userPos = position;
+    }
+    function setMap(map) {
+      myMap = map;
     }
 
     function GetNearbyPharmacy() {
@@ -140,8 +156,7 @@ class MapView extends Component {
       <MapContainer
         style={styleMap}
         center={[28.112067, -15.439845,]}
-        zoom={13}
-        id="map">
+        zoom={13}>
 
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -160,9 +175,9 @@ class MapView extends Component {
       
        {/* <p>La ubicacion del usuario es {userPos.lat +  ' , ' + userPos.lng}</p> */}
        <div id="buttons" className="mx-0">
-        {/* <button id="location" onClick={LocationMarker}>
+        <button id="location" onClick={MoveToLocation}>
               Get Location
-          </button> */}
+          </button>
           <button id="nearby" onClick={NearbyPharmacy}>
               Find near pharmacy
           </button>
@@ -172,7 +187,7 @@ class MapView extends Component {
           <div class="fila">
             <h2 id="rutas"> {location.address} </h2>
             <div id="buttonsPharmacy">
-              <button id="route"> Route </button>
+              <button id="route" onClick={RoutePharmacy}> Route </button>
               <button id="products"> Products </button>
             </div>
             <hr></hr>

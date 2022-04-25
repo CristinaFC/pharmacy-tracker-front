@@ -26,34 +26,35 @@ const MapViewTest = () => {
   this.setState({
     pharmacies: pharmacyList,
   });
-    const ZOOM_LEVEL = 9;
-    const mapRef = useRef();
-    const center = useState({ lat: 28.112067, lng: -15.439845});
-    const location = useGeoLocation();
-    const styleMap = {"width": "50%", "height": "50vh", "margin-left":"5%",  "margin-top":"5%"}
-    let marks = [];
-    const { pharmacies } = this.state;
+
+  const ZOOM_LEVEL = 9;
+  const mapRef = useRef();
+  const center = useState({ lat: 28.112067, lng: -15.439845});
+  const location = useGeoLocation();
+  const styleMap = {"width": "50%", "height": "50vh", "margin-left":"5%",  "margin-top":"5%"}
+  let marks = [];
+  const { pharmacies } = this.state;
     pharmacies.forEach((pharmacy) => {
       marks.push({ "address": pharmacy.Address, "position": [pharmacy.Location.latitude, pharmacy.Location.longitude], "nPharmacy": "Nº " + pharmacy.nPharmacy, "owner": pharmacy.Owner });
-    });
+  });
   
-    const showMyLocation = () => {
-      if (location.loaded && !location.error) {
-        mapRef.current.leafletElement.flyTo(
-          [location.coordinates.lat, location.coordinates.lng],
-          ZOOM_LEVEL,
-          { animate: true }
-        );
-      } else {
-        alert(location.error.message);
-      }
+  const showMyLocation = () => {
+    if (location.loaded && !location.error) {
+      mapRef.current.leafletElement.flyTo(
+        [location.coordinates.lat, location.coordinates.lng],
+        ZOOM_LEVEL,
+        { animate: true }
+      );
+    } else {
+      alert(location.error.message);
     }
+  }
     
   
   
     return (
         <>
-        <MapContainer center={center} zoom={ZOOM_LEVEL} ref={mapRef}  style={styleMap}>
+        <MapContainer center={center} zoom={ZOOM_LEVEL} ref={mapRef} style={styleMap}>
   
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
