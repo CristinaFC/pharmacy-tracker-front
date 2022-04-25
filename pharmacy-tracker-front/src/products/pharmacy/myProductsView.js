@@ -37,6 +37,7 @@ class MyProductsView extends Component
             imageSrc: '',
             price: 0,
             stock: 0,
+            searchProduct: '',
         };
     }
 
@@ -183,6 +184,31 @@ class MyProductsView extends Component
         });
     }
 
+    searchProduct(e)
+    {
+        console.log('searchProduct', this.state.searchProduct);
+        if (this.state.searchProduct === '')
+        {
+            console.log('HERE');
+            this.pharmacyProducts();
+        } else
+        {
+
+            const { products } = this.state;
+            const searched = [];
+            products.filter(p =>
+            {
+                if (p.name.contains(this.state.searchProduct))
+                {
+                    searched.push(p);
+                }
+            });
+            console.log('searched', searched);
+            this.setState({ products: searched });
+        }
+
+    }
+
     dataTable(product, key)
     {
 
@@ -207,16 +233,27 @@ class MyProductsView extends Component
         );
     }
 
+    clear(e)
+    {
+        this.setState({ [e.target.name]: '' });
+    }
 
     render()
     {
         const { products = [], addModal, editModal, deleteModal, actualProduct } = this.state;
+        const regex = new RegExp(`${this.state.searchProduct}`, 'i');
 
         return (
             <div class="myProducts-container">
                 <div class="title-container">
                     <div class="title">
                         <h1>Products</h1>
+                    </div>
+                    <div>
+                        <div class="ms-5 d-flex form-search">
+                            <input type="search" class="form-control" placeholder="Search" aria-label="Search" name="searchProduct" onChange={(e) => this.handleChange(e)} />
+                            <button class="btn btn-outline-success" type="submit" name="searchProduct" onClick={(e) => this.clear(e)}>Clear</button>
+                        </div>
                     </div>
                     <div class="add-button">
                         <button onClick={() => this.toggleShowAdd()} type="submit" class="btn-add-product">Add new product</button>
@@ -235,7 +272,14 @@ class MyProductsView extends Component
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map((product, key) => this.dataTable(product, key))}
+                        {products
+                            .filter((p) =>
+                            {
+                                return regex.test(p.name);
+                            })
+                            .map((product, key) => this.dataTable(product, key))}
+
+                        {/*products.map((product, key) => this.dataTable(product, key))*/}
                     </tbody>
                 </table>
 
@@ -249,7 +293,7 @@ class MyProductsView extends Component
                                     <MDBBtn className='btn-close' color='none' onClick={() => this.toggleShowEdit()}></MDBBtn>
                                 </MDBModalHeader>
                                 <MDBModalBody>
-                                    <EditProductView product={this.state.actualProduct} handle={() => this.closeEditModal()} />
+                                    <EditProductView product={actualProduct} handle={() => this.closeEditModal()} />
                                 </MDBModalBody>
                             </MDBModalContent>
                         </MDBModalDialog>
