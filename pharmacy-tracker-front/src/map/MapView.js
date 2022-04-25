@@ -88,14 +88,18 @@ class MapView extends Component {
       const pharmacy = GetNearbyPharmacy();
       myMap.flyTo(pharmacy.position);
       if(setRoute === true) {
-        myMap.removeLayer(route)
+        myMap.removeControl(route)
       }
-      var latlngs = [
-        userPos,
-        pharmacy.position
-      ]
-      route = L.polyline(latlngs, {color: 'blue'}).addTo(myMap);
+      route = L.Routing.control({
+        waypoints: [
+          userPos,
+          pharmacy.position
+        ],
+        routeWhileDragging: false,
+        router: null,
+        }).addTo(myMap);
       setRoute = true;
+      myMap.fitBounds(route.getBounds())
     }
 
     function MoveToLocation() {
@@ -109,7 +113,7 @@ class MapView extends Component {
     function routeToPharmacy(location) {
       if(userPos) {
         if(setRoute === true) {
-          myMap.removeLayer(route)
+          myMap.removeControl(route)
         }
         //Variable que creo que tiene que tener mínimo 2 puntos
         var latlngs = [
@@ -121,14 +125,15 @@ class MapView extends Component {
         console.log(latlngs);
 
         //Pintar la ruta a lo bruto
-        // route = L.Routing.control({
-        //   waypoints: [
-        //     userPos,
-        //     location.position
-        //   ], 
-        //   routeWhileDragging: false,
-        //   }).addTo(myMap);
-        route = L.polyline(latlngs, {color: 'blue'}).addTo(myMap);
+        route = L.Routing.control({
+          waypoints: [
+            userPos,
+            location.position
+          ],
+          routeWhileDragging: false,
+          router: null,
+          }).addTo(myMap);
+        // route = L.polyline(latlngs, {color: 'blue'}).addTo(myMap);
         setRoute = true;
         myMap.fitBounds(route.getBounds())
       } else {
