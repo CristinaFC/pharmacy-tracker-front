@@ -107,7 +107,6 @@ class MapView extends Component {
 
     //Función de onClick Route
     function routeToPharmacy(location) {
-      myMap.flyTo(userPos)
       if(userPos) {
         if(setRoute === true) {
           myMap.removeLayer(route)
@@ -131,7 +130,7 @@ class MapView extends Component {
         //   }).addTo(myMap);
         route = L.polyline(latlngs, {color: 'blue'}).addTo(myMap);
         setRoute = true;
-        
+        myMap.fitBounds(route.getBounds())
       } else {
         window.alert("Unable to get a route without your location \nTo set your location, click on the map")
       }
