@@ -46,7 +46,10 @@ export default function Register()
     const handleChangePharmacy = ({ target: { name, value } }) =>
     {
         setPharm({ ...pharm, [name]: value });
-        { console.log('pharmacy', pharm); }
+        { 
+            console.log('pharmacy', pharm);
+
+        }
     };
 
 
@@ -92,39 +95,38 @@ export default function Register()
         }
     }
 
-
-
     return (
         <div class="account-form">
             {error && <p>{error.message}</p>}
-            <form >
-                <div class='title'>
-                    <h1>Create Account</h1>
-                </div>
+            <form>
+                <div id='reg1'>
+                    <div class='title'>
+                        <h1>Create Account</h1>
+                    </div>
 
-                <div class="Rrow">
-                    <input class="inputRegister" type="text" name="fullname" onChange={handleChange} required />
-                </div>
+                    <div class="Rrow">
+                        <input class="inputRegister" type="text" name="fullname" onChange={handleChange} required />
+                    </div>
 
-                <div class="Rrow">
-                    <input class="inputRegister" type="email" name="email" onChange={handleChange} required />
-                </div>
-                <div class="Rrow">
-                    <input class="inputRegister" type="password" name="password" id="password" onChange={handleChange} required />
-                </div>
-                <div class="last-row">
-                    <p>Create as:</p>
-                    <div class="radios" required>
-                        <input type="radio" value="pharmacy" id="pharmacy" name='userType' onChange={handleRol} />
-                        <label style={{ margin: '0 100px 0 0' }} for="phamarcy">A Phamarcy</label><br></br>
-
-                        <input type="radio" value="user" id="user" onChange={handleRol} name="userType" />
-                        <label for="user">A User</label>
+                    <div class="Rrow">
+                        <input class="inputRegister" type="email" name="email" onChange={handleChange} required />
+                    </div>
+                    <div class="Rrow">
+                        <input class="inputRegister" type="password" name="password" id="password" onChange={handleChange} required />
+                    </div>
+                    <div class="last-row">
+                        <p stytle={{ margin: '0' }}>Create as:</p>
+                        <div class="radios" required>
+                            <input type="radio" value="user" id="user" onChange={handleRol} name="userType"/>
+                            <label style={{ margin: '0 100px 0 0' }} for="user">A User</label>
+                            <input type="radio" value="pharmacy" id="pharmacy" name='userType' onChange={handleRol} />
+                            <label for="phamarcy">A Phamarcy</label><br></br>
+                        </div>
                     </div>
                 </div>
                 {console.log('rol', rol)}
                 {rol === "pharmacy"
-                    ? <RegisterPharm handleSubmit={handleSubmitPharmacy} handleChange={handleChangePharmacy} />
+                    ? <RegisterPharm handleSubmit={handleSubmitPharmacy} handleChange={handleChangePharmacy} /> 
                     : <button button type="submit" class="btn-register" onClick={handleSubmitUser}>Register</button>}
             </form>
         </div >

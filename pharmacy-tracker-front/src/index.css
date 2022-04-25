@@ -142,8 +142,8 @@ code {
 /** ACCOUNT FORM **/
 .account-form {
   position: relative;
-  max-width: 550px;
-  margin: 100px auto 100px;
+  /*max-width: 550px;*/
+  margin: 65px auto 100px;
   text-align: center;
 }
 
@@ -192,9 +192,20 @@ code {
 .account-form {
   position: relative;
   max-width: auto;
-  margin: 100px auto 100px;
+  margin: 50px auto 83px;
   text-align: center;
   /*box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);*/
+}
+
+.magic2{
+  display: block;
+  margin-left: 31%;
+}
+
+#reg1{
+  /*display: none;*/
+  display: block;
+  margin-left: 31%;
 }
 
 .title{
@@ -206,7 +217,7 @@ code {
 }
 
 .account-form form {
-  padding: 20px;
+  /*padding: 20px;*/
 }
 
 .account-form label {
@@ -216,7 +227,7 @@ code {
 
 .inputRegister {
   width: 500px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 /** NAVBAR **/
