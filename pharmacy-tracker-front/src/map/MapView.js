@@ -115,16 +115,7 @@ class MapView extends Component {
         if(setRoute === true) {
           myMap.removeControl(route)
         }
-        //Variable que creo que tiene que tener mínimo 2 puntos
-        var latlngs = [
-          userPos,
-          location.position,
-        ];
-
-        //Visualizar la var
-        console.log(latlngs);
-
-        //Pintar la ruta a lo bruto
+        myMap.flyTo(location.position);
         route = L.Routing.control({
           waypoints: [
             userPos,
@@ -164,8 +155,8 @@ class MapView extends Component {
       myMap = map;
     }
 
-    function clearRoutes() {
-      myMap.removeLayer(route)
+    function clearRoute() {
+      myMap.removeControl(route)
     }
 
     function GetNearbyPharmacy() {
@@ -224,11 +215,14 @@ class MapView extends Component {
       
        {/* <p>La ubicacion del usuario es {userPos.lat +  ' , ' + userPos.lng}</p> */}
        <div id="buttons" className="mx-0">
-        <button class = "btn-accion" id="location" onClick={MoveToLocation}>
+        <button class = "btn-login" id="location" onClick={MoveToLocation}>
               Go to your location
           </button>
-          <button class = "btn-accion" id="nearby" onClick={NearbyPharmacy}>
+          <button class = "btn-accion-nearby" id="nearby" onClick={NearbyPharmacy}>
               Find near pharmacy
+          </button>
+          <button class = "btn-accion-clear" id="nearby" onClick={clearRoute}>
+              Clear route
           </button>
         </div>
         <div class="sidebar" id="sidebar">
