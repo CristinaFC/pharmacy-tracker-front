@@ -8,6 +8,7 @@ export default function Register()
 {
 
     const [user, setUser] = useState({
+        fullname: '',
         email: '',
         password: '',
     });
@@ -97,26 +98,29 @@ export default function Register()
         <div class="account-form">
             {error && <p>{error.message}</p>}
             <form >
-                <div class="form-group row">
-                    <label for="email" class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10">
-                        <input type="email" name="email" onChange={handleChange} required />
-                    </div>
+                <div class='title'>
+                    <h1>Create Account</h1>
                 </div>
-                <div class="form-group row">
-                    <label for="password" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                        <input type="password" name="password" id="password" onChange={handleChange} required />
-                    </div>
-                </div>
-                <div required>
-                    <input type="radio" value="pharmacy" id="male"
-                        onChange={handleRol} name="rol" />
-                    <label for="male">Pharmacy</label>
 
-                    <input type="radio" value="user" id="female"
-                        onChange={handleRol} name="rol" />
-                    <label for="female">User</label>
+                <div class="Rrow">
+                    <input class="inputRegister" type="text" name="fullname" onChange={handleChange} required />
+                </div>
+
+                <div class="Rrow">
+                    <input class="inputRegister" type="email" name="email" onChange={handleChange} required />
+                </div>
+                <div class="Rrow">
+                    <input class="inputRegister" type="password" name="password" id="password" onChange={handleChange} required />
+                </div>
+                <div class="last-row">
+                    <p>Create as:</p>
+                    <div class="radios" required>
+                        <input type="radio" value="pharmacy" id="pharmacy" name='userType' onChange={handleRol} />
+                        <label style={{ margin: '0 100px 0 0' }} for="phamarcy">A Phamarcy</label><br></br>
+
+                        <input type="radio" value="user" id="user" onChange={handleRol} name="userType" />
+                        <label for="user">A User</label>
+                    </div>
                 </div>
                 {console.log('rol', rol)}
                 {rol === "pharmacy"
