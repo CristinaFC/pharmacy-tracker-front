@@ -29,7 +29,7 @@ body.active-modal {
     left: 50%;
     transform: translate(-50%, -50%);
     line-height: 1.4;
-    background: #f1f1f1;
+    background: #ffffff;
     padding: 14px 28px;
     border-radius: 3px;
     max-width: 813px;
@@ -41,10 +41,11 @@ body.active-modal {
     top: 5px;
     right: 5px;
     padding: 2px 2px;
-    width: 23px;
-    height: 16px;
+    width: 27px;
+    height: 27px;
     border: none;
     font-size: 17px;
+    margin: 0;
 }
 
 .content{
@@ -55,4 +56,26 @@ body.active-modal {
 .img{
     max-width: 292px;
     max-height: 292px;
+}
+
+.list{
+    display: flex;
+    justify-content: space-between;
+    max-height: 56px;
+    margin-bottom: 20px;
+}
+
+.left{
+    width: 50%;
+}
+
+.rigth{
+    width: 50%;
+}
+
+.links{
+    display: flex;
+    width: 30%;
+    justify-content: space-around;
+    align-items: flex-end;
 }

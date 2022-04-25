@@ -133,7 +133,7 @@ code {
   padding: 0.375rem 0.75rem;
   color: #fff;
   background-color: #7ED1A7;
-  width: 490px;
+  width: 500px;
   height: 45px;
   margin-top: 39px;
 }
@@ -144,6 +144,25 @@ code {
   max-width: 550px;
   margin: 100px auto 100px;
   text-align: center;
+}
+
+.Rrow{
+  max-width: 500px;
+}
+
+.title{
+  margin-bottom: 50px;
+}
+
+.last-row{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.radios{
+  display: flex;
+  align-items: center;
 }
 
 /** ACCOUNT UPDATE **/
@@ -181,6 +200,10 @@ code {
   text-align: start;
 }
 
+.radios > input{
+  margin-right: 10px;
+}
+
 .account-form form {
   padding: 20px;
 }
@@ -192,7 +215,7 @@ code {
 
 .inputRegister {
   width: 500px;
-  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 /** NAVBAR **/
