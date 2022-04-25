@@ -320,6 +320,14 @@ code {
   margin: 10px;
 }*/
 
+.account-formLogin {
+  position: relative;
+  max-width: 30%;
+  margin: 50px auto 83px;
+  text-align: center;
+  
+}
+
 /** REGISTER & LOGIN FORM **/
 .account-form {
   position: relative;

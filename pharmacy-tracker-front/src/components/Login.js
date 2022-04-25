@@ -30,7 +30,7 @@ export default function Login() {
     }
 
     return (
-        <div class="account-form">
+        <div class="account-formLogin">
             {error && <p >{error.message}</p>}
             <form onSubmit={handleSubmit}>
                 <div class="form-group row">
