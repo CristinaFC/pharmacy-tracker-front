@@ -7,9 +7,7 @@ import Routing from './Routing';
 import { auth } from '../firebase/firebaseConfig';
 import { useAuth } from '../context/authContext';
 
-
-export function NavBar()
-{
+export function NavBar() {  
   const { user } = useAuth();
 
   return (
@@ -31,7 +29,8 @@ const NavBarNonAuthUser = () =>
         </Link>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <form class="ms-5 d-flex form-search">
-            <input type="search" class="form-control" placeholder="Search" aria-label="Search" />
+            <input type="search" class="form-control" placeholder="Search" aria-label="Search"
+            />
           </form>
           <ul class="navbar-nav ms-5">
             <li class="nav-item top-r" >
