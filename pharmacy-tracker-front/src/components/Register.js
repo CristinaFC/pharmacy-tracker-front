@@ -1,60 +1,65 @@
-import React, { useState } from 'react';
-import 'firebase/auth';
-import { useFirebaseApp } from 'reactfire';
-import {createUserWithEmailAndPassword} from 'firebase/auth'
-import { auth, createUserDocument } from '../firebase/firebaseConfig';
-
+import React, { useState } from 'react'
+import { useAuth } from '../context/authContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
 
-    const [ fullname, setFullName ] = useState('');
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('');
+    const [user, setUser] = useState({
+        email: '',
+        password: '',
+    });
 
-      const register = e => {
+    /*const [pharm, setPharm] = useState({
+        email: '',
+        password: '',
+        address: '',
+        city: '',
+        owner: '',
+        phone: '',
+        eclosing: '',
+        eopening: '',
+        mclosing: '',
+        mopening: '',
+        npharmacy: '',
+    });*/
 
-        console.log("submiting values")
+    const { signupUser, signupPharm } = useAuth();
+    const navigate = useNavigate();
+    const [error, setError] = useState();
+
+    const handleChange = ({ target: { name, value } }) => {
+        setUser({ ...user, [name]: value })
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-            createUserWithEmailAndPassword(auth, email, password)
-            .then((res) => {
-                console.log(res.user)
-              })
-            .catch(err => console.log(err.message))
-        setEmail('')
-        setPassword('')
-      }
+        setError('');
+        try {
+            await signupPharm('domingos00@gmail.com', '12345678',  'calabaceira', 'praia', 'djonsa', '98765434', '13:20', '13:20', '13:20', '13:20', 'nao sei');
+            navigate('/');
+        } catch (error) {
+            setError(error.message);
+        }
+    }
 
     return (
         <div class="account-form">
-            <form onSubmit={register}>
-                <div class='title'>
-                    <h1>Create Account</h1>
-                </div>
-                <div class="Rrow">
-                        <input class="inputRegister" type="text" name="Name" placeholder='Full Name' onChange={ (ev)=> setFullName(ev.target.value)} />
-                </div>
-
-                <div class="Rrow">
-                        <input class="inputRegister" type="email" name="email" placeholder='Email' onChange={(ev)=> setEmail(ev.target.value)} />
-                </div>
-
-                <div class="Rrow">
-                        <input class="inputRegister" type="password" name="password" id="password" placeholder='Password' onChange={(ev)=> setPassword(ev.target.value)} />
-                </div>
-
-                <div class="last-row">
-                    <p>Create as:</p> 
-                    <div class="radios">
-                        <input type="radio" id="user" name="userType" value="user"/>
-                        <label style={{margin: '0 100px 0 0'}} for="user">A User</label><br></br>
-                        <input type="radio" id="pharmacy" name="userType" value="pharmacy"/>
-                        <label for="pharmacy">A Pharmacy</label><br></br>
+            {error && <p>{error.message}</p>}
+            <form onSubmit={handleSubmit}>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" name="email" onChange={handleChange} />
                     </div>
-                </div>                
-                <button type="submit" class="btn-register">Register</button>  
-        </form>
-    </div>
-        
-        
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" name="password" id="password" onChange={handleChange} />
+                    </div>
+                </div>
+                <button type="submit" class="btn-register">Register</button>
+            </form>
+        </div>
     )
 }

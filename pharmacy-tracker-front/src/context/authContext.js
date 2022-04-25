@@ -17,27 +17,21 @@ export function AuthProvider ({children}) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const signup = (email, password) => createUserWithEmailAndPassword(auth, email, password)
+    const signupUser = (email, password) => createUserWithEmailAndPassword(auth, email, password)
     .then(cred => {
         const newUserRef = doc(db, `users/${cred.user.uid}`);
+        setDoc(newUserRef, {uid: cred.user.uid, email: email, name:"Prueba"});
+    });
+
+    const signupPharm = (email, password, address, city, owner, phone, eclosing, eopening, mclosing, mopening, npharmacy) => createUserWithEmailAndPassword(auth, email, password)
+    .then(cred => {
         const newPharmacyRef = doc(db, `pharmacies/${cred.user.uid}`);
         const point = new GeoPoint(28.105557, -15.422794);
-        setDoc(newUserRef, {uid: cred.user.uid, email: email, name:"Prueba"});
-        //LA FARMACIA SE TIENE QUE CREAR POR ESTE MOMENTO CON LOCATION PUESTO, SI NO, EL MAPA DA FALLO
-        //PORQUE FALTA UNA COMPROBACION DE QUE SI UNA FARMACIA NO TIENE LOCATION, NO CREE EL MARKER,
-        //ESTE FALLO DARÁ UNA PANTALLA PRINCIPAL BLANCA Y NULLPOINTERS
         setDoc(newPharmacyRef, 
-            {uid: cred.user.uid,email: email, Address: '',City: '',Location: point ,Owner:'', Phone: '',eClosing: '',
-            eOpening: '', mClosing: '', mOpening: '', nPharmacy: ''
+            {uid: cred.user.uid,email: email, Address: address,City: city,Location: point ,Owner:owner, Phone: phone, eClosing: eclosing,
+            eOpening: eopening, mClosing: mclosing, mOpening: mopening, nPharmacy: npharmacy
         });
     });
-    
-    // .then()(cred =>
-    // {
-    //     return db.collection('pharmacies').doc(cred.user.uid).set({
-    //         uid: cred.user.uid,
-    //         email: cred.user.email,
-    //     });
     
 
     const logout = () => signOut(auth);
@@ -52,5 +46,5 @@ export function AuthProvider ({children}) {
         })
     }, [])
 
-    return (<authContext.Provider value={{ signup, login , user, logout, loading}}>{children}</authContext.Provider>);
+    return (<authContext.Provider value={{ signupUser, signupPharm, login , user, logout, loading}}>{children}</authContext.Provider>);
 }

@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore/lite";
 import 'firebase/auth';
 import 'firebase/firestore';
 import { getAuth } from "firebase/auth";
@@ -23,7 +23,7 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 
 
-export const createUserDocument = async (user) => {
+export const createUserDocument = async (user, additionalData) => {
   if (!user) return;
 
   const userRef = db.doc(`users/${user.uid}`);
