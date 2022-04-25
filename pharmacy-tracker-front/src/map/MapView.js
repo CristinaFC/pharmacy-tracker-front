@@ -90,6 +90,27 @@ class MapView extends Component {
       myMap.flyTo(userPos)
     }
 
+    //Función de onClick Route
+    function routeToPharmacy(location) {
+      console.log("click");
+      if(userPos) {
+        //Variable que creo que tiene que tener mínimo 2 puntos
+        var latlngs = [
+          userPos,
+          location.position,
+        ];
+
+        //Visualizar la var
+        console.log(latlngs);
+
+        //Pintar la ruta a lo bruto
+        var lineField = new L.polyline(latlngs, {color: 'blue'}).addTo(myMap);
+
+        //Zoom a la ruta
+        myMap.fitBounds(lineField.getBounds())
+      }
+    }
+
     // function showNearestPharmacy(){
     //   var closestPharmacy = GetNearbyPharmacy()
     //   var str = JSON.stringify(closestPharmacy.address);
@@ -104,8 +125,28 @@ class MapView extends Component {
     // }
 
     function setUserLocation(position) {
-      userPos = position;
+      //console.log("click");
+      if(position) {
+        userPos = position;
+      }
+
+      // if(userPos) {
+      //   var latlngs = [
+      //     userPos,
+      //     [28.10147, -15.415611],
+      //   ];
+  
+      //   //Visualizar la var
+      //   console.log(latlngs);
+  
+      //   //Pintar la ruta a lo bruto
+      //   var lineField = new L.polyline(latlngs, {color: 'blue'}).addTo(myMap);
+      //   //Zoom a la ruta
+      //   myMap.fitBounds(lineField.getBounds())
+      // }
+
     }
+
     function setMap(map) {
       myMap = map;
     }
@@ -178,8 +219,8 @@ class MapView extends Component {
           <div class="fila">
             <h2 id="rutas"> {location.address} </h2>
             <div id="buttonsPharmacy">
-              {/* <button id="route"> Route </button>
-              <button id="products"> Products </button> */}
+              <button id="route" onClick={(e) => routeToPharmacy(location)}> Route </button>
+              <button id="products"> Products </button>
             </div>
             <hr></hr>
           </div>
