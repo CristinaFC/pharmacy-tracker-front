@@ -12,6 +12,138 @@ code {
     monospace;
 }
 
+#sidebar {
+  margin-left: 120vh;
+  z-index: 2;
+  position: absolute;
+  top: 10%;
+  width: 40%;
+  max-width: 40%;
+  text-align: left;
+}
+
+#rutas {
+  font-size: 1rem;
+  width: 300px;
+}
+
+#buttons {
+  text-align: left;
+  padding-left: 40vh;
+  margin-top: 5vh;
+}
+
+#buttons > button{
+  margin-left: 5vh;
+}
+
+#buttonsPharmacy {
+  margin-left: 40%;
+}
+
+#buttonsPharmacy > button {
+  margin-left: 15vh;
+}
+
+/** ADD PRODUCT */
+.btn-add-product {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  user-select: none;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  color: #fff;
+  background-color: #7ED1A7;
+  margin-top: 15px;
+}
+
+.product-name, .product-description, .product-category, .product-price {
+  border-radius: 0.25rem;
+  border: 1px solid ;
+  border-color: grey;
+}
+
+.wrapper {
+  display: flex;  
+  flex-flow: row wrap;
+  font-weight: bold;
+  justify-content: center;  
+  text-align: flex-start; 
+}
+
+.wrapper > * {
+  flex: auto;
+}
+
+@media all and (min-width: 240px) {
+  .aside { flex: 250px 0 0; }
+}
+
+@media all and (min-width: 240px) {
+  .aside-1 { order: 1; } 
+  .aside-2 { order: 2; }
+}
+
+.category-price-container {
+  display: flex;
+  justify-content: center;
+}
+
+.product-description {
+  width: 400px;
+}
+
+.product-name {
+  width: 400px;
+}
+
+.product-select {
+  width: 180px;
+  margin-right: 40px;
+}
+
+.product-price {
+  width: 180px;
+}
+
+.product-stock {
+  width: 400px;
+}
+
+/** PHARMACY PRODUCTS**/
+.myProducts-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.myProducts-container h1, table {
+  margin-top: 3%;
+}
+
+.title-container {
+  margin-top: 3%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/** ICONS **/
+.delete-icon, .edit-icon {
+ width: 20px;
+ height: 20px;
+}
+
 /** BUTTONS **/
 .edit-button {
   background-color: #fff;
@@ -264,7 +396,7 @@ code {
   transition: color .15s ease-in-out;
 }
 
-.nav-item .nav-profile {
+.nav-item .nav-profile, .nav-products {
   background-color: #6EE6AA;
   color: #fff;
   margin: 0 10px;

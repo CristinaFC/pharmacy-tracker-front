@@ -7,8 +7,8 @@ import Routing from './Routing';
 import { auth } from '../firebase/firebaseConfig';
 import { useAuth } from '../context/authContext';
 
-
-export function NavBar() {
+export function NavBar()
+{
   const { user } = useAuth();
 
   return (
@@ -19,7 +19,8 @@ export function NavBar() {
   );
 }
 
-const NavBarNonAuthUser = () => {
+const NavBarNonAuthUser = () =>
+{
 
   return (
     <nav class="navbar navbar-expand-lg">
@@ -28,9 +29,10 @@ const NavBarNonAuthUser = () => {
           <strong class="title">Pharmacy Tracker</strong>
         </Link>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="ms-5 d-flex form-search">
-            <input type="search" class="form-control" placeholder="Search" aria-label="Search" />
-          </form>
+          {/* <form class="ms-5 d-flex form-search">
+            <input type="search" class="form-control" placeholder="Search" aria-label="Search"
+            />
+          </form> */}
           <ul class="navbar-nav ms-5">
             <li class="nav-item top-r" >
               <Link class="nav-login" to={Routing.login}>Login</Link>
@@ -46,7 +48,8 @@ const NavBarNonAuthUser = () => {
 };
 
 
-const NavBarAuthUser = () => {
+const NavBarAuthUser = () =>
+{
 
   return (
     <nav class="navbar navbar-expand-lg">
@@ -59,17 +62,16 @@ const NavBarAuthUser = () => {
             <Link class="nav-profile" to={Routing.myProfile}>Profile</Link>
           </li>
           <li class="nav-item" >
-            <Link class="nav-edit-profile" to={Routing.editProfile}>Edit Profile</Link>
+            <Link class="nav-products" to={Routing.myProducts}>Products</Link>
           </li>
         </ul>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="ms-5 d-flex form-search">
-            <input type="search" class="form-control" placeholder="Search" aria-label="Search" />
-          </form>
+
           <ul class="navbar-nav ms-5">
             <li class="nav-item" >
               <Link class="nav-logout" onClick={() => auth.signOut()} to={Routing.home}>Log out</Link>
             </li>
+
           </ul>
         </div>
       </div>
