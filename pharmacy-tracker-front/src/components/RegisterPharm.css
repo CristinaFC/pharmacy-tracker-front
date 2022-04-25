@@ -1,4 +1,4 @@
-.row{
+.row1{
     display: flex;
     margin-bottom: 50px;
 }
@@ -65,7 +65,6 @@ button{
     background-color: #7ED1A7;
     width: 211px;
     height: 42px;
-    margin-top: 39px;
 }
 
 .buttom{

@@ -23,6 +23,7 @@ code {
 }
 
 #rutas {
+  text-align: center;
   font-size: 1rem;
   width: 300px;
 }
@@ -34,15 +35,15 @@ code {
 }
 
 #buttons > button{
-  margin-left: 5vh;
+  margin-left: 3vh;
 }
 
 #buttonsPharmacy {
-  margin-left: 40%;
+  margin-left: 50%;
 }
 
 #buttonsPharmacy > button {
-  margin-left: 15vh;
+  margin-left: 10vh;
 }
 
 /** ADD PRODUCT */
@@ -272,11 +273,21 @@ code {
 }
 
 /** ACCOUNT FORM **/
-.account-form {
+
+/**#######**/
+.account-form2 {
   position: relative;
   /*max-width: 550px;*/
   margin: 65px auto 100px;
   text-align: center;
+}
+
+.account-form {
+  position: relative;
+  max-width: 400px;
+  margin: 100px auto 100px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .Rrow{
@@ -316,9 +327,9 @@ code {
   color: #7ED1A7;
 }
 
-/*div.row {
+div.row {
   margin: 10px;
-}*/
+}
 
 .account-formLogin {
   position: relative;
@@ -329,12 +340,21 @@ code {
 }
 
 /** REGISTER & LOGIN FORM **/
-.account-form {
+/****/
+.account-form2 {
   position: relative;
   max-width: auto;
   margin: 50px auto 83px;
   text-align: center;
   /*box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);*/
+}
+
+.account-form {
+  position: relative;
+  max-width: auto;
+  margin: 100px auto 100px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .magic2{
@@ -357,14 +377,14 @@ code {
 }
 
 .account-form form {
-  /*padding: 20px;*/
+  padding: 20px;
 }
 
 .account-form label {
   font-weight: bold;
   color: #7ED1A7;
 }
-
+/****/
 .inputRegister {
   width: 500px;
   margin-bottom: 20px;

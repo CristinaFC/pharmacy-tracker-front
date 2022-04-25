@@ -96,7 +96,7 @@ export default function Register()
     }
 
     return (
-        <div class="account-form">
+        <div class="account-form2">
             {error && <p>{error.message}</p>}
             <form>
                 <div id='reg1'>
