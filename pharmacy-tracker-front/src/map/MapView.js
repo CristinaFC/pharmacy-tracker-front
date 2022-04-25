@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import L from 'leaflet';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { Routing } from "leaflet-routing-machine/"
 import { getDocs, collection } from "firebase/firestore/lite";
 import { db } from "../firebase/firebaseConfig";
 
@@ -30,7 +31,7 @@ class MapView extends Component {
     };
   }
   render() {
-    const styleMap = {"width": "50%", "height": "50vh", "margin-left":"2%",  "margin-top":"2%"}
+    const styleMap = {"width": "50%", "height": "75vh", "margin-left":"2%",  "margin-top":"2%"}
     let marks = [];
     const { pharmacies } = this.state;
     pharmacies.forEach((pharmacy) => {
@@ -56,6 +57,8 @@ class MapView extends Component {
 
     var userPos;
     var myMap;
+    var route;
+    var setRoute = false;
 
     function LocationMarker() {
       const [positionx, setPosition] = useState(null)
@@ -84,16 +87,31 @@ class MapView extends Component {
     function NearbyPharmacy() {
       const pharmacy = GetNearbyPharmacy();
       myMap.flyTo(pharmacy.position);
+      if(setRoute === true) {
+        myMap.removeLayer(route)
+      }
+      var latlngs = [
+        userPos,
+        pharmacy.position
+      ]
+      route = L.polyline(latlngs, {color: 'blue'}).addTo(myMap);
+      setRoute = true;
     }
 
     function MoveToLocation() {
+      if (!userPos) {
+        window.alert("To set your location, click on the map");
+      }
       myMap.flyTo(userPos)
     }
 
     //Función de onClick Route
     function routeToPharmacy(location) {
-      console.log("click");
+      myMap.flyTo(userPos)
       if(userPos) {
+        if(setRoute === true) {
+          myMap.removeLayer(route)
+        }
         //Variable que creo que tiene que tener mínimo 2 puntos
         var latlngs = [
           userPos,
@@ -104,10 +122,18 @@ class MapView extends Component {
         console.log(latlngs);
 
         //Pintar la ruta a lo bruto
-        var lineField = new L.polyline(latlngs, {color: 'blue'}).addTo(myMap);
-
-        //Zoom a la ruta
-        myMap.fitBounds(lineField.getBounds())
+        // route = L.Routing.control({
+        //   waypoints: [
+        //     userPos,
+        //     location.position
+        //   ], 
+        //   routeWhileDragging: false,
+        //   }).addTo(myMap);
+        route = L.polyline(latlngs, {color: 'blue'}).addTo(myMap);
+        setRoute = true;
+        
+      } else {
+        window.alert("Unable to get a route without your location \nTo set your location, click on the map")
       }
     }
 
@@ -125,30 +151,17 @@ class MapView extends Component {
     // }
 
     function setUserLocation(position) {
-      //console.log("click");
       if(position) {
         userPos = position;
       }
-
-      // if(userPos) {
-      //   var latlngs = [
-      //     userPos,
-      //     [28.10147, -15.415611],
-      //   ];
-  
-      //   //Visualizar la var
-      //   console.log(latlngs);
-  
-      //   //Pintar la ruta a lo bruto
-      //   var lineField = new L.polyline(latlngs, {color: 'blue'}).addTo(myMap);
-      //   //Zoom a la ruta
-      //   myMap.fitBounds(lineField.getBounds())
-      // }
-
     }
 
     function setMap(map) {
       myMap = map;
+    }
+
+    function clearRoutes() {
+      myMap.removeLayer(route)
     }
 
     function GetNearbyPharmacy() {
@@ -207,20 +220,20 @@ class MapView extends Component {
       
        {/* <p>La ubicacion del usuario es {userPos.lat +  ' , ' + userPos.lng}</p> */}
        <div id="buttons" className="mx-0">
-        <button id="location" onClick={MoveToLocation}>
-              Get Location
+        <button class = "btn-accion" id="location" onClick={MoveToLocation}>
+              Go to your location
           </button>
-          <button id="nearby" onClick={NearbyPharmacy}>
+          <button class = "btn-accion" id="nearby" onClick={NearbyPharmacy}>
               Find near pharmacy
           </button>
         </div>
         <div class="sidebar" id="sidebar">
           {marks.map((location) => (
           <div class="fila">
-            <h2 id="rutas"> {location.address} </h2>
+            <p id="rutas"> {location.address} </p>
             <div id="buttonsPharmacy">
-              <button id="route" onClick={(e) => routeToPharmacy(location)}> Route </button>
-              <button id="products"> Products </button>
+              <button class="btn-login" id="route" onClick={(e) => routeToPharmacy(location)}> Route </button>
+              <button class="btn-register" id="products"> Products </button>
             </div>
             <hr></hr>
           </div>

@@ -23,6 +23,7 @@ code {
 }
 
 #rutas {
+  text-align: center;
   font-size: 1rem;
   width: 300px;
 }
@@ -34,15 +35,15 @@ code {
 }
 
 #buttons > button{
-  margin-left: 5vh;
+  margin-left: 3vh;
 }
 
 #buttonsPharmacy {
-  margin-left: 40%;
+  margin-left: 50%;
 }
 
 #buttonsPharmacy > button {
-  margin-left: 15vh;
+  margin-left: 10vh;
 }
 
 /** ADD PRODUCT */
@@ -250,6 +251,21 @@ code {
   color: #fff;
   background-color: #7AD8DE;
   border-color: #7AD8DE;
+}
+.btn-accion {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  color: #fff;
+  background-color:  #7ED1A7;
+  border-color:  #7ED1A7;
 }
 
 .btn-register {
