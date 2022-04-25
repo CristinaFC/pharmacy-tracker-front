@@ -46,7 +46,7 @@ export default function Register()
     const handleChangePharmacy = ({ target: { name, value } }) =>
     {
         setPharm({ ...pharm, [name]: value });
-        { 
+        {
             console.log('pharmacy', pharm);
 
         }
@@ -105,19 +105,19 @@ export default function Register()
                     </div>
 
                     <div class="Rrow">
-                        <input class="inputRegister" type="text" name="fullname" onChange={handleChange} required />
+                        <input class="inputRegister" type="text" name="fullname" onChange={handleChange} required placeholder="Fullname" />
                     </div>
 
                     <div class="Rrow">
-                        <input class="inputRegister" type="email" name="email" onChange={handleChange} required />
+                        <input class="inputRegister" type="email" name="email" onChange={handleChange} required placeholder="Email" />
                     </div>
                     <div class="Rrow">
-                        <input class="inputRegister" type="password" name="password" id="password" onChange={handleChange} required />
+                        <input class="inputRegister" type="password" name="password" id="password" onChange={handleChange} required placeholder="Password" />
                     </div>
                     <div class="last-row">
                         <p stytle={{ margin: '0' }}>Create as:</p>
                         <div class="radios" required>
-                            <input type="radio" value="user" id="user" onChange={handleRol} name="userType"/>
+                            <input type="radio" value="user" id="user" onChange={handleRol} name="userType" />
                             <label style={{ margin: '0 100px 0 0' }} for="user">A User</label>
                             <input type="radio" value="pharmacy" id="pharmacy" name='userType' onChange={handleRol} />
                             <label for="phamarcy">A Phamarcy</label><br></br>
@@ -126,7 +126,7 @@ export default function Register()
                 </div>
                 {console.log('rol', rol)}
                 {rol === "pharmacy"
-                    ? <RegisterPharm handleSubmit={handleSubmitPharmacy} handleChange={handleChangePharmacy} /> 
+                    ? <RegisterPharm handleSubmit={handleSubmitPharmacy} handleChange={handleChangePharmacy} />
                     : <button button type="submit" class="btn-register" onClick={handleSubmitUser}>Register</button>}
             </form>
         </div >
