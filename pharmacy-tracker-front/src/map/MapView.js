@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import L from 'leaflet';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { Routing } from "leaflet-routing-machine/"
 import { getDocs, collection } from "firebase/firestore/lite";
 import { db } from "../firebase/firebaseConfig";
 
@@ -30,7 +31,7 @@ class MapView extends Component {
     };
   }
   render() {
-    const styleMap = {"width": "50%", "height": "50vh", "margin-left":"2%",  "margin-top":"2%"}
+    const styleMap = {"width": "50%", "height": "75vh", "margin-left":"2%",  "margin-top":"2%"}
     let marks = [];
     const { pharmacies } = this.state;
     pharmacies.forEach((pharmacy) => {
@@ -56,6 +57,8 @@ class MapView extends Component {
 
     var userPos;
     var myMap;
+    var route;
+    var setRoute = false;
 
     function LocationMarker() {
       const [positionx, setPosition] = useState(null)
@@ -84,10 +87,49 @@ class MapView extends Component {
     function NearbyPharmacy() {
       const pharmacy = GetNearbyPharmacy();
       myMap.flyTo(pharmacy.position);
+      if(setRoute === true) {
+        myMap.removeControl(route)
+      }
+      route = L.Routing.control({
+        waypoints: [
+          userPos,
+          pharmacy.position
+        ],
+        routeWhileDragging: false,
+        router: null,
+        }).addTo(myMap);
+      setRoute = true;
+      myMap.fitBounds(route.getBounds())
     }
 
     function MoveToLocation() {
+      if (!userPos) {
+        window.alert("To set your location, click on the map");
+      }
       myMap.flyTo(userPos)
+    }
+
+    //Función de onClick Route
+    function routeToPharmacy(location) {
+      if(userPos) {
+        if(setRoute === true) {
+          myMap.removeControl(route)
+        }
+        myMap.flyTo(location.position);
+        route = L.Routing.control({
+          waypoints: [
+            userPos,
+            location.position
+          ],
+          routeWhileDragging: false,
+          router: null,
+          }).addTo(myMap);
+        // route = L.polyline(latlngs, {color: 'blue'}).addTo(myMap);
+        setRoute = true;
+        myMap.fitBounds(route.getBounds())
+      } else {
+        window.alert("Unable to get a route without your location \nTo set your location, click on the map")
+      }
     }
 
     // function showNearestPharmacy(){
@@ -104,10 +146,17 @@ class MapView extends Component {
     // }
 
     function setUserLocation(position) {
-      userPos = position;
+      if(position) {
+        userPos = position;
+      }
     }
+
     function setMap(map) {
       myMap = map;
+    }
+
+    function clearRoute() {
+      myMap.removeControl(route)
     }
 
     function GetNearbyPharmacy() {
@@ -166,20 +215,23 @@ class MapView extends Component {
       
        {/* <p>La ubicacion del usuario es {userPos.lat +  ' , ' + userPos.lng}</p> */}
        <div id="buttons" className="mx-0">
-        <button id="location" onClick={MoveToLocation}>
-              Get Location
+        <button class = "btn-login" id="location" onClick={MoveToLocation}>
+              Go to your location
           </button>
-          <button id="nearby" onClick={NearbyPharmacy}>
+          <button class = "btn-accion-nearby" id="nearby" onClick={NearbyPharmacy}>
               Find near pharmacy
+          </button>
+          <button class = "btn-accion-clear" id="nearby" onClick={clearRoute}>
+              Clear route
           </button>
         </div>
         <div class="sidebar" id="sidebar">
           {marks.map((location) => (
           <div class="fila">
-            <h2 id="rutas"> {location.address} </h2>
+            <p id="rutas"> {location.address} </p>
             <div id="buttonsPharmacy">
-              {/* <button id="route"> Route </button>
-              <button id="products"> Products </button> */}
+              <button class="btn-login" id="route" onClick={(e) => routeToPharmacy(location)}> Route </button>
+              <button class="btn-register" id="products"> Products </button>
             </div>
             <hr></hr>
           </div>
