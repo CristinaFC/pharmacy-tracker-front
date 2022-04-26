@@ -231,7 +231,7 @@ class MapView extends Component {
             <p id="rutas"> {location.address} </p>
             <div id="buttonsPharmacy">
               <button class="btn-login" id="route" onClick={(e) => routeToPharmacy(location)}> Route </button>
-              <button class="btn-register" id="products"> Products </button>
+              <button class="btn-register" id="products" disabled> Products </button>
             </div>
             <hr></hr>
           </div>
