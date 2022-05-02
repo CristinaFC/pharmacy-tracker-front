@@ -54,6 +54,7 @@ class MacComponent extends Component
                 click()
                 {
                     map.locate()
+
                 },
                 locationfound(e)
                 {
@@ -71,6 +72,8 @@ class MacComponent extends Component
                 </Marker>
 
             )
+
+
         }
 
         function NearbyPharmacy()

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { getProductByName, getPharmacies } from '../../database/functions';
+import Routing from '../../routing/Routing';
 
 import Map from '@mui/icons-material/Map';
 import MapComponent from '../../components/MapComponent';
+
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 export const ProductDetails = () => 
 {
@@ -60,7 +63,6 @@ export const ProductDetails = () =>
     function route(pharmacy)
     {
         setSelected(pharmacy);
-        console.log(pharmacy);
         setShowing(true);
     }
 
@@ -70,6 +72,9 @@ export const ProductDetails = () =>
 
             <div class="title-container">
                 <h2>Details</h2>
+                <Link to={Routing.products}>
+                    <KeyboardBackspaceIcon sx={{ color: "#7ED1A7" }} />
+                </Link>
             </div>
             {product != undefined
                 ? <div class="product-container" >
