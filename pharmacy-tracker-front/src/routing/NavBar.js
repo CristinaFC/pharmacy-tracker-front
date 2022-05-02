@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import { Link } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,52 +12,38 @@ import { getUserData } from '../database/functions'
 
 export function NavBar()
 {
-  const isLogged = getAuth().currentUser;
   let role;
-  let nUser = false;
+  const isLogged = getAuth().currentUser;
   try {
     const user = getAuth().currentUser.uid;
     const data = getUserData(user);
     data.then(function(value){
       role = value.role;
-      if (role == "normal_user") {
-        nUser = true;
-        console.log(nUser);
+      if (role == 'normal_user') {
+        console.log("nose");
+        return (
+          <div> 
+            <NavBarAuthUser/>
+          </div>
+        );
+      } else if (role == 'pharmacy') {
+        console.log("nose2");
+          return (
+            <div>
+                <NavBarPharmacy/>
+            </div>
+          );
+      } else {
+        return (
+          <div>
+            <NavBarNonAuthUser/>
+          </div>
+        )
       }
-    })
+    });
   } catch (e) {
       console.error("Error reading document: ", e);
   }
-
-  // var status = async function () {
-  //   const user = getAuth().currentUser.uid;
-  //   const data = getUserData(user);
-  //   status = await data.role;
-  //   console.log(status);
-  // }
-  
-  // const getUser = async () => {
-  //   let doc = null;
-  //   const userRef = db.collection('users').doc(user.uid);
-  //   doc = await userRef.get();
-  //   console.log(doc);
-  // }
-  console.log(nUser);
-  if(isLogged) {
-    return (
-      <div>
-        {nUser == true ? <NavBarAuthUser/> : <NavBarPharmacy/>}
-      </div>
-  
-    );
-  }
-
-  return (
-    <div>
-      {<NavBarNonAuthUser/>}
-    </div>
-
-  );
 }
 
 const NavBarNonAuthUser = () =>
@@ -155,3 +141,17 @@ const NavBarAuthUser = () =>
 };
 
 export default NavBar;
+
+async function getRole() {
+    const isLogged = getAuth().currentUser;
+  let role;
+  try {
+    const user = getAuth().currentUser.uid;
+    const data = getUserData(user);
+    data.then(function(value){
+      role = value.role; 
+    });
+  } catch (e) {
+      console.error("Error reading document: ", e);
+  }
+}
