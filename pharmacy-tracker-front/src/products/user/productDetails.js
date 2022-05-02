@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
-import { getProductByName, getPharmaciesByProductId, getPharmacies } from '../../database/functions';
+import { Link, useLocation } from "react-router-dom";
+import { getProductByName, getPharmacies } from '../../database/functions';
 
-
+import Map from '@mui/icons-material/Map';
+import MapComponent from '../../components/MapComponent';
 
 export const ProductDetails = () => 
 {
     const [product, setProduct] = useState();
     const [pharmacies, setPharmacy] = useState();
+    const [pharmacy, setSelected] = useState();
+    const [isShowingMap, setShowing] = useState(false);
 
     let name = useLocation().pathname.split('/')[2];
     useEffect(() =>
@@ -37,15 +40,28 @@ export const ProductDetails = () =>
 
     }, []);
 
+
     function data(pharmacy)
     {
+
         return (
             <tr>
                 <td>{pharmacy.Address}</td>
                 <td>{pharmacy.products[product.id].price}</td>
                 <td>{pharmacy.products[product.id].stock}</td>
-            </tr>
+                <td>
+                    <Map sx={{ color: "white" }} onClick={() => route(pharmacy)} />
+                </td>
+
+            </tr >
         );
+    }
+
+    function route(pharmacy)
+    {
+        setSelected(pharmacy);
+        console.log(pharmacy);
+        setShowing(true);
     }
 
 
@@ -72,6 +88,7 @@ export const ProductDetails = () =>
                                     <th scope="col">Pharmacy</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Stock</th>
+                                    <th scope="col">Go to</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,6 +99,10 @@ export const ProductDetails = () =>
                     </div>
 
                 </div>
+                : ""}
+
+            {isShowingMap
+                ? <MapComponent pharmacy={pharmacy} />
                 : ""}
 
         </div>

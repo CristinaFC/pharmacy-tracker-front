@@ -26,6 +26,17 @@ code {
   font-size: 20px;
 }
 
+.map-title-2{
+  /* display: flex; */
+  justify-content: left;
+  width: 100%;
+  margin-top: 1%;
+  justify-content: center;
+  padding: 10px;
+  border: solid 2px #7AD8DE;
+  font-size: 20px;
+}
+
 #sidebar {
   margin-left: 120vh;
   z-index: 2;
@@ -60,6 +71,8 @@ code {
   margin-left: 3%;
   /* max-width: 20%; */
 } 
+
+
 
 /** USER PRODUCTS **/
 
@@ -335,7 +348,6 @@ code {
   border-color: #7AD8DE;
 }
 .btn-accion-nearby {
-  display: inline-block;
   font-weight: 400;
   line-height: 1.5;
   text-align: center;
@@ -348,6 +360,8 @@ code {
   color: #fff;
   background-color:  #7ED1A7;
   border-color:  #7ED1A7;
+  margin-bottom: 5%;
+  margin-left: 0;
 }
 .btn-accion-clear{
   display: inline-block;
