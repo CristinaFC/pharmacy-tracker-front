@@ -12,6 +12,8 @@ code {
     monospace;
 }
 
+
+
 .map-title {
   /* display: flex; */
   justify-content: left;
@@ -58,6 +60,73 @@ code {
   margin-left: 3%;
   /* max-width: 20%; */
 } 
+
+/** USER PRODUCTS **/
+
+.products-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.card {width: 18rem;  margin: 2%;}
+
+.product-container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+
+.tbl-content {
+  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+  background: linear-gradient(to right, #25c481, #25b7c4);
+  overflow-x:auto;
+  margin-top: 0px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  border: 1px solid #7ED1A7;
+  border-radius: 5px;
+  padding: 2%;
+  width: 75%;
+  margin: 2%;
+  display: flex;
+  align-items: flex-start;
+}
+
+.tbl-content th {
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.tbl-content td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+ 
+.product-info {
+  border: 1px solid #7ED1A7;
+  border-radius: 5px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  padding: 2%;
+  margin-top: 2%;
+  display: flex;
+  width: 25%;
+  flex-direction: column;
+  justify-self: flex-start;
+  align-items: center;
+}
+.product-info span {
+  margin: 5%;
+}
+
 
 /** ADD PRODUCT */
 .btn-add-product {

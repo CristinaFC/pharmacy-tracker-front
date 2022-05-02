@@ -1,4 +1,4 @@
-import { getDoc, doc, getDocs, collection, updateDoc, deleteField, setDoc } from 'firebase/firestore/lite';
+import { getDoc, doc, getDocs, collection, updateDoc, deleteField, setDoc, query, where, collectionGroup } from 'firebase/firestore/lite';
 import { db } from '../firebase/firebaseConfig';
 
 
@@ -104,6 +104,61 @@ export const getCategoryById = async (id) =>
 
 }
 
+export const getPharmacies = async () =>
+{
+    try
+    {
+        const docRef = collection(db, 'pharmacies');
+        const docSnap = await getDocs(docRef);
+
+        const pharmacies = [];
+        docSnap.forEach((doc) => pharmacies.push(doc.data()));
+
+        return pharmacies;
+    } catch (e)
+    {
+        console.error("Error getting pharmacies: ", e);
+    }
+
+}
+
+
+export const getPharmaciesByProductId = async (id) =>
+{
+    try
+    {
+
+
+        const products = collection(db, `pharmacies.products.${id}`);
+        const querySnapshot = await getDocs(products);
+        querySnapshot.forEach((doc) =>
+        {
+            console.log('here');
+            console.log(doc.id, ' => ', doc.data());
+        });
+
+        //const docRef = query(collectionGroup(db, 'products'), where('id', '==', id));
+
+        //console.log(docRef);
+        //const docRef = query(collectionGroup(db, 'products'), where("name", "id", id));
+        //const docSnap = await getDocs(docRef);
+        //const pharmacies = [];
+        //docSnap.forEach((doc) =>
+        //{
+        //    console.log(doc.id, ' => ', doc.data());
+        //    pharmacies.push(doc.data())
+        //});
+        //
+        //console.log('pharmacies', pharmacies);
+        //return pharmacies;
+
+    } catch (e)
+    {
+        console.log(e);
+    }
+
+}
+
 export const getPharmacyProducts = async (id) =>
 {
     try
@@ -112,6 +167,27 @@ export const getPharmacyProducts = async (id) =>
         const docSnap = await getDoc(docRef);
         const products = docSnap.data().products;
         return products;
+
+    } catch (e)
+    {
+        console.log(e);
+    }
+
+}
+
+export const getProductByName = async (name) =>
+{
+    try
+    {
+        const docRefProducts = query(collection(db, 'products'), where("name", "==", name));
+        const docSnapProducts = await getDocs(docRefProducts);
+        const products = [];
+        docSnapProducts.forEach((doc) =>
+        {
+            products.push(doc.data());
+        });
+
+        return products[0];
 
     } catch (e)
     {
