@@ -5,7 +5,7 @@ import "leaflet/dist/leaflet.css";
 import { Routing } from "leaflet-routing-machine/"
 import { getDocs, collection } from "firebase/firestore/lite";
 import { db } from "../firebase/firebaseConfig";
-
+import { Pagination, PaginationItem, Stack, Typography } from "@mui/material";
 
 
 var myIcon = L.icon({
@@ -213,6 +213,22 @@ class MapView extends Component {
           </Marker>))}
         <LocationMarker/>
       </MapContainer>
+
+      <Stack spacing={2}>
+        <Typography>Page: {page}</Typography>
+        <Pagination 
+          count={10} 
+          defaultPage={1} 
+          siblingCount={0}
+          page={page} 
+          onChange={handleChange}
+          variant="outlined"
+          size="small"
+          color="primary"
+          showFirstButton 
+          showLastButton
+        />
+      </Stack>
       
        {/* <p>La ubicacion del usuario es {userPos.lat +  ' , ' + userPos.lng}</p> */}
        <div id="buttons" className="mx-0">
