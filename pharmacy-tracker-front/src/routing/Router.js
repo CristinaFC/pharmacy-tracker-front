@@ -7,6 +7,10 @@ import Routing from './Routing';
 import { ProtectedRoute } from './ProtectedRoute';
 import { UserProtectedRoute } from './UserProtectedRoute';
 
+/** USER */
+import UserProfile from '../users/userProfile';
+import UserUpdate from '../users/userUpdate';
+
 /** PHARMACY **/
 import PharmacyProfile from '../pharmacies/pharmacyProfile';
 import PharmacyUpdate from '../pharmacies/pharmacyUpdate';
@@ -40,7 +44,9 @@ class RouterComponent extends Component
           <Route path={Routing.editProfile} element={<ProtectedRoute><PharmacyUpdate /> </ProtectedRoute>} />
           <Route path={Routing.deleteProfile} element={<ProtectedRoute><PharmacyDelete /> </ProtectedRoute>} />
           {/** User Role **/}
-          <Route path={Routing.login} element={<Login />} />
+          <Route path={Routing.login} element={<Login/>} />
+          <Route path={Routing.userProfile} element={<ProtectedRoute><UserProfile/></ProtectedRoute>} />
+          <Route path={Routing.updateProfile} element={<ProtectedRoute><UserUpdate/></ProtectedRoute>} />
           <Route path={Routing.register} element={<UserProtectedRoute><Register /></UserProtectedRoute>} />
           <Route path={Routing.compareprice} element={<UserProtectedRoute><ComparePrice /></UserProtectedRoute>} />
 
