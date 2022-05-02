@@ -12,6 +12,18 @@ code {
     monospace;
 }
 
+.map-title {
+  /* display: flex; */
+  justify-content: left;
+  width: 50%;
+  margin-top: 1%;
+  margin-left: 2%;
+  justify-content: center;
+  padding: 10px;
+  border: solid 2px #7AD8DE;
+  font-size: 20px;
+}
+
 #sidebar {
   margin-left: 120vh;
   z-index: 2;

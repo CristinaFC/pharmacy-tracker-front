@@ -193,6 +193,7 @@ class MapView extends Component {
 
     return (
       <>
+      <p class="map-title">Click on the map to get your route</p>
       <MapContainer
         style={styleMap}
         center={[28.112067, -15.439845,]}
