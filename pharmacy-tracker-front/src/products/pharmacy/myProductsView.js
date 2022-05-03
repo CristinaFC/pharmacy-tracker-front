@@ -251,8 +251,8 @@ class MyProductsView extends Component
                     </div>
                     <div>
                         <div class="ms-5 d-flex form-search">
-                            <input type="search" class="form-control" placeholder="Search" aria-label="Search" name="searchProduct" onChange={(e) => this.handleChange(e)} />
-                            <button class="btn btn-outline-success" type="submit" name="searchProduct" onClick={(e) => this.clear(e)}>Clear</button>
+                            <input type="search" class="form-control" placeholder="Search" aria-label="Search" name="searchProduct" onChange={(e) => this.handleChange(e)} value={this.state.searchProduct} />
+                            <button class="btn btn-outline-success" type="submit" name="searchProduct" onClick={(e) => this.clear(e)} >Clear</button>
                         </div>
                     </div>
                     <div class="add-button">
@@ -277,9 +277,8 @@ class MyProductsView extends Component
                             {
                                 return regex.test(p.name);
                             })
-                            .map((product, key) => this.dataTable(product, key))}
-
-                        {/*products.map((product, key) => this.dataTable(product, key))*/}
+                            .map((product, key) => this.dataTable(product, key))
+                        }
                     </tbody>
                 </table>
 

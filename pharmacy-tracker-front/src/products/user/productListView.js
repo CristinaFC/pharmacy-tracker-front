@@ -18,6 +18,7 @@ class ProductsView extends Component
         this.state = {
             products: [],
             authUser: false,
+            searchProduct: '',
         };
     }
 
@@ -62,18 +63,49 @@ class ProductsView extends Component
     }
 
 
+    handleChange = (e) =>
+    {
+        const name = e.target.name;
+
+        this.setState({
+            [name]: e.target.value,
+        });
+    }
+
+    clear(e)
+    {
+        this.setState({ [e.target.name]: '' });
+    }
+
+
+
     render()
     {
         const { products } = this.state;
+        const regex = new RegExp(`${this.state.searchProduct}`, 'i');
+
         return (
             <div class="container">
                 <div class="title-container">
                     <div class="title">
                         <h1>Products</h1>
                     </div>
+                    <div class="ms-5 d-flex form-search">
+                        <input type="search" class="form-control" placeholder="Search" aria-label="Search" name="searchProduct" onChange={(e) => this.handleChange(e)} value={this.state.searchProduct} />
+                        <button class="btn btn-outline-success" type="submit" name="searchProduct" onClick={(e) => this.clear(e)}>Clear</button>
+                    </div>
+                </div>
+                <div>
                 </div>
                 <div class="products-container">
-                    {products.map((product) => this.product(product))}
+                    {products
+                        .filter((p) =>
+                        {
+                            return regex.test(p.name);
+                        })
+                        .map((product, key) => this.product(product, key))
+                    }
+
                 </div>
             </div >
         );
