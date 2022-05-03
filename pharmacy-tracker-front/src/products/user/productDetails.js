@@ -74,7 +74,6 @@ export const ProductDetails = () =>
                 <td>
                     <Map sx={{ color: "white" }} onClick={() => route(pharmacy)} />
                 </td>
-
             </tr >
         );
     }
@@ -85,10 +84,10 @@ export const ProductDetails = () =>
         setShowing(true);
     }
 
-    if (authUser)
+    function authUserData()
     {
-        return (
 
+        return (
             <div class="container">
 
                 <div class="title-container">
@@ -134,56 +133,67 @@ export const ProductDetails = () =>
 
             </div>
         );
-    } else
-    {
-        return (
-
-            <div class="container">
-
-                <div class="title-container">
-                    <h2>Details</h2>
-                    <Link to={Routing.products}>
-                        <KeyboardBackspaceIcon sx={{ color: "#7ED1A7" }} />
-                    </Link>
-                </div>
-                {product != undefined
-                    ? <div class="product-container" >
-                        <div class="product-info">
-                            <h6><b>Name</b></h6>
-                            <span>{product.name}</span>
-
-                            <h6><b>Description</b></h6>
-                            <span>{product.description}</span>
-                        </div>
-                        <div class="tbl-content">
-
-                            <table class="table table-hover" cellpadding="0" cellspacing="0" border="0">
-
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Pharmacy</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {pharmacies != undefined ? pharmacies.map(pharmacy => data(pharmacy)) : ""}
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                    : ""}
-
-                {isShowingMap
-                    ? <MapComponent pharmacy={pharmacy} />
-                    : ""}
-
-            </div>
-        );
 
     }
 
+    function nonAuthUserData()
+    {
+        return (<div class="container">
+
+            <div class="title-container">
+                <h2>Details</h2>
+                <Link to={Routing.products}>
+                    <KeyboardBackspaceIcon sx={{ color: "#7ED1A7" }} />
+                </Link>
+            </div>
+            {product != undefined
+                ? <div class="product-container" >
+                    <div class="product-info">
+                        <h6><b>Name</b></h6>
+                        <span>{product.name}</span>
+
+                        <h6><b>Description</b></h6>
+                        <span>{product.description}</span>
+                    </div>
+                    <div class="tbl-content">
+
+                        <table class="table table-hover" cellpadding="0" cellspacing="0" border="0">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">Pharmacy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {pharmacies != undefined ? pharmacies.map(pharmacy => data(pharmacy)) : ""}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                : ""}
+
+        </div>);
+    }
+
+    if (authUser)
+    {
+        return authUserData();
+    } else
+    {
+        return nonAuthUserData();
+    }
+
+
+
 }
 
+
 export default ProductDetails;
+
+
+
+
+
+
