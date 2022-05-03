@@ -120,6 +120,23 @@ export const getPharmacyProducts = async (id) =>
 
 }
 
+export const getUserData = async (id) =>
+{
+    try
+    {
+        const docRef = doc(db, 'users', id);
+        const docSnap = await getDoc(docRef);
+        const data = docSnap.data();
+        return data;
+
+    } catch (e)
+    {
+        console.log(e);
+    }
+
+}
+
+
 export const getProducts = async () =>
 {
     try
