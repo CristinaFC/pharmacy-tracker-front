@@ -30,7 +30,9 @@ export function AuthProvider({ children })
         .then(cred =>
         {
             const newPharmacyRef = doc(db, `pharmacies/${cred.user.uid}`);
+            const newUserRef = doc(db, `users/${cred.user.uid}`);
             const point = new GeoPoint(lat, long);
+            setDoc(newUserRef, { uid: cred.user.uid, email: email, name: "Prueba" });
             setDoc(newPharmacyRef,
                 {
                     uid: cred.user.uid, email: email, Address: address, City: city, Location: point, Owner: owner, Phone: phone, eClosing: eclosing,
