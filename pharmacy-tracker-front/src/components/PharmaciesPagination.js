@@ -7,7 +7,6 @@ export default function PaginationControlled() {
             count={10} 
             defaultPage={1} 
             siblingCount={0}
-            variant="outlined"
             size="small"
             color="primary"
             showFirstButton 
