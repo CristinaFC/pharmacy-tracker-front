@@ -4,6 +4,7 @@ import { getAuth } from 'firebase/auth';
 import { getProducts } from '../../database/functions';
 import { Link } from 'react-router-dom';
 import Routing from '../../routing/Routing';
+import { useAuth } from '../../context/authContext';
 
 
 
@@ -16,6 +17,7 @@ class ProductsView extends Component
 
         this.state = {
             products: [],
+            authUser: false,
         };
     }
 
@@ -71,7 +73,6 @@ class ProductsView extends Component
                     </div>
                 </div>
                 <div class="products-container">
-
                     {products.map((product) => this.product(product))}
                 </div>
             </div >
