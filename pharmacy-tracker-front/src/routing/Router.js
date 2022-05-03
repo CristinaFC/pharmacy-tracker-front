@@ -46,13 +46,13 @@ class RouterComponent extends Component
           <Route path={Routing.editProfile} element={<ProtectedRoute><PharmacyUpdate /> </ProtectedRoute>} />
           <Route path={Routing.deleteProfile} element={<ProtectedRoute><PharmacyDelete /> </ProtectedRoute>} />
           {/** User Role **/}
-          <Route path={Routing.login} element={<Login/>} />
-          <Route path={Routing.userProfile} element={<ProtectedRoute><UserProfile/></ProtectedRoute>} />
-          <Route path={Routing.updateProfile} element={<ProtectedRoute><UserUpdate/></ProtectedRoute>} />
+          <Route path={Routing.login} element={<Login />} />
+          <Route path={Routing.userProfile} element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+          <Route path={Routing.updateProfile} element={<ProtectedRoute><UserUpdate /></ProtectedRoute>} />
           <Route path={Routing.register} element={<UserProtectedRoute><Register /></UserProtectedRoute>} />
           <Route path={Routing.compareprice} element={<UserProtectedRoute><ComparePrice /></UserProtectedRoute>} />
-          <Route path={Routing.products} element={<UserProtectedRoute><ProductsView /></UserProtectedRoute>} />
-          <Route path={`${Routing.productDetails}${Routing.id}`} element={<UserProtectedRoute><ProductDetails /></UserProtectedRoute>} />
+          <Route path={Routing.products} element={<ProductsView />} />
+          <Route path={`${Routing.productDetails}${Routing.id}`} element={<ProductDetails />} />
 
           {/** Pharmacy Role **/}
           <Route path={Routing.registerpharm} element={<UserProtectedRoute><RegisterPharm /></UserProtectedRoute>} />

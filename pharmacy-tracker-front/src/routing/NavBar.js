@@ -53,6 +53,9 @@ const NavBarNonAuthUser = () =>
         </Link>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-5">
+            <li class="nav-item" >
+              <Link class="nav-products" to={Routing.products}>Products</Link>
+            </li>
             <li class="nav-item top-r" >
               <Link class="nav-login" to={Routing.login}>Login</Link>
             </li>
@@ -88,9 +91,6 @@ const NavBarPharmacy = () =>
             <li class="nav-item" >
               <Link class="nav-logout" onClick={(e) => auth.signOut()} to={Routing.home}>Log out</Link>
             </li>
-            <li>
-              <a> Your role is: Pharmacy </a>
-            </li>
           </ul>
         </div>
       </div>
@@ -100,7 +100,7 @@ const NavBarPharmacy = () =>
 
 const NavBarAuthUser = () =>
 {
-  console.log('DENTRO');
+
   return (
     <nav class="navbar navbar-expand-lg">
       <div class="container">
@@ -111,6 +111,9 @@ const NavBarAuthUser = () =>
           <li class="nav-item" >
             <Link class="nav-profile" to={Routing.userProfile}>Profile</Link>
           </li>
+          <li class="nav-item" >
+            <Link class="nav-products" to={Routing.products}>Products</Link>
+          </li>
         </ul>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -118,8 +121,6 @@ const NavBarAuthUser = () =>
             <li class="nav-item" >
               <Link class="nav-logout" onClick={() => auth.signOut()} to={Routing.home}>Log out</Link>
             </li>
-
-
           </ul>
         </div>
       </div>
