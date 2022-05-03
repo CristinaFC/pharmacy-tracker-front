@@ -1,6 +1,6 @@
-import React, { useState, Component } from "react";
-import L, { icon } from 'leaflet';
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
+import React, {  Component } from "react";
+import L from 'leaflet';
+import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 var myIcon = L.icon({
@@ -12,30 +12,29 @@ var myIcon = L.icon({
 
 class MapAux extends Component{
 
-    constructor(props) {
-        super(props);
-        this.state = props;
-      }
-      
-     
-
       render(){
         const styleMap = {"width": "60%", "height": "50vh"};
         var marker;
-        var startPosition = [28.112067, -15.439845];
-        const LocationFinderDummy = () => {
+        var startPosition;
+
+        function setPharmacyPosition(position){
+            startPosition = position;
+        }
+
+
+        const LocationPlacer = () => {
             const map = useMapEvents({
                 click(e) {
                     if (marker) {
                         map.removeLayer(marker);
                     }
-                    startPosition = e.latlng;
+                    setPharmacyPosition(e.latlng);
                     console.log(e.latlng);
                     console.log(startPosition);
                     marker = new L.Marker(new L.LatLng(e.latlng.lat,e.latlng.lng),{icon:myIcon});
-                    console.log("Llega hasta aqui");
                     map.addLayer(marker);
                 },
+                
             });
             return null;
         };
@@ -50,9 +49,8 @@ class MapAux extends Component{
 
                 <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                />
-                <LocationFinderDummy />
+                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"/>
+                <LocationPlacer/>
              </MapContainer>
             </>
         )
