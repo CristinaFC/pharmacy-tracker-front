@@ -121,7 +121,7 @@ export const getPharmacies = async () =>
     }
 
 }
- 
+
 
 export const getPharmacyProducts = async (id) =>
 {
@@ -152,6 +152,11 @@ export const getProductByName = async (name) =>
         });
 
         return products[0];
+    } catch (err)
+    {
+        console.error(err);
+    }
+}
 
 export const getUserData = async (id) =>
 {
