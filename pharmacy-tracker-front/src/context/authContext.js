@@ -23,7 +23,7 @@ export function AuthProvider({ children })
         .then(cred =>
         {
             const newUserRef = doc(db, `users/${cred.user.uid}`);
-            setDoc(newUserRef, { uid: cred.user.uid, email: email, name: "Prueba" });
+            setDoc(newUserRef, { uid: cred.user.uid, email: email, name: "Prueba", role: "normal_user"});
         });
 
     const signupPharm = (email, password, address, city, owner, phone, eclosing, eopening, mclosing, mopening, npharmacy, lat, long) => createUserWithEmailAndPassword(auth, email, password)
@@ -32,7 +32,7 @@ export function AuthProvider({ children })
             const newPharmacyRef = doc(db, `pharmacies/${cred.user.uid}`);
             const newUserRef = doc(db, `users/${cred.user.uid}`);
             const point = new GeoPoint(lat, long);
-            setDoc(newUserRef, { uid: cred.user.uid, email: email, name: "Prueba" });
+            setDoc(newUserRef, { uid: cred.user.uid, email: email, name: "Prueba", role: "pharmacy"});
             setDoc(newPharmacyRef,
                 {
                     uid: cred.user.uid, email: email, Address: address, City: city, Location: point, Owner: owner, Phone: phone, eClosing: eclosing,
