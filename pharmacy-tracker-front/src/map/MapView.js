@@ -5,6 +5,7 @@ import "leaflet/dist/leaflet.css";
 import { getDocs, collection } from "firebase/firestore/lite";
 import { db } from "../firebase/firebaseConfig";
 import PaginationControlled from "../components/PharmaciesPagination";
+import { getPharmacies } from "../database/functions";
 
 
 var myIcon = L.icon({
@@ -236,6 +237,7 @@ class MapView extends Component {
             <hr></hr>
           </div>
           ))}
+          
           <PaginationControlled />
         </div>
       </> 

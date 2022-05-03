@@ -104,6 +104,24 @@ export const getCategoryById = async (id) =>
 
 }
 
+export const getPharmacies = async () =>
+{
+    try
+    {
+        const docRef = collection(db, 'pharmacies');
+        const docSnap = await getDocs(docRef);
+
+        const pharmacies = [];
+        docSnap.forEach((doc) => pharmacies.push(doc.data()));
+
+        return pharmacies;
+    } catch (e)
+    {
+        console.error("Error getting pharmacies: ", e);
+    }
+
+}
+
 export const getPharmacyProducts = async (id) =>
 {
     try
