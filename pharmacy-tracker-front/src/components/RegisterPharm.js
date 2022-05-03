@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'firebase/auth';
 import "./RegisterPharm.css";
-
+import MapAux from './MapAux';
 
 export default function RegisterPharm({ handleSubmit, handleChange })
 {
@@ -63,15 +63,12 @@ export default function RegisterPharm({ handleSubmit, handleChange })
                         <p>Please enter exactly location of pharmacy </p>
                     </div>
                     <div className='inputDivs'>
-                        <div className='elements'>
-                            <label for="lat">Latitude</label>
-                            <input style={{ width: '373px' }} type="Number" step="any" name="lat" placeholder='' />
-                        </div>
-                        <div className='elements'>
-                            <label for="long">Longitude</label>
-                            <input style={{ width: '373px' }} type="Number" step="any" name="long" placeholder='' />
+                         <MapAux/>
+                         <div className='buttom'>
+                            <button type="setPosition" onClick={handleSubmit}>Set Pharmacy Position</button>
                         </div>
                     </div>
+
                 </div>
                 <div className='buttom'>
                     <button type="submit" onClick={handleSubmit}>Register</button>
