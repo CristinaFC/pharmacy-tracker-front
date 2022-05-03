@@ -121,43 +121,7 @@ export const getPharmacies = async () =>
     }
 
 }
-
-
-export const getPharmaciesByProductId = async (id) =>
-{
-    try
-    {
-
-
-        const products = collection(db, `pharmacies.products.${id}`);
-        const querySnapshot = await getDocs(products);
-        querySnapshot.forEach((doc) =>
-        {
-            console.log('here');
-            console.log(doc.id, ' => ', doc.data());
-        });
-
-        //const docRef = query(collectionGroup(db, 'products'), where('id', '==', id));
-
-        //console.log(docRef);
-        //const docRef = query(collectionGroup(db, 'products'), where("name", "id", id));
-        //const docSnap = await getDocs(docRef);
-        //const pharmacies = [];
-        //docSnap.forEach((doc) =>
-        //{
-        //    console.log(doc.id, ' => ', doc.data());
-        //    pharmacies.push(doc.data())
-        //});
-        //
-        //console.log('pharmacies', pharmacies);
-        //return pharmacies;
-
-    } catch (e)
-    {
-        console.log(e);
-    }
-
-}
+ 
 
 export const getPharmacyProducts = async (id) =>
 {
@@ -188,6 +152,16 @@ export const getProductByName = async (name) =>
         });
 
         return products[0];
+
+export const getUserData = async (id) =>
+{
+    try
+    {
+        const docRef = doc(db, 'users', id);
+        const docSnap = await getDoc(docRef);
+        const data = docSnap.data();
+        return data;
+
 
     } catch (e)
     {

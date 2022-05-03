@@ -1,22 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Routing from './Routing';
 import { auth } from '../firebase/firebaseConfig';
-import { useAuth } from '../context/authContext';
+import { getAuth } from 'firebase/auth';
+import { getUserData } from '../database/functions'
+
 
 export function NavBar()
 {
-  const { user } = useAuth();
+  const [login, setLogin] = useState();
+
+  try
+  {
+    const userRef = getAuth().currentUser.uid;
+    getUserData(userRef).then((data) =>
+    {
+      if (data.role == "normal_user")
+      {
+        setLogin(true);
+      } else if (data.role == "pharmacy")
+      {
+        setLogin(false);
+      }
+    })
+  } catch (e)
+  {
+    console.log(e);
+  }
+
+  const isLogged = getAuth().currentUser;
+
 
   return (
     <div>
-      {user ? <NavBarAuthUser /> : <NavBarNonAuthUser />}
+      {isLogged == null ? <NavBarNonAuthUser /> : login == true ? <NavBarAuthUser /> : <NavBarPharmacy />}
     </div>
-
   );
+
 }
 
 const NavBarNonAuthUser = () =>
@@ -29,10 +52,6 @@ const NavBarNonAuthUser = () =>
           <strong class="title">Pharmacy Tracker</strong>
         </Link>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          {/* <form class="ms-5 d-flex form-search">
-            <input type="search" class="form-control" placeholder="Search" aria-label="Search"
-            />
-          </form> */}
           <ul class="navbar-nav ms-5">
             <li class="nav-item top-r" >
               <Link class="nav-login" to={Routing.login}>Login</Link>
@@ -47,10 +66,8 @@ const NavBarNonAuthUser = () =>
   );
 };
 
-
-const NavBarAuthUser = () =>
+const NavBarPharmacy = () =>
 {
-
   return (
     <nav class="navbar navbar-expand-lg">
       <div class="container">
@@ -69,8 +86,39 @@ const NavBarAuthUser = () =>
 
           <ul class="navbar-nav ms-5">
             <li class="nav-item" >
+              <Link class="nav-logout" onClick={(e) => auth.signOut()} to={Routing.home}>Log out</Link>
+            </li>
+            <li>
+              <a> Your role is: Pharmacy </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+const NavBarAuthUser = () =>
+{
+  console.log('DENTRO');
+  return (
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <Link class="navbar-brand" to={Routing.userProfile}>
+          <strong class="title">Pharmacy Tracker </strong>
+        </Link>
+        <ul class="navbar-nav ms-5">
+          <li class="nav-item" >
+            <Link class="nav-profile" to={Routing.userProfile}>Profile</Link>
+          </li>
+        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <ul class="navbar-nav ms-5">
+            <li class="nav-item" >
               <Link class="nav-logout" onClick={() => auth.signOut()} to={Routing.home}>Log out</Link>
             </li>
+
 
           </ul>
         </div>

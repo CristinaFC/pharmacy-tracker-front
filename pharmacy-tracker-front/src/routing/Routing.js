@@ -30,7 +30,12 @@ export default class Routing
 
     /** User role */
     static compareprice = '/compareprice';
+
     static products = '/products';
     static productDetails = '/product-details/';
+
+
+    static userProfile = '/yourProfile';
+    static updateProfile = '/updateProfile';
 
 }
