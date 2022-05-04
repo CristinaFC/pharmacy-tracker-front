@@ -1,6 +1,7 @@
-import React, {  Component } from "react";
+import React, {  Component} from "react";
 import L from 'leaflet';
 import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+
 import "leaflet/dist/leaflet.css";
 
 var myIcon = L.icon({
@@ -11,35 +12,46 @@ var myIcon = L.icon({
   });
 
 class MapAux extends Component{
+        constructor(props) {
+        super(props);
+        this.state = {startPosition:[28.112067, -15.439845,]};
+      }
+
+      updatePosition = (e) =>{
+        this.setState({
+            state: e
+        })
+    }
 
       render(){
         const styleMap = {"width": "60%", "height": "50vh"};
         var marker;
-        var startPosition;
+        var lat;
+        var lng;
+        var aux;
+        console.log(this.state.startPosition);
 
-        function setPharmacyPosition(position){
-            startPosition = position;
-        }
-
-
+       
         const LocationPlacer = () => {
             const map = useMapEvents({
                 click(e) {
                     if (marker) {
                         map.removeLayer(marker);
                     }
-                    setPharmacyPosition(e.latlng);
-                    console.log(e.latlng);
-                    console.log(startPosition);
+                    lat = e.latlng.lat;
+                    lng = e.latlng.lng;
+                    console.log(lat);
+                    console.log(lng);
+                    aux = e.latlng;
                     marker = new L.Marker(new L.LatLng(e.latlng.lat,e.latlng.lng),{icon:myIcon});
                     map.addLayer(marker);
+                    this.updatePosition(e)
                 },
                 
             });
             return null;
         };
 
-       
         return (
             <>
             <MapContainer
@@ -52,10 +64,15 @@ class MapAux extends Component{
                 attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"/>
                 <LocationPlacer/>
              </MapContainer>
+             <h1>{this.state.startPosition}</h1>
             </>
         )
-    }          
+        
+    }     
+         
 }
+
+
 export default MapAux;
 
      
