@@ -1,28 +1,35 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Pagination from '@mui/material/Pagination';
 import { getPharmacies } from '../database/functions';
 import { increment } from 'firebase/firestore';
 
-export default function PaginationControlled() {
+export default function PaginationControlled()
+{
 
-    const [amount, setAmount] = React.useState();
-    const [page, setPage] = React.useState();
+    const [amount, setAmount] = useState();
+    const [page, setPage] = useState(1);
+    const [pharmacies, setPharmacies] = useState();
 
-    async function getPharmaciesNumber() {
-        try {
+    async function getPharmaciesNumber()
+    {
+        try
+        {
             const allPharmacies = await getPharmacies();
             setAmount(allPharmacies.length);
-        } catch (e) {
+        } catch (e)
+        {
             console.log("error");
         }
     }
 
     getPharmaciesNumber();
 
-    const handleChangePage = (page) => {
-        console.log(page);
+    const handleChange = (event, page) =>
+    {
         setPage(page);
     };
+
+    console.log(page);
 
     return (
         /*
@@ -33,15 +40,15 @@ export default function PaginationControlled() {
         f increment()
         ifcuaosdj 
         */
-        <Pagination 
-            count={amount%4 > 0 ? Math.round(amount/4) +1 : amount/4}
+        <Pagination
+            count={amount % 4 > 0 ? Math.round(amount / 4) + 1 : amount / 4}
             page={page}
-            onClick={handleChangePage}
-            defaultPage={1} 
+            onChange={handleChange}
+            defaultPage={1}
             siblingCount={0}
             size="small"
             color="primary"
-            showFirstButton 
+            showFirstButton
             showLastButton
         />
     );
