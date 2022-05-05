@@ -1,11 +1,66 @@
 import React, { useState } from 'react';
 import 'firebase/auth';
 import "./RegisterPharm.css";
-import MapAux from './MapAux';
+import L from 'leaflet';
+import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+import { myIcon } from '../assets/icons/icons';
+
+var marker;
+var aux;
 
 export default function RegisterPharm({ handleSubmit, handleChange })
-{
+{   
 
+const [startPosition, setStartPosition] = useState(0,0);
+
+function setPosition(aux){
+    if(aux){
+        return setStartPosition(aux)
+    }
+        alert("Click on the map to set Location");
+}
+const MapAux = () =>
+{
+    
+    const styleMap = { "width": "60%", "height": "50vh"};
+
+    const LocationPlacer = () =>
+    {
+        const map = useMapEvents({
+            click(e)
+            {
+                if(marker){
+                    map.removeLayer(marker);
+                    console.log("Mark")
+                }
+                marker = new L.Marker(new L.LatLng(e.latlng.lat, e.latlng.lng), { icon: myIcon });
+                map.addLayer(marker);
+                aux=e.latlng;
+                setStartPosition(aux)
+            },
+        });
+        
+        console.log('startPosition', startPosition);
+        return null;
+    };
+
+    
+        return (
+        <>
+            <MapContainer
+                style={styleMap}
+                center={[28.112067, -15.439845,]}
+                zoom={13}>
+
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
+                <LocationPlacer/>
+            </MapContainer>
+        </>
+        )
+
+    }
 
     return (
         <div class="pharm-form">
@@ -60,21 +115,17 @@ export default function RegisterPharm({ handleSubmit, handleChange })
                 <div className='row3'>
                     <div className='sideHeader' >
                         <h2>Set Location</h2>
-                        <p>Please enter exactly location of pharmacy </p>
+                        <p>Click on the map to set the location </p>
                     </div>
                     <div className='inputDivs'>
                          <MapAux/>
                          <div className='buttom'>
-                            <button type="setPosition" onClick={handleSubmit}>Set Pharmacy Position</button>
+                            <button type="submit" onClick={handleSubmit}>Register</button>
                         </div>
-                    </div>
-
+                    </div>  
                 </div>
-                <div className='buttom'>
-                    <button type="submit" onClick={handleSubmit}>Register</button>
-                </div>
-
-
+                <p> {startPosition.lat} {startPosition.lng} </p>
+                <button  onClick={()=> setPosition(aux)}>Set Pharmacy Position</button>
             </form>
         </div>
     )
