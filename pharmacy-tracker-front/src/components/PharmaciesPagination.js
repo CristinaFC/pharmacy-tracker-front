@@ -5,7 +5,7 @@ import { increment } from 'firebase/firestore';
 
 var pag = 1;
 
-export default function PaginationControlled()
+export default function PaginationControlled(props)
 {
 
     const [amount, setAmount] = useState();
@@ -29,6 +29,7 @@ export default function PaginationControlled()
     const handleChange = (event, page) =>
     {
         setPage(page);
+        props.handlePageChange(page);
         pag=page;
     };
 
@@ -57,6 +58,3 @@ export default function PaginationControlled()
     );
 
 }
-
-export const pagina = pag;
-console.log("here >>" + pagina)

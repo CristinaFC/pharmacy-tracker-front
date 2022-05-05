@@ -6,7 +6,7 @@ import { getDocs, collection } from "firebase/firestore/lite";
 import { db } from "../firebase/firebaseConfig";
 import PaginationControlled from "../components/PharmaciesPagination";
 import { getPharmacies } from "../database/functions";
-import { pagina } from "../components/PharmaciesPagination";
+//import { pagina } from "../components/PharmaciesPagination";
 
 
 var myIcon = L.icon({
@@ -28,9 +28,15 @@ class MapView extends Component {
     super(props);
     this.state = {
       pharmacies: [],
-      mapRef: []
+      mapRef: [],
+      pagina: 1
     };
   }
+
+  handlePageChange(pagina){
+    this.setState({pagina})
+  }
+
   render() {
     const styleMap = {"width": "50%", "height": "75vh", "margin-left":"2%",  "margin-top":"2%"}
     let marks = [];
@@ -232,8 +238,8 @@ class MapView extends Component {
           </button>
         </div>
         <div class="sidebar" id="sidebar">
-            { console.log("Pagina >>" + pagina) }
-            {marks.slice(pagina*3-3, pagina*3).map((location) => (
+            { console.log("Pagina >>" + this.state.pagina) }
+            {marks.slice(this.state.pagina*3-3, this.state.pagina*3).map((location) => (
             <div class="fila">
               <p id="rutas"> {location.address} </p>
               <div id="buttonsPharmacy">
@@ -243,7 +249,7 @@ class MapView extends Component {
               <hr></hr>
             </div>
           ))}
-          <PaginationControlled />
+          <PaginationControlled pagina={ this.state.pagina } handlePageChange={this.handlePageChange.bind(this)} />
         </div>
       </> 
     )
