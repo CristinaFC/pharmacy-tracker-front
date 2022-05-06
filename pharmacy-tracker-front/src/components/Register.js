@@ -23,8 +23,8 @@ export default function Register()
         mclosing: '',
         mopening: '',
         npharmacy: '',
-        lat: 28.105557,
-        long: -15.422794,
+        lat: '',
+        long: '',
     });
 
     const { signupUser, signupPharm } = useAuth();
@@ -38,6 +38,20 @@ export default function Register()
         setUser({ ...user, [name]: value });
     };
 
+    function setLat  (value1, value2){
+
+        setPharm({ ...pharm, lat : value1, long:value2 });
+        console.log(pharm.lat);
+        console.log(pharm.long)
+    };
+   
+   /* function setLong  (value){
+
+        setPharm({ ...pharm, long : value });
+        console.log(value);
+    }*/
+
+
     const handleRol = ({ target: { value } }) =>
     {
         setRol(value);
@@ -47,6 +61,9 @@ export default function Register()
     {
         setPharm({ ...pharm, [name]: value });
         {
+            console.log(name);
+            console.log(value);
+            
             console.log('pharmacy', pharm);
 
         }
@@ -126,7 +143,7 @@ export default function Register()
                 </div>
                 {console.log('rol', rol)}
                 {rol === "pharmacy"
-                    ? <RegisterPharm handleSubmit={handleSubmitPharmacy} handleChange={handleChangePharmacy} />
+                    ? <RegisterPharm handleSubmit={handleSubmitPharmacy} handleChange={handleChangePharmacy} handleLat={setLat}  />
                     : <button button type="submit" class="btn-register" onClick={handleSubmitUser}>Register</button>}
             </form>
         </div >

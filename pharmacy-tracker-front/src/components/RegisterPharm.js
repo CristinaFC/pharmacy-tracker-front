@@ -6,19 +6,13 @@ import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
 import { myIcon } from '../assets/icons/icons';
 
 var marker;
-var aux;
 
-export default function RegisterPharm({ handleSubmit, handleChange })
+export default function RegisterPharm({ handleSubmit, handleChange, handleLat, handleLng })
 {   
 
 const [startPosition, setStartPosition] = useState(0,0);
 
-function setPosition(aux){
-    if(aux){
-        return setStartPosition(aux)
-    }
-        alert("Click on the map to set Location");
-}
+
 const MapAux = () =>
 {
     
@@ -35,13 +29,16 @@ const MapAux = () =>
                 }
                 marker = new L.Marker(new L.LatLng(e.latlng.lat, e.latlng.lng), { icon: myIcon });
                 map.addLayer(marker);
-                aux=e.latlng;
-                setStartPosition(aux)
+                console.log("Marcador añadido")
+                setStartPosition(e.latlng)
+                handleLat(e.latlng.lat,e.latlng.lng)
+                //handleLng(e.latlng.lng)
+                
             },
         });
         
         console.log('startPosition', startPosition);
-        return null;
+        return false;
     };
 
     
@@ -82,7 +79,7 @@ const MapAux = () =>
                         </div>
                         <div className='elements'>
                             <label for="address">Address</label>
-                            <input style={{ width: '373px' }} type="address" name="address" placeholder='' onChange={handleChange} />
+                            <input style={{ width: '373px' }} type="address" name="address" placeholder='' onChange={handleChange}  />
                         </div>
                     </div>
                 </div>
@@ -124,8 +121,7 @@ const MapAux = () =>
                         </div>
                     </div>  
                 </div>
-                <p> {startPosition.lat} {startPosition.lng} </p>
-                <button  onClick={()=> setPosition(aux)}>Set Pharmacy Position</button>
+                <p>{startPosition.lat}{startPosition.lng} </p>
             </form>
         </div>
     )
