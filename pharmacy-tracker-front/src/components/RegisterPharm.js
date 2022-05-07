@@ -3,7 +3,7 @@ import 'firebase/auth';
 import "./RegisterPharm.css";
 import L from 'leaflet';
 import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet";
-import { myIcon } from '../assets/icons/icons';
+
 
 
 var myPos = L.icon({
@@ -13,37 +13,34 @@ var myPos = L.icon({
     popupAnchor: [0, -41]
   });
 
+
+  
 export default function RegisterPharm({ handleSubmit, handleChange, handleLat })
 {   
 
-const [startPosition, setStartPosition] = useState(0,0);
-var marker=startPosition;
-
+const [lat,setLat]= useState(28.112067);
+const [lng,setLng]= useState(-15.439845);
 
 const MapAux = () =>
 {
+    
     
     const styleMap = { "width": "60%", "height": "50vh"};
 
     const LocationPlacer = () =>
     {
-        const map = useMapEvents({
+         useMapEvents({
             click(e)
             {
-                if(marker){
-                    map.removeLayer(marker);
-                    console.log("Mark")
-                }
-                setStartPosition(e.latlng)
-                marker = new L.Marker(new L.LatLng(startPosition.lat, startPosition.lng), { icon: myIcon });
-                map.addLayer(marker);
+              
                 handleLat(e.latlng.lat,e.latlng.lng)
-                
+                setLat(e.latlng.lat);
+                setLng(e.latlng.lng);
+            
                 
             },
         });
         
-        console.log('startPosition', startPosition);
         return false;
     };
 
@@ -59,7 +56,7 @@ const MapAux = () =>
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors" />
                 <LocationPlacer/>
-                <Marker position={startPosition} icon={myPos}/>
+                <Marker position={[lat,lng]} icon={myPos}/>
             </MapContainer>
         </>
         )
@@ -128,7 +125,7 @@ const MapAux = () =>
                         </div>
                     </div>  
                 </div>
-                <p>{startPosition.lat}{startPosition.lng} </p>
+                <p>{lat}{lng} </p>
             </form>
         </div>
     )

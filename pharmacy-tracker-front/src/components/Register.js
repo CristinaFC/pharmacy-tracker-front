@@ -23,8 +23,8 @@ export default function Register()
         mclosing: '',
         mopening: '',
         npharmacy: '',
-        lat: '',
-        long: '',
+        lat: 28.112067,
+        long: -15.439845,
     });
 
     const { signupUser, signupPharm } = useAuth();
