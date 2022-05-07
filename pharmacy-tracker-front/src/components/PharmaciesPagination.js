@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import Pagination from '@mui/material/Pagination';
 import { getPharmacies } from '../database/functions';
-import { increment } from 'firebase/firestore';
 
-var pag = 1;
+//var pag = 1;
 
 export default function PaginationControlled(props)
 {
 
     const [amount, setAmount] = useState();
     const [page, setPage] = useState(1);
-    const [pharmacies, setPharmacies] = useState();
+    //const [pharmacies, setPharmacies] = useState();
 
     async function getPharmaciesNumber()
     {
@@ -30,7 +29,7 @@ export default function PaginationControlled(props)
     {
         setPage(page);
         props.handlePageChange(page);
-        pag=page;
+        //pag=page;
     };
 
 
