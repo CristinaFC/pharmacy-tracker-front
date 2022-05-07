@@ -122,7 +122,6 @@ export const getPharmacies = async () =>
 
 }
 
-
 export const getPharmacyProducts = async (id) =>
 {
     try

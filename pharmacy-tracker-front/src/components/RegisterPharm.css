@@ -37,7 +37,7 @@
     align-items: flex-start;
 }
 
-input{
+.RegInput{
     height: 42px;
     border-style: solid;
     border-width: 1px;
@@ -50,7 +50,7 @@ input{
     align-items: flex-start;
 }
 
-button{
+.RegButtom{
     display: inline-block;
     font-weight: 400;
     line-height: 1.5;

@@ -2,10 +2,11 @@ import React, { Component, useState } from "react";
 import L from 'leaflet';
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { Routing } from "leaflet-routing-machine/"
 import { getDocs, collection } from "firebase/firestore/lite";
 import { db } from "../firebase/firebaseConfig";
-
+import PaginationControlled from "../components/PharmaciesPagination";
+import { getPharmacies } from "../database/functions";
+//import { pagina } from "../components/PharmaciesPagination";
 
 
 var myIcon = L.icon({
@@ -27,9 +28,15 @@ class MapView extends Component {
     super(props);
     this.state = {
       pharmacies: [],
-      mapRef: []
+      mapRef: [],
+      pagina: 1
     };
   }
+
+  handlePageChange(pagina){
+    this.setState({pagina})
+  }
+
   render() {
     const styleMap = {"width": "50%", "height": "75vh", "margin-left":"2%",  "margin-top":"2%"}
     let marks = [];
@@ -54,6 +61,10 @@ class MapView extends Component {
         }
       }
     */
+
+    //var for paginated
+    var marksCount = Object.keys(marks).length;
+
 
     var userPos;
     var myMap;
@@ -227,16 +238,18 @@ class MapView extends Component {
           </button>
         </div>
         <div class="sidebar" id="sidebar">
-          {marks.map((location) => (
-          <div class="fila">
-            <p id="rutas"> {location.address} </p>
-            <div id="buttonsPharmacy">
-              <button class="btn-login" id="route" onClick={(e) => routeToPharmacy(location)}> Route </button>
-              <button class="btn-register" id="products" disabled> Products </button>
+            { console.log("Pagina >>" + this.state.pagina) }
+            {marks.slice(this.state.pagina*3-3, this.state.pagina*3).map((location) => (
+            <div class="fila">
+              <p id="rutas"> {location.address} </p>
+              <div id="buttonsPharmacy">
+                <button class="btn-login" id="route" onClick={(e) => routeToPharmacy(location)}> Route </button>
+                <button class="btn-register" id="products" disabled> Products </button>
+              </div>
+              <hr></hr>
             </div>
-            <hr></hr>
-          </div>
           ))}
+          <PaginationControlled pagina={ this.state.pagina } handlePageChange={this.handlePageChange.bind(this)} />
         </div>
       </> 
     )

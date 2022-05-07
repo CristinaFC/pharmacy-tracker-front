@@ -75,15 +75,15 @@ const MapAux = () =>
                     <div className='inputDivs'>
                         <div className='elements'>
                             <label for="phone">Phone</label>
-                            <input style={{ width: '373px' }} type="Number" name="phone" placeholder='' onChange={handleChange} />
+                            <input className='RegInput' style={{ width: '373px' }} type="Number" name="phone" placeholder='' onChange={handleChange} />
                         </div>
                         <div className='elements'>
                             <label for="city">City</label>
-                            <input style={{ width: '373px' }} type="text" name="city" placeholder='' onChange={handleChange} />
+                            <input className='RegInput' style={{ width: '373px' }} type="text" name="city" placeholder='' onChange={handleChange} />
                         </div>
                         <div className='elements'>
                             <label for="address">Address</label>
-                            <input style={{ width: '373px' }} type="address" name="address" placeholder='' onChange={handleChange}  />
+                            <input className='RegInput' style={{ width: '373px' }} type="address" name="address" placeholder='' onChange={handleChange} />
                         </div>
                     </div>
                 </div>
@@ -96,19 +96,19 @@ const MapAux = () =>
                     <div className='inputDivs'>
                         <div className='elements'>
                             <label for="Mo">Morning Opening</label>
-                            <input style={{ width: '136px' }} type="time" name="mopening" placeholder='' onChange={handleChange} />
+                            <input className='RegInput' style={{ width: '136px' }} type="time" name="mopening" placeholder='' onChange={handleChange} />
                         </div>
                         <div className='elements'>
                             <label for="Mc">Morning Closing</label>
-                            <input style={{ width: '136px' }} type="time" name="mclosing" placeholder='' onChange={handleChange} />
+                            <input className='RegInput' style={{ width: '136px' }} type="time" name="mclosing" placeholder='' onChange={handleChange} />
                         </div>
                         <div className='elements'>
                             <label for="Eo">Evening Opening</label>
-                            <input style={{ width: '136px' }} type="time" name="eopening" placeholder='' onChange={handleChange} />
+                            <input className='RegInput' style={{ width: '136px' }} type="time" name="eopening" placeholder='' onChange={handleChange} />
                         </div>
                         <div className='elements'>
                             <label for="Ec">Evening Closing</label>
-                            <input style={{ width: '136px' }} type="time" name="eclosing" placeholder='' onChange={handleChange} />
+                            <input className='RegInput' style={{ width: '136px' }} type="time" name="eclosing" placeholder='' onChange={handleChange} />
                         </div>
                     </div>
                 </div>
@@ -120,12 +120,20 @@ const MapAux = () =>
                     </div>
                     <div className='inputDivs'>
                          <MapAux/>
-                         <div className='buttom'>
-                            <button type="submit" onClick={handleSubmit}>Register</button>
+                        <div className='elements'>
+                            <label for="lat">Latitude</label>
+                            <input className='RegInput' style={{ width: '373px' }} type="Number" step="any" name="lat" placeholder='' />
+                        </div>
+                        <div className='elements'>
+                            <label for="long">Longitude</label>
+                            <input className='RegInput' style={{ width: '373px' }} type="Number" step="any" name="long" placeholder='' />
                         </div>
                     </div>  
                 </div>
                 <p>{lat}{lng} </p>
+                <div className='buttom'>
+                    <button className='RegButtom' type="submit" onClick={handleSubmit}>Register</button>
+                </div>
             </form>
         </div>
     )
