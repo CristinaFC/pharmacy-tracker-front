@@ -7,6 +7,10 @@ import Routing from './Routing';
 import { ProtectedRoute } from './ProtectedRoute';
 import { UserProtectedRoute } from './UserProtectedRoute';
 
+/** USER */
+import UserProfile from '../users/userProfile';
+import UserUpdate from '../users/userUpdate';
+
 /** PHARMACY **/
 import PharmacyProfile from '../pharmacies/pharmacyProfile';
 import PharmacyUpdate from '../pharmacies/pharmacyUpdate';
@@ -24,6 +28,8 @@ import Login from '../components/Login';
 import Register from '../components/Register';
 import RegisterPharm from '../components/RegisterPharm';
 import ComparePrice from '../components/ComparePrice';
+import ProductsView from '../products/user/productListView';
+import ProductDetails from '../products/user/productDetails';
 
 class RouterComponent extends Component
 {
@@ -41,12 +47,16 @@ class RouterComponent extends Component
           <Route path={Routing.deleteProfile} element={<ProtectedRoute><PharmacyDelete /> </ProtectedRoute>} />
           {/** User Role **/}
           <Route path={Routing.login} element={<Login />} />
+          <Route path={Routing.userProfile} element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+          <Route path={Routing.updateProfile} element={<ProtectedRoute><UserUpdate /></ProtectedRoute>} />
           <Route path={Routing.register} element={<UserProtectedRoute><Register /></UserProtectedRoute>} />
           <Route path={Routing.compareprice} element={<UserProtectedRoute><ComparePrice /></UserProtectedRoute>} />
+          <Route path={Routing.products} element={<ProductsView />} />
+          <Route path={`${Routing.productDetails}${Routing.id}`} element={<ProductDetails />} />
 
           {/** Pharmacy Role **/}
           <Route path={Routing.registerpharm} element={<UserProtectedRoute><RegisterPharm /></UserProtectedRoute>} />
-          <Route path={Routing.myProducts} element={<MyProductsView />} />
+          <Route path={Routing.myProducts} element={<ProtectedRoute><MyProductsView /></ProtectedRoute>} />
           <Route path={Routing.editProduct} element={<EditProductView />} />
           <Route path={Routing.addProduct} element={<CreateProductView />} />
 

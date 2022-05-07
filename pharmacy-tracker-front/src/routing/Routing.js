@@ -8,7 +8,7 @@ export default class Routing
     /** NavBar **/
     static login = '/login';
     static register = '/register';
-    static searchResults = 'searchResults';
+    static searchResults = '/searchResults';
 
     /**Login **/
     static signInOptions = '/signInOptions';
@@ -30,4 +30,12 @@ export default class Routing
 
     /** User role */
     static compareprice = '/compareprice';
+
+    static products = '/products';
+    static productDetails = '/product-details/';
+
+
+    static userProfile = '/yourProfile';
+    static updateProfile = '/updateProfile';
+
 }

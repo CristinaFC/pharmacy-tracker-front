@@ -1,4 +1,4 @@
-import { getDoc, doc, getDocs, collection, updateDoc, deleteField, setDoc } from 'firebase/firestore/lite';
+import { getDoc, doc, getDocs, collection, updateDoc, deleteField, setDoc, query, where, collectionGroup } from 'firebase/firestore/lite';
 import { db } from '../firebase/firebaseConfig';
 
 
@@ -130,6 +130,42 @@ export const getPharmacyProducts = async (id) =>
         const docSnap = await getDoc(docRef);
         const products = docSnap.data().products;
         return products;
+
+    } catch (e)
+    {
+        console.log(e);
+    }
+
+}
+
+export const getProductByName = async (name) =>
+{
+    try
+    {
+        const docRefProducts = query(collection(db, 'products'), where("name", "==", name));
+        const docSnapProducts = await getDocs(docRefProducts);
+        const products = [];
+        docSnapProducts.forEach((doc) =>
+        {
+            products.push(doc.data());
+        });
+
+        return products[0];
+    } catch (err)
+    {
+        console.error(err);
+    }
+}
+
+export const getUserData = async (id) =>
+{
+    try
+    {
+        const docRef = doc(db, 'users', id);
+        const docSnap = await getDoc(docRef);
+        const data = docSnap.data();
+        return data;
+
 
     } catch (e)
     {
