@@ -1,0 +1,73 @@
+.row1{
+    display: flex;
+    margin-bottom: 50px;
+}
+
+.row2, .row3{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5 0px;
+}
+
+.row2 > .inputDivs, .row3 > .inputDivs{
+    width: 65%;
+}
+
+.sideHeader{
+    max-width: 373px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.pharm-form{
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.inputDivs{
+    display: flex;
+    justify-content: space-between;
+}
+
+.elements{
+    max-width: 373px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.RegInput{
+    height: 42px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 6px;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.RegButtom{
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid #7ED1A7;
+    border-radius: 5px;
+    padding: 0.375rem 0.75rem;
+    color: #fff;
+    background-color: #7ED1A7;
+    width: 211px;
+    height: 42px;
+}
+
+.buttom{
+    display: flex;
+    justify-content: end;
+}
