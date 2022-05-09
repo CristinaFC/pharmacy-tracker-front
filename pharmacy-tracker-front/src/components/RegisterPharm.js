@@ -32,13 +32,10 @@ const MapAux = () =>
          useMapEvents({
             click(e)
             {
-              
                 handleLat(e.latlng.lat,e.latlng.lng)
                 setLat(e.latlng.lat);
                 setLng(e.latlng.lng);
-            
-                
-            },
+            }
         });
         
         return false;
@@ -49,7 +46,7 @@ const MapAux = () =>
         <>
             <MapContainer
                 style={styleMap}
-                center={[28.112067, -15.439845,]}
+                center={[lat, lng]}
                 zoom={13}>
 
                 <TileLayer
@@ -71,7 +68,6 @@ const MapAux = () =>
                         <h2>Pharmacy Information</h2>
                         <p>Please enter your's Pharmacy data</p>
                     </div>
-
                     <div className='inputDivs'>
                         <div className='elements'>
                             <label for="phone">Phone</label>
@@ -122,15 +118,14 @@ const MapAux = () =>
                          <MapAux/>
                         <div className='elements'>
                             <label for="lat">Latitude</label>
-                            <input className='RegInput' style={{ width: '373px' }} type="Number" step="any" name="lat" placeholder='' />
+                            <input className='RegInput' style={{ width: '373px' }} type="Number" step="any" name="lat" placeholder='' value={lat} />
                         </div>
                         <div className='elements'>
                             <label for="long">Longitude</label>
-                            <input className='RegInput' style={{ width: '373px' }} type="Number" step="any" name="long" placeholder='' />
+                            <input className='RegInput' style={{ width: '373px' }} type="Number" step="any" name="long" placeholder='' value={lng} />
                         </div>
                     </div>  
                 </div>
-                <p>{lat}{lng} </p>
                 <div className='buttom'>
                     <button className='RegButtom' type="submit" onClick={handleSubmit}>Register</button>
                 </div>

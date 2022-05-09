@@ -39,18 +39,8 @@ export default function Register()
     };
 
     function setLat  (value1, value2){
-
         setPharm({ ...pharm, lat : value1, long:value2 });
-        console.log(pharm.lat);
-        console.log(pharm.long)
     };
-   
-   /* function setLong  (value){
-
-        setPharm({ ...pharm, long : value });
-        console.log(value);
-    }*/
-
 
     const handleRol = ({ target: { value } }) =>
     {
@@ -60,13 +50,6 @@ export default function Register()
     const handleChangePharmacy = ({ target: { name, value } }) =>
     {
         setPharm({ ...pharm, [name]: value });
-        {
-            console.log(name);
-            console.log(value);
-            
-            console.log('pharmacy', pharm);
-
-        }
     };
 
 
@@ -91,7 +74,6 @@ export default function Register()
         setError('');
         try
         {
-            console.log('data', pharm);
             await signupPharm(user.email,
                 user.password,
                 pharm.address,
@@ -141,7 +123,6 @@ export default function Register()
                         </div>
                     </div>
                 </div>
-                {console.log('rol', rol)}
                 {rol === "pharmacy"
                     ? <RegisterPharm handleSubmit={handleSubmitPharmacy} handleChange={handleChangePharmacy} handleLat={setLat}  />
                     : <button button type="submit" class="btn-register" onClick={handleSubmitUser}>Register</button>}
