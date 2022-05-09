@@ -1,12 +1,7 @@
-
 import React, { Component } from 'react';
-import { getAuth } from 'firebase/auth';
 import { getProducts } from '../../database/functions';
 import { Link } from 'react-router-dom';
 import Routing from '../../routing/Routing';
-import { useAuth } from '../../context/authContext';
-
-
 
 class ProductsView extends Component
 {
@@ -22,28 +17,20 @@ class ProductsView extends Component
         };
     }
 
-
-
-
     async componentDidMount()
     {
         const products = await getProducts();
         this.setState({ products });
-
     }
 
     dataTable(product, key)
     {
-
         return (
-
             <tr onclick="window.location='#';">
-
                 <th scope="row">{key + 1}</th>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
             </tr>
-
         );
     }
 
@@ -57,11 +44,8 @@ class ProductsView extends Component
                     <Link to={`${Routing.productDetails}${product.name}`} class="card-link">See details</Link>
                 </div>
             </div>
-
-
         );
     }
-
 
     handleChange = (e) =>
     {
@@ -76,8 +60,6 @@ class ProductsView extends Component
     {
         this.setState({ [e.target.name]: '' });
     }
-
-
 
     render()
     {
@@ -105,13 +87,10 @@ class ProductsView extends Component
                         })
                         .map((product, key) => this.product(product, key))
                     }
-
                 </div>
             </div >
         );
     }
 }
-
-
 
 export default ProductsView;

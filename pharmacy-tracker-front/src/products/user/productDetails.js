@@ -3,11 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { getProductByName, getPharmacies } from '../../database/functions';
 import Routing from '../../routing/Routing';
 import { getAuth } from 'firebase/auth';
-
-
 import Map from '@mui/icons-material/Map';
 import MapComponent from '../../components/MapComponent';
-
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 export const ProductDetails = () => 
@@ -106,9 +103,7 @@ export const ProductDetails = () =>
                             <span>{product.description}</span>
                         </div>
                         <div class="tbl-content">
-
                             <table class="table table-hover" cellpadding="0" cellspacing="0" border="0">
-
                                 <thead>
                                     <tr>
                                         <th scope="col">Pharmacy</th>
@@ -119,7 +114,6 @@ export const ProductDetails = () =>
                                 </thead>
                                 <tbody>
                                     {pharmacies != undefined ? pharmacies.map(pharmacy => data(pharmacy)) : ""}
-
                                 </tbody>
                             </table>
                         </div>
@@ -133,13 +127,11 @@ export const ProductDetails = () =>
 
             </div>
         );
-
     }
 
     function nonAuthUserData()
     {
         return (<div class="container">
-
             <div class="title-container">
                 <h2>Details</h2>
                 <Link to={Routing.products}>
@@ -151,14 +143,11 @@ export const ProductDetails = () =>
                     <div class="product-info">
                         <h6><b>Name</b></h6>
                         <span>{product.name}</span>
-
                         <h6><b>Description</b></h6>
                         <span>{product.description}</span>
                     </div>
                     <div class="tbl-content">
-
                         <table class="table table-hover" cellpadding="0" cellspacing="0" border="0">
-
                             <thead>
                                 <tr>
                                     <th scope="col">Pharmacy</th>
@@ -166,7 +155,6 @@ export const ProductDetails = () =>
                             </thead>
                             <tbody>
                                 {pharmacies != undefined ? pharmacies.map(pharmacy => data(pharmacy)) : ""}
-
                             </tbody>
                         </table>
                     </div>
@@ -184,16 +172,6 @@ export const ProductDetails = () =>
     {
         return nonAuthUserData();
     }
-
-
-
 }
 
-
 export default ProductDetails;
-
-
-
-
-
-
