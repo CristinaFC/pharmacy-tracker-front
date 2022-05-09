@@ -18,10 +18,10 @@ export function NavBar()
     const userRef = getAuth().currentUser.uid;
     getUserData(userRef).then((data) =>
     {
-      if (data.role === "normal_user")
+      if (data.role == "normal_user")
       {
         setLogin(true);
-      } else if (data.role === "pharmacy")
+      } else if (data.role == "pharmacy")
       {
         setLogin(false);
       }
@@ -36,7 +36,7 @@ export function NavBar()
 
   return (
     <div>
-      {isLogged === null ? <NavBarNonAuthUser /> : login === true ? <NavBarAuthUser /> : <NavBarPharmacy />}
+      {isLogged == null ? <NavBarNonAuthUser /> : login == true ? <NavBarAuthUser /> : <NavBarPharmacy />}
     </div>
   );
 
