@@ -18,10 +18,10 @@ export function NavBar()
     const userRef = getAuth().currentUser.uid;
     getUserData(userRef).then((data) =>
     {
-      if (data.role == "normal_user")
+      if (data.role === "normal_user")
       {
         setLogin(true);
-      } else if (data.role == "pharmacy")
+      } else if (data.role === "pharmacy")
       {
         setLogin(false);
       }
@@ -36,7 +36,7 @@ export function NavBar()
 
   return (
     <div>
-      {isLogged == null ? <NavBarNonAuthUser /> : login == true ? <NavBarAuthUser /> : <NavBarPharmacy />}
+      {isLogged === null ? <NavBarNonAuthUser /> : login === true ? <NavBarAuthUser /> : <NavBarPharmacy />}
     </div>
   );
 
@@ -74,7 +74,7 @@ const NavBarPharmacy = () =>
   return (
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <Link class="navbar-brand" to={Routing.myProfile}>
+        <Link class="navbar-brand" to={Routing.home}>
           <strong class="title">Pharmacy Tracker </strong>
         </Link>
         <ul class="navbar-nav ms-5">
@@ -104,7 +104,7 @@ const NavBarAuthUser = () =>
   return (
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <Link class="navbar-brand" to={Routing.userProfile}>
+        <Link class="navbar-brand" to={Routing.home}>
           <strong class="title">Pharmacy Tracker </strong>
         </Link>
         <ul class="navbar-nav ms-5">
