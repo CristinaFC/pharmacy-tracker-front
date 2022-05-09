@@ -74,7 +74,7 @@ const NavBarPharmacy = () =>
   return (
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <Link class="navbar-brand" to={Routing.myProfile}>
+        <Link class="navbar-brand" to={Routing.home}>
           <strong class="title">Pharmacy Tracker </strong>
         </Link>
         <ul class="navbar-nav ms-5">
@@ -104,7 +104,7 @@ const NavBarAuthUser = () =>
   return (
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <Link class="navbar-brand" to={Routing.userProfile}>
+        <Link class="navbar-brand" to={Routing.home}>
           <strong class="title">Pharmacy Tracker </strong>
         </Link>
         <ul class="navbar-nav ms-5">
