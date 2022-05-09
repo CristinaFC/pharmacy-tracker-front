@@ -6,6 +6,8 @@ import { getDocs, collection } from "firebase/firestore/lite";
 import { db } from "../firebase/firebaseConfig";
 import PaginationControlled from "../components/PharmaciesPagination";
 import { getPharmacies } from "../database/functions";
+import Routing from "../routing/Routing";
+import { Link } from "react-router-dom";
 //import { pagina } from "../components/PharmaciesPagination";
 
 
@@ -23,8 +25,10 @@ var myPos = L.icon({
   popupAnchor: [0, -41]
 });
 
-class MapView extends Component {
-  constructor(props) {
+class MapView extends Component
+{
+  constructor(props)
+  {
     super(props);
     this.state = {
       pharmacies: [],
@@ -33,34 +37,22 @@ class MapView extends Component {
     };
   }
 
-  handlePageChange(pagina){
-    this.setState({pagina})
+  handlePageChange(pagina)
+  {
+    this.setState({ pagina })
   }
 
-  render() {
-    const styleMap = {"width": "50%", "height": "75vh", "margin-left":"2%",  "margin-top":"2%"}
+  render()
+  {
+    const styleMap = { "width": "50%", "height": "75vh", "margin-left": "2%", "margin-top": "2%" }
     let marks = [];
     const { pharmacies } = this.state;
-    pharmacies.forEach((pharmacy) => {
-      marks.push({ "address": pharmacy.Address, "position": [pharmacy.Location.latitude, pharmacy.Location.longitude], "nPharmacy": "Nº " + pharmacy.nPharmacy, "owner": pharmacy.Owner });
+    pharmacies.forEach((pharmacy) =>
+    {
+      console.log('pharmacy.uid', pharmacy.uid);
+      marks.push({ "address": pharmacy.Address, "position": [pharmacy.Location.latitude, pharmacy.Location.longitude], "nPharmacy": "Nº " + pharmacy.nPharmacy, "owner": pharmacy.Owner, "uid": pharmacy.uid });
     });
 
-
-    /*
-      const showMyLocation = () => {
-        const mapRef = useRef();
-        const location = useGeoLocation();
-        if (location.loaded && !location.error) {
-          mapRef.current.leafletElement.flyTo(
-            [location.coordinates.lat, location.coordinates.lng],
-            17,
-            { animate: true }
-          );
-        } else {
-          alert(location.error.message);
-        }
-      }
-    */
 
     //var for paginated
     var marksCount = Object.keys(marks).length;
@@ -71,13 +63,16 @@ class MapView extends Component {
     var route;
     var setRoute = false;
 
-    function LocationMarker() {
+    function LocationMarker()
+    {
       const [positionx, setPosition] = useState(null)
       const map = useMapEvents({
-        click() {
+        click()
+        {
           map.locate()
         },
-        locationfound(e) {
+        locationfound(e)
+        {
           setPosition(e.latlng)
           setMap(map)
           map.flyTo(e.latlng, 17)
@@ -85,20 +80,22 @@ class MapView extends Component {
           setUserLocation(e.latlng);
         },
       })
-      
+
       return positionx === null ? null : (
-        
-        <Marker position={positionx} icon ={myPos}>
+
+        <Marker position={positionx} icon={myPos}>
           <Popup>You are here</Popup>
         </Marker>
-        
+
       )
     }
 
-    function NearbyPharmacy() {
+    function NearbyPharmacy()
+    {
       const pharmacy = GetNearbyPharmacy();
       myMap.flyTo(pharmacy.position);
-      if(setRoute === true) {
+      if (setRoute === true)
+      {
         myMap.removeControl(route)
       }
       route = L.Routing.control({
@@ -108,22 +105,27 @@ class MapView extends Component {
         ],
         routeWhileDragging: false,
         router: null,
-        }).addTo(myMap);
+      }).addTo(myMap);
       setRoute = true;
       myMap.fitBounds(route.getBounds())
     }
 
-    function MoveToLocation() {
-      if (!userPos) {
+    function MoveToLocation()
+    {
+      if (!userPos)
+      {
         window.alert("To set your location, click on the map");
       }
       myMap.flyTo(userPos)
     }
 
     //Función de onClick Route
-    function routeToPharmacy(location) {
-      if(userPos) {
-        if(setRoute === true) {
+    function routeToPharmacy(location)
+    {
+      if (userPos)
+      {
+        if (setRoute === true)
+        {
           myMap.removeControl(route)
         }
         myMap.flyTo(location.position);
@@ -134,43 +136,37 @@ class MapView extends Component {
           ],
           routeWhileDragging: false,
           router: null,
-          }).addTo(myMap);
+        }).addTo(myMap);
         // route = L.polyline(latlngs, {color: 'blue'}).addTo(myMap);
         setRoute = true;
         myMap.fitBounds(route.getBounds())
-      } else {
+      } else
+      {
         window.alert("Unable to get a route without your location \nTo set your location, click on the map")
       }
     }
 
-    // function showNearestPharmacy(){
-    //   var closestPharmacy = GetNearbyPharmacy()
-    //   var str = JSON.stringify(closestPharmacy.address);
-    //   console.log(str);
-    //   alert('La farmacia más cerca es: ' + str);
-    // }
 
-    // function showUserPos(){
-    //   var str = JSON.stringify(userPos);
-    //   console.log(str);
-    //   alert('La posicion del usuario es: ' + str);
-    // }
-
-    function setUserLocation(position) {
-      if(position) {
+    function setUserLocation(position)
+    {
+      if (position)
+      {
         userPos = position;
       }
     }
 
-    function setMap(map) {
+    function setMap(map)
+    {
       myMap = map;
     }
 
-    function clearRoute() {
+    function clearRoute()
+    {
       myMap.removeControl(route)
     }
 
-    function GetNearbyPharmacy() {
+    function GetNearbyPharmacy()
+    {
       var pharmacyLat;
       var pharmacyLng;
       var tempDist;
@@ -179,14 +175,16 @@ class MapView extends Component {
       var pharmacyTarget;
 
 
-      marks.forEach((pharmacy) => {
+      marks.forEach((pharmacy) =>
+      {
         pharmacyLat = pharmacy.position[0];
         pharmacyLng = pharmacy.position[1];
         theta = userPos.lng - pharmacyLng;
         tempDist = Math.sin(deg2rad(userPos.lat)) * Math.sin(deg2rad(pharmacyLat)) + Math.cos(deg2rad(userPos.lat)) * Math.cos(deg2rad(pharmacyLat)) * Math.cos(deg2rad(theta))
         tempDist = rad2deg(tempDist);
         tempDist = tempDist * 60 * 1.1515;
-        if (tempDist > dist || dist == null) {
+        if (tempDist > dist || dist == null)
+        {
           dist = tempDist
           pharmacyTarget = pharmacy;
         }
@@ -194,81 +192,90 @@ class MapView extends Component {
       return pharmacyTarget;
     }
 
-    function deg2rad(deg) {
+    function deg2rad(deg)
+    {
       return (deg * Math.PI / 180.0);
     }
 
-    function rad2deg(rad) {
+    function rad2deg(rad)
+    {
       return (rad * 180.0 / Math.PI);
     }
 
     return (
       <>
-      <p class="map-title">Click on the map to get your route</p>
-      <MapContainer
-        style={styleMap}
-        center={[28.112067, -15.439845,]}
-        zoom={13}>
+        <p class="map-title">Click on the map to get your route</p>
+        <MapContainer
+          style={styleMap}
+          center={[28.112067, -15.439845,]}
+          zoom={13}>
 
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-        />
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+          />
 
-        {marks.map((location) => (
-          <Marker position={location.position} icon={myIcon}>
-            <Popup>
-              {location.nPharmacy} {location.owner} <br />
-              {location.address}
-            </Popup>
-          </Marker>))}
-        <LocationMarker/>
-      </MapContainer>
-      
-       {/* <p>La ubicacion del usuario es {userPos.lat +  ' , ' + userPos.lng}</p> */}
-       <div id="buttons" className="mx-0">
-        <button class = "btn-login" id="location" onClick={MoveToLocation}>
-              Go to your location
+          {marks.map((location) => (
+            <Marker position={location.position} icon={myIcon}>
+              <Popup>
+                {location.nPharmacy} {location.owner} <br />
+                {location.address}
+              </Popup>
+            </Marker>))}
+          <LocationMarker />
+        </MapContainer>
+
+        {/* <p>La ubicacion del usuario es {userPos.lat +  ' , ' + userPos.lng}</p> */}
+        <div id="buttons" className="mx-0">
+          <button class="btn-login" id="location" onClick={MoveToLocation}>
+            Go to your location
           </button>
-          <button class = "btn-accion-nearby" id="nearby" onClick={NearbyPharmacy}>
-              Find near pharmacy
+          <button class="btn-accion-nearby" id="nearby" onClick={NearbyPharmacy}>
+            Find near pharmacy
           </button>
-          <button class = "btn-accion-clear" id="nearby" onClick={clearRoute}>
-              Clear route
+          <button class="btn-accion-clear" id="nearby" onClick={clearRoute}>
+            Clear route
           </button>
         </div>
         <div class="sidebar" id="sidebar">
-            { console.log("Pagina >>" + this.state.pagina) }
-            {marks.slice(this.state.pagina*3-3, this.state.pagina*3).map((location) => (
+          {console.log("Pagina >>" + this.state.pagina)}
+          {marks.slice(this.state.pagina * 3 - 3, this.state.pagina * 3).map((location) => (
             <div class="fila">
               <p id="rutas"> {location.address} </p>
               <div id="buttonsPharmacy">
                 <button class="btn-login" id="route" onClick={(e) => routeToPharmacy(location)}> Route </button>
-                <button class="btn-register" id="products" disabled> Products </button>
+                {console.log('location', location)}
+                <Link to={`${Routing.pharmacyProducts}${location.uid}`} class="card-link">
+                  <button class="btn-register" id="products"> Products </button>
+                </Link>
               </div>
               <hr></hr>
             </div>
           ))}
-          <PaginationControlled pagina={ this.state.pagina } handlePageChange={this.handlePageChange.bind(this)} />
+          <PaginationControlled pagina={this.state.pagina} handlePageChange={this.handlePageChange.bind(this)} />
         </div>
-      </> 
+      </>
     )
-    
+
   }
 
-  async componentDidMount() {
-    try {
+  async componentDidMount()
+  {
+    try
+    {
       const querySnapshot = await getDocs(collection(db, "pharmacies"));
       const pharmacyList = [];
 
-      querySnapshot.forEach((doc) => {
+      querySnapshot.forEach((doc) =>
+      {
         pharmacyList.push(doc.data());
       });
 
       this.setState({
         pharmacies: pharmacyList
       });
-    } catch (e) {
+    } catch (e)
+    {
       console.error("Error adding document: ", e);
     }
   }

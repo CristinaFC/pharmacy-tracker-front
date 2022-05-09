@@ -10,6 +10,7 @@ import { UserProtectedRoute } from './UserProtectedRoute';
 /** USER */
 import UserProfile from '../users/userProfile';
 import UserUpdate from '../users/userUpdate';
+import PharmacyProducts from '../products/user/pharmacyProducts';
 
 /** PHARMACY **/
 import PharmacyProfile from '../pharmacies/pharmacyProfile';
@@ -53,6 +54,7 @@ class RouterComponent extends Component
           <Route path={Routing.compareprice} element={<UserProtectedRoute><ComparePrice /></UserProtectedRoute>} />
           <Route path={Routing.products} element={<ProductsView />} />
           <Route path={`${Routing.productDetails}${Routing.id}`} element={<ProductDetails />} />
+          <Route path={`${Routing.pharmacyProducts}${Routing.id}`} element={<PharmacyProducts />} />
 
           {/** Pharmacy Role **/}
           <Route path={Routing.registerpharm} element={<UserProtectedRoute><RegisterPharm /></UserProtectedRoute>} />
