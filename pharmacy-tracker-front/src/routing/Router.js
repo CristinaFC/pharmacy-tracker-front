@@ -10,7 +10,7 @@ import { UserProtectedRoute } from './UserProtectedRoute';
 /** USER */
 import UserProfile from '../users/userProfile';
 import UserUpdate from '../users/userUpdate';
-import PharmacyProducts from '../products/user/pharmacyProducts';
+import { PharmacyProducts } from '../products/user/pharmacyProducts';
 
 /** PHARMACY **/
 import PharmacyProfile from '../pharmacies/pharmacyProfile';

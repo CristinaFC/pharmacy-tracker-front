@@ -5,6 +5,8 @@ import "leaflet/dist/leaflet.css";
 import { getDocs, collection } from "firebase/firestore/lite";
 import { db } from "../firebase/firebaseConfig";
 import PaginationControlled from "../components/PharmaciesPagination";
+import Routing from "../routing/Routing";
+import { Link } from "react-router-dom";
 
 
 var myIcon = L.icon({
@@ -29,7 +31,8 @@ class MapView extends Component
     this.state = {
       pharmacies: [],
       mapRef: [],
-      pagina: 1
+      pagina: 1,
+      uid: ''
     };
   }
 
@@ -242,7 +245,11 @@ class MapView extends Component
               <p id="rutas"> {location.address} </p>
               <div id="buttonsPharmacy">
                 <button class="btn-route" id="route" onClick={(e) => routeToPharmacy(location)}> Route </button>
-                <button class="btn-products" id="products" disabled> Products </button>
+
+
+                <Link to={`${Routing.pharmacyProducts}${location.uid}`} >
+                  <button class="btn-products" id="products"> Products </button>
+                </Link>
               </div>
               <hr></hr>
             </div>
@@ -252,6 +259,12 @@ class MapView extends Component
       </>
     )
 
+  }
+
+  handleClick(uid)
+  {
+    this.setState({ uid });
+    console.log('here ', this.state.uid);
   }
 
   async componentDidMount()
