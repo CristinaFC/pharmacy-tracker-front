@@ -96,10 +96,10 @@ export const ProductDetails = () =>
                 {product != undefined
                     ? <div class="product-container" >
                         <div class="product-info">
-                            <h6><b>Name</b></h6>
-                            <span>{product.name}</span>
+                            <h6><b><span>{product.name}</span></b></h6>
+                            <img src="https://www.farmaciaevacontreras.com/wp-content/uploads/2021/01/Paracetamol-Kern-Pharma-100-mg-ml-Solucion-Oral-30-ml.jpg" className='img' alt="Product Image" width={170}/>
 
-                            <h6><b>Description</b></h6>
+                            {/*<h6><b>Description</b></h6>*/}
                             <span>{product.description}</span>
                         </div>
                         <div class="tbl-content">

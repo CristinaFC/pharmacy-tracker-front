@@ -40,6 +40,7 @@ class ProductsView extends Component
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title"><b>{product.name}</b></h5>
+                    <img src="https://www.farmaciaevacontreras.com/wp-content/uploads/2021/01/Paracetamol-Kern-Pharma-100-mg-ml-Solucion-Oral-30-ml.jpg" className='img' alt="Product Image" width={225}/>
                     <p class="card-text">{product.description}</p>
                     <Link to={`${Routing.productDetails}${product.name}`} class="card-link">See details</Link>
                 </div>
