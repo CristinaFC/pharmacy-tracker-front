@@ -48,7 +48,6 @@ class MyProductsView extends Component
         {
             this.pharmacyProducts();
 
-            console.log('currentUser', this.state.currentUser);
         } catch (e)
         {
             console.error("Error reading document: ", e);

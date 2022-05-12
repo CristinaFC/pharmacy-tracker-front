@@ -33,6 +33,7 @@ export default class Routing
 
     static products = '/products';
     static productDetails = '/product-details/';
+    static pharmacyProducts = '/products/';
 
 
     static userProfile = '/yourProfile';
