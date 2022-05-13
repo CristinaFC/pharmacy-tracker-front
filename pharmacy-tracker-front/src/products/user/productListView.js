@@ -42,7 +42,7 @@ class ProductsView extends Component
                     <h5 class="card-title"><b>{product.name}</b></h5>
                     <img src={product.img} className='img' alt="NO PHOTO AVAILABLE" width={225}/>
                     <p class="card-text">{product.description}</p>
-                    <Link to={`${Routing.productDetails}${product.name}`} class="card-link">See details</Link>
+                    <Link to={`${Routing.productDetails}${product.name}`} class="card-link btn btn-outline-primary">See details</Link>
                 </div>
             </div>
         );
@@ -75,7 +75,7 @@ class ProductsView extends Component
                     </div>
                     <div class="ms-5 d-flex form-search">
                         <input type="search" class="form-control" placeholder="Search" aria-label="Search" name="searchProduct" onChange={(e) => this.handleChange(e)} value={this.state.searchProduct} />
-                        <button class="btn btn-outline-success" type="submit" name="searchProduct" onClick={(e) => this.clear(e)}>Clear</button>
+                        <button class="btn btn-outline-info" type="submit" name="searchProduct" onClick={(e) => this.clear(e)}>Clear</button>
                     </div>
                 </div>
                 <div>

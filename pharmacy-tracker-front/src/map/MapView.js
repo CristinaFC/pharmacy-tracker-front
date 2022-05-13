@@ -247,7 +247,7 @@ class MapView extends Component
         <div class="sidebar" id="sidebar">
           <div class="ms-5 d-flex form-search">
               <input type="search" class="form-control" placeholder="Search" aria-label="Search" name="searchPharmacy" onChange={(e) => this.handleChange(e)} value={this.state.searchPharmacy} />
-              <button class="btn btn-outline-success" type="submit" name="searchPharmacy" onClick={(e) => this.clear(e)}>Clear</button>
+              <button class="btn btn-outline-info" type="submit" name="searchPharmacy" onClick={(e) => this.clear(e)}>Clear</button>
           </div>
           {marks.filter((p) =>
             {

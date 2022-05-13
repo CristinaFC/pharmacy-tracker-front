@@ -58,7 +58,7 @@ class UserProfile extends Component
                     <li class="list-group-item">UID: {datos.uid}</li>
                     <li class="list-group-item">
                         <UserUpdateButton />
-                        <DeleteProfileButton />
+                        <DeleteProfileButton class="nav-logout"/>
                     </li>
                 </ul>
             </div>

@@ -251,7 +251,7 @@ class MyProductsView extends Component
                     <div>
                         <div class="ms-5 d-flex form-search">
                             <input type="search" class="form-control" placeholder="Search" aria-label="Search" name="searchProduct" onChange={(e) => this.handleChange(e)} value={this.state.searchProduct} />
-                            <button class="btn btn-outline-success" type="submit" name="searchProduct" onClick={(e) => this.clear(e)} >Clear</button>
+                            <button class="btn btn-outline-info" type="submit" name="searchProduct" onClick={(e) => this.clear(e)} >Clear</button>
                         </div>
                     </div>
                     <div class="add-button">

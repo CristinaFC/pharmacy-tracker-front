@@ -45,7 +45,7 @@ export const DeleteProfileButton = () => {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button onClick={handleClickOpen} className="btn-delete-account">
                 Delete account
             </Button>
             <Dialog

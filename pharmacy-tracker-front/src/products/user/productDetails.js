@@ -115,7 +115,7 @@ export const ProductDetails = () =>
 
                 <div class="title-container">
                     <h2>Details</h2>
-                    <Link to={Routing.products}>
+                    <Link to={Routing.products} className="back-space-arrow">
                         <KeyboardBackspaceIcon sx={{ color: "#7ED1A7" }} />
                     </Link>
                 </div>
@@ -158,7 +158,7 @@ export const ProductDetails = () =>
         return (<div class="container">
             <div class="title-container">
                 <h2>Details</h2>
-                <Link to={Routing.products}>
+                <Link to={Routing.products} className="back-space-arrow">
                     <KeyboardBackspaceIcon sx={{ color: "#7ED1A7" }} />
                 </Link>
             </div>

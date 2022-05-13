@@ -73,7 +73,7 @@ export const PharmacyProducts = () =>
                 <div class="card-body">
                     <h5 class="card-title"><b>{product.name}</b></h5>
                     <p class="card-text">{product.description}</p>
-                    <Link to={`${Routing.productDetails}${product.name}`} class="card-link">See details</Link>
+                    <Link to={`${Routing.productDetails}${product.name}`} class="card-link btn btn-outline-primary">See details</Link>
                 </div>
             </div>
         );

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { db } from '../firebase/firebaseConfig';
-import { getDoc, doc, setDoc } from 'firebase/firestore/lite';
+import { getDoc, doc } from 'firebase/firestore/lite';
 import { userConverter } from './user';
-import User from './user';
 import { getAuth } from 'firebase/auth';
 import { updateDoc } from 'firebase/firestore';
 
@@ -52,7 +51,7 @@ class UserUpdate extends Component {
                         </div>
                     </div>
                     {this.state.message ? <div><span>{this.state.message}</span></div> : ""}
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="edit-button">Update</button>
                 </form>
             </div>
         );
