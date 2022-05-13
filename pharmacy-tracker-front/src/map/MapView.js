@@ -31,7 +31,8 @@ class MapView extends Component
       pharmacies: [],
       mapRef: [],
       pagina: 1,
-      uid: ''
+      uid: '',
+      searchPharmacy: ''
     };
   }
 
