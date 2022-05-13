@@ -1,4 +1,4 @@
-import { getDoc, doc, getDocs, collection, updateDoc, deleteField, setDoc, query, where, collectionGroup } from 'firebase/firestore/lite';
+import { getDoc, doc, getDocs, collection, updateDoc, deleteField, setDoc, query, orderBy, where, collectionGroup } from 'firebase/firestore/lite';
 import { db } from '../firebase/firebaseConfig';
 
 
