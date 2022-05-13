@@ -31,8 +31,19 @@ class MapView extends Component
       pharmacies: [],
       mapRef: [],
       pagina: 1,
-      uid: ''
+      uid: '',
+      searchPharmacy: '',
+      pharmaciesListSize: 0
     };
+  }
+
+  handleChange = (e) =>
+  {
+      const name = e.target.name;
+
+      this.setState({
+          [name]: e.target.value,
+      });
   }
 
   handlePageChange(pagina)
@@ -40,14 +51,19 @@ class MapView extends Component
     this.setState({ pagina })
   }
 
+  clear(e)
+  {
+      this.setState({ [e.target.name]: '' });
+  }
+
   render()
   {
     const styleMap = { "width": "50%", "height": "75vh", "margin-left": "2%", "margin-top": "2%" }
     let marks = [];
     const { pharmacies } = this.state;
+    const regex = new RegExp(`${this.state.searchPharmacy}`, 'i');
     pharmacies.forEach((pharmacy) =>
     {
-      console.log('pharmacy.uid', pharmacy.uid);
       marks.push({ "address": pharmacy.Address, "position": [pharmacy.Location.latitude, pharmacy.Location.longitude], "nPharmacy": "Nº " + pharmacy.nPharmacy, "owner": pharmacy.Owner, "uid": pharmacy.uid });
     });
 
@@ -69,7 +85,6 @@ class MapView extends Component
           setPosition(e.latlng)
           setMap(map)
           map.flyTo(e.latlng, 17)
-          console.log(e.latlng)
           setUserLocation(e.latlng);
         },
       })
@@ -197,6 +212,7 @@ class MapView extends Component
     {
       return (rad * 180.0 / Math.PI);
     }
+    let size = 0;
 
     return (
       <>
@@ -233,20 +249,30 @@ class MapView extends Component
           </button>
         </div>
         <div class="sidebar" id="sidebar">
-          {console.log("Pagina >>" + this.state.pagina)}
-          {marks.slice(this.state.pagina * 5 - 5, this.state.pagina * 5).map((location) => (
-            <div class="fila">
-              <p id="rutas"> {location.address} </p>
-              <div id="buttonsPharmacy">
-                <button class="btn-route" id="route" onClick={(e) => routeToPharmacy(location)}> Route </button>
-                <Link to={`${Routing.pharmacyProducts}${location.uid}`} >
-                  <button class="btn-products" id="products"> Products </button>
-                </Link>
+          <div class="ms-5 d-flex form-search">
+              <input type="search" class="form-control" placeholder="Search" aria-label="Search" name="searchPharmacy" onChange={(e) => this.handleChange(e)} value={this.state.searchPharmacy} />
+              <button class="btn btn-outline-success" type="submit" name="searchPharmacy" onClick={(e) => this.clear(e)}>Clear</button>
+          </div>
+          {marks.filter((p) =>
+            {
+              if(regex.test(p.address))size++;
+              return regex.test(p.address);
+            })
+            .slice(this.state.pagina * 5 - 5, this.state.pagina * 5)
+            .map((location) => (
+              <div class="fila">
+                <p id="rutas"> {location.address} </p>
+                <div id="buttonsPharmacy">
+                  <button class="btn-route" id="route" onClick={(e) => routeToPharmacy(location)}> Route </button>
+                  <Link to={`${Routing.pharmacyProducts}${location.uid}`} >
+                    <button class="btn-products" id="products"> Products </button>
+                  </Link>
+                </div>
+                <hr></hr>
               </div>
-              <hr></hr>
-            </div>
-          ))}
-          <PaginationControlled pagina={this.state.pagina} handlePageChange={this.handlePageChange.bind(this)} />
+            ))
+          }
+          <PaginationControlled pagina={this.state.pagina} handlePageChange={this.handlePageChange.bind(this)} filteredAmount={size} />
         </div>
       </>
     )
@@ -256,7 +282,6 @@ class MapView extends Component
   handleClick(uid)
   {
     this.setState({ uid });
-    console.log('here ', this.state.uid);
   }
 
   async componentDidMount()

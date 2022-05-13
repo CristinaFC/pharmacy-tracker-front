@@ -71,7 +71,12 @@ code {
 #buttonsPharmacy > button {
   margin-left: 10px;
   margin-top: 10px;
-} 
+}
+
+#buttonsPharmacy > a {
+  margin-left: 10px;
+  margin-top: 10px;
+}
 
 /** USER PRODUCTS **/
 

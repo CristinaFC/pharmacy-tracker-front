@@ -12,10 +12,12 @@ export default function PaginationControlled(props)
         try
         {
             const allPharmacies = await getPharmacies();
-            setAmount(allPharmacies.length);
-        } catch (e)
+            if(props.filteredAmount === undefined) setAmount(allPharmacies.length);
+            else setAmount(props.filteredAmount);
+        } 
+        catch (e)
         {
-            console.log("error");
+            console.log("error", props.filteredAmount);
         }
     }
 
