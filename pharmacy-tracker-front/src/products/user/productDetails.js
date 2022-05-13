@@ -132,7 +132,7 @@ export const ProductDetails = () =>
                                 <thead>
                                     <tr>
                                         <th scope="col">Pharmacy</th>
-                                        <button onClick={sortPrice}><th scope="col">Price</th></button>
+                                        <button class="filterButton" onClick={sortPrice}><th scope="col">Price</th></button>
                                         <th scope="col">Stock</th>
                                         <th scope="col">Go to</th>
                                     </tr>
