@@ -28,7 +28,6 @@ import Home from '../home/home';
 import Login from '../components/Login';
 import Register from '../components/Register';
 import RegisterPharm from '../components/RegisterPharm';
-import ComparePrice from '../components/ComparePrice';
 import ProductsView from '../products/user/productListView';
 import ProductDetails from '../products/user/productDetails';
 
@@ -51,7 +50,6 @@ class RouterComponent extends Component
           <Route path={Routing.userProfile} element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
           <Route path={Routing.updateProfile} element={<ProtectedRoute><UserUpdate /></ProtectedRoute>} />
           <Route path={Routing.register} element={<UserProtectedRoute><Register /></UserProtectedRoute>} />
-          <Route path={Routing.compareprice} element={<UserProtectedRoute><ComparePrice /></UserProtectedRoute>} />
           <Route path={Routing.products} element={<ProductsView />} />
           <Route path={`${Routing.productDetails}${Routing.id}`} element={<ProductDetails />} />
           <Route path={`${Routing.pharmacyProducts}${Routing.id}`} element={<PharmacyProducts />} />

@@ -29,12 +29,9 @@ export default class Routing
     //static map = '/map';
 
     /** User role */
-    static compareprice = '/compareprice';
-
     static products = '/products';
     static productDetails = '/product-details/';
     static pharmacyProducts = '/products/';
-
 
     static userProfile = '/yourProfile';
     static updateProfile = '/updateProfile';
