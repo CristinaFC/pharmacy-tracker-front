@@ -196,6 +196,52 @@ export const getProducts = async () =>
 
 }
 
+export const getProductsAsc = async () =>
+{
+    try
+    {
+        const ref = collection(db, 'products');
+        const _query = query(ref, orderBy("price", "asc"));
+        const docSnapProducts = await getDocs(_query);
+        const products = [];
+
+        docSnapProducts.forEach((doc) =>
+        {
+            products.push(doc.data());
+        });
+
+        return products;
+
+    } catch (e)
+    {
+        console.log(e);
+    }
+
+}
+
+export const getProductsDesc = async () =>
+{
+    try
+    {
+        const ref = collection(db, 'products');
+        const _query = query(ref, orderBy("price", "desc"));
+        const docSnapProducts = await getDocs(_query);
+        const products = [];
+
+        docSnapProducts.forEach((doc) =>
+        {
+            products.push(doc.data());
+        });
+
+        return products;
+
+    } catch (e)
+    {
+        console.log(e);
+    }
+
+}
+
 
 
 
