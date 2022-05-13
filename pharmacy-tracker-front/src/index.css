@@ -75,6 +75,11 @@ code {
 
 .filterButton {
   border: none;
+  background: none;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+  text-transform: uppercase;
 }
 
 /** USER PRODUCTS **/
@@ -112,10 +117,10 @@ code {
 }
 
 .tbl-content th {
-  /* padding: 20px 15px;
-  text-align: left; */
+  /* padding: 20px 15px; */
+  text-align: left;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   color: #fff;
   text-transform: uppercase;
 }

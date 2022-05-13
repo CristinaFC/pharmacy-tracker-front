@@ -6,6 +6,7 @@ import { getAuth } from 'firebase/auth';
 import Map from '@mui/icons-material/Map';
 import MapComponent from '../../components/MapComponent';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 export const ProductDetails = () => 
 {
@@ -123,8 +124,6 @@ export const ProductDetails = () =>
                         <div class="product-info">
                             <h6><b><span>{product.name}</span></b></h6>
                             <img src="https://www.farmaciaevacontreras.com/wp-content/uploads/2021/01/Paracetamol-Kern-Pharma-100-mg-ml-Solucion-Oral-30-ml.jpg" className='img' alt="Product Image" width={170} />
-
-                            {/*<h6><b>Description</b></h6>*/}
                             <span>{product.description}</span>
                         </div>
                         <div class="tbl-content">
@@ -132,7 +131,7 @@ export const ProductDetails = () =>
                                 <thead>
                                     <tr>
                                         <th scope="col">Pharmacy</th>
-                                        <button class="filterButton" onClick={sortPrice}><th scope="col">Price</th></button>
+                                        <th scope="col"><button class="filterButton" onClick={sortPrice}>Price <FilterAltIcon fontSize='1rem'/></button></th>
                                         <th scope="col">Stock</th>
                                         <th scope="col">Go to</th>
                                     </tr>
