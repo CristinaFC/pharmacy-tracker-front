@@ -10,10 +10,12 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 export const ProductDetails = () => 
 {
     const [product, setProduct] = useState();
-    const [pharmacies, setPharmacy] = useState();
+    const [pharmacies, setPharmacies] = useState();
     const [pharmacy, setSelected] = useState();
     const [isShowingMap, setShowing] = useState(false);
     const [authUser, setAuthUser] = useState(false);
+    const [asc, setAsc] = useState(true);
+
     const name = useLocation().pathname.split('/')[2];
     useEffect(() =>
     {
@@ -35,7 +37,7 @@ export const ProductDetails = () =>
                 }
             });
 
-            setPharmacy(pharmacies);
+            setPharmacies(pharmacies);
 
         }
         function getAuthUser()
@@ -52,6 +54,29 @@ export const ProductDetails = () =>
 
     }, []);
 
+    function sortPrice()
+    {
+        setAsc(!asc);
+        const values = Array.from(pharmacies.values());
+        if (asc)
+        {
+
+            values.sort((a, b) =>
+            {
+                return a.products[product.id].price - b.products[product.id].price;
+            });
+            setPharmacies(values);
+        } else
+        {
+            values.sort((a, b) =>
+            {
+                return b.products[product.id].price - a.products[product.id].price;
+            });
+            setPharmacies(values);
+        }
+
+        console.log('values', pharmacies);
+    }
 
     function data(pharmacy)
     {
@@ -93,11 +118,11 @@ export const ProductDetails = () =>
                         <KeyboardBackspaceIcon sx={{ color: "#7ED1A7" }} />
                     </Link>
                 </div>
-                {product != undefined
+                {product !== undefined
                     ? <div class="product-container" >
                         <div class="product-info">
                             <h6><b><span>{product.name}</span></b></h6>
-                            <img src="https://www.farmaciaevacontreras.com/wp-content/uploads/2021/01/Paracetamol-Kern-Pharma-100-mg-ml-Solucion-Oral-30-ml.jpg" className='img' alt="Product Image" width={170}/>
+                            <img src="https://www.farmaciaevacontreras.com/wp-content/uploads/2021/01/Paracetamol-Kern-Pharma-100-mg-ml-Solucion-Oral-30-ml.jpg" className='img' alt="Product Image" width={170} />
 
                             {/*<h6><b>Description</b></h6>*/}
                             <span>{product.description}</span>
@@ -107,13 +132,13 @@ export const ProductDetails = () =>
                                 <thead>
                                     <tr>
                                         <th scope="col">Pharmacy</th>
-                                        <th scope="col">Price</th>
+                                        <button onClick={sortPrice}><th scope="col">Price</th></button>
                                         <th scope="col">Stock</th>
                                         <th scope="col">Go to</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {pharmacies != undefined ? pharmacies.map(pharmacy => data(pharmacy)) : ""}
+                                    {pharmacies !== undefined ? pharmacies.map(pharmacy => data(pharmacy)) : ""}
                                 </tbody>
                             </table>
                         </div>
@@ -138,7 +163,7 @@ export const ProductDetails = () =>
                     <KeyboardBackspaceIcon sx={{ color: "#7ED1A7" }} />
                 </Link>
             </div>
-            {product != undefined
+            {product !== undefined
                 ? <div class="product-container" >
                     <div class="product-info">
                         <h6><b>Name</b></h6>
@@ -154,7 +179,7 @@ export const ProductDetails = () =>
                                 </tr>
                             </thead>
                             <tbody>
-                                {pharmacies != undefined ? pharmacies.map(pharmacy => data(pharmacy)) : ""}
+                                {pharmacies !== undefined ? pharmacies.map(pharmacy => data(pharmacy)) : ""}
                             </tbody>
                         </table>
                     </div>
