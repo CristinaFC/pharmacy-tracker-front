@@ -88,13 +88,16 @@ code {
 /** USER PRODUCTS **/
 
 .products-container {
-  display: flex;
+  display: inline-block;
   flex-direction: row;
   width: 100%;
 }
 
 .card {
-  width: 18rem;  margin: 2%;
+  float: left;
+  width: 16rem;
+  height: 30rem; 
+  margin: 2%;
 }
 
 .product-container {
