@@ -142,6 +142,7 @@ export const getProductByName = async (name) =>
 {
     try
     {
+        name = decodeURI(name)
         const docRefProducts = query(collection(db, 'products'), where("name", "==", name));
         const docSnapProducts = await getDocs(docRefProducts);
         const products = [];
