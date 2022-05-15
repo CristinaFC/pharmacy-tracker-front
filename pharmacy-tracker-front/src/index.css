@@ -46,11 +46,14 @@ code {
   /* text-align: left; */
 }
 
-/* #rutas {
-  text-align: center;
-  font-size: 1rem;
-  width: 300px;
-} */
+.rutas {
+  background: linear-gradient(to right, #25b7c4, #25c481);
+  width: max-content;
+  margin: auto;
+  color: white;
+  padding: 10px;
+  border-radius: 10px 40px;
+}
 
 #buttons {
   text-align: left;
@@ -83,6 +86,10 @@ code {
   font-size: 14px;
   color: #fff;
   text-transform: uppercase;
+}
+
+.fila {
+  display: block;
 }
 
 /** USER PRODUCTS **/
@@ -445,6 +452,11 @@ button:hover,
 	border: 2px solid rgba(0,0,0,0.2);
 	background-clip: padding-box;
   display:none
+}
+
+/** SEARCH FORMS */
+.form-search {
+  margin-bottom: 10px;
 }
 
 /** ACCOUNT FORM **/

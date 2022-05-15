@@ -65,7 +65,15 @@ class MapView extends Component
     const regex = new RegExp(`${this.state.searchPharmacy}`, 'i');
     pharmacies.forEach((pharmacy) =>
     {
-      marks.push({ "address": pharmacy.Address, "position": [pharmacy.Location.latitude, pharmacy.Location.longitude], "nPharmacy": "Nº " + pharmacy.nPharmacy, "owner": pharmacy.Owner, "uid": pharmacy.uid });
+      marks.push({ "address": pharmacy.Address, 
+        "position": [pharmacy.Location.latitude, pharmacy.Location.longitude], 
+        "nPharmacy": "Nº " + pharmacy.nPharmacy, 
+        "mOpening": pharmacy.mOpening,
+        "mClosing": pharmacy.mClosing,
+        "eOpening": pharmacy.eOpening,
+        "eClosing": pharmacy.eClosing,
+        "owner": pharmacy.Owner, 
+        "uid": pharmacy.uid });
     });
 
     var userPos;
@@ -257,7 +265,10 @@ class MapView extends Component
             .slice(this.state.pagina * 5 - 5, this.state.pagina * 5)
             .map((location) => (
               <div class="fila">
-                <p id="rutas"> {location.address} </p>
+                <p class="rutas"> <em><strong>{location.address}</strong></em> <br></br>
+                  <strong>Morning Schelude:</strong> {location.mOpening}-{location.mClosing} <br></br>
+                  <strong>Evening Schelude:</strong> {location.eOpening}-{location.eClosing} 
+                </p>
                 <div id="buttonsPharmacy">
                   <button class="btn-route" id="route" onClick={() => routeToPharmacy(location)}> Route </button>
                   <Link to={`/products/${location.uid}`} >
