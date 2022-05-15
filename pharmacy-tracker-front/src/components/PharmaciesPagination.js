@@ -32,7 +32,7 @@ export default function PaginationControlled(props)
 
     return (
         <Pagination
-            count={amount % 6 > 0 ? Math.round(amount / 6) + 1 : amount / 4}
+            count={amount % 5 > 0 ? Math.round(amount / 5) + 1 : amount / 5}
             page={page}
             onChange={handleChange}
             defaultPage={1}

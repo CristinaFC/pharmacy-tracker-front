@@ -262,7 +262,7 @@ class MapView extends Component
               if(regex.test(p.address))size++;
               return regex.test(p.address);
             })
-            .slice(this.state.pagina * 5 - 5, this.state.pagina * 5)
+            .slice(this.state.pagina * 4 - 4, this.state.pagina * 4)
             .map((location) => (
               <div class="fila">
                 <p class="rutas"> <em><strong>{location.address}</strong></em> <br></br>
