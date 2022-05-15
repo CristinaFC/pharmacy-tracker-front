@@ -49,6 +49,7 @@ export const PharmacyProducts = () =>
                                 id: product.id,
                                 name: product.name,
                                 description: product.description,
+                                img: product.img,
                                 category: product.category,
                                 price: pharmacyProducts[key].price,
                                 stock: pharmacyProducts[key].stock
@@ -72,6 +73,7 @@ export const PharmacyProducts = () =>
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title"><b>{product.name}</b></h5>
+                    <img src={product.img} className='img' alt="NO PHOTO AVAILABLE" width={225}/>
                     <p class="card-text">{product.description}</p>
                     <Link to={`${Routing.productDetails}${product.name}`} class="card-link btn btn-outline-primary">See details</Link>
                 </div>
