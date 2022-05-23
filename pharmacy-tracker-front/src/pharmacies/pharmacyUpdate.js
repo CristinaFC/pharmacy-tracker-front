@@ -5,8 +5,10 @@ import { pharmacyConverter } from './pharmacy';
 import Pharmacy from './pharmacy';
 import { getAuth } from 'firebase/auth';
 
-class PharmacyUpdate extends Component {
-    constructor(props) {
+class PharmacyUpdate extends Component
+{
+    constructor(props)
+    {
         super(props);
         this.state = {
             address: '',
@@ -27,8 +29,10 @@ class PharmacyUpdate extends Component {
 
     }
 
-    async componentDidMount() {
-        try {
+    async componentDidMount()
+    {
+        try
+        {
             //Recoger el uid de la farmacia logeada
             const currentUser = getAuth().currentUser.uid;
             //Obtengo los datos de la BD que lo convierte a objeto Pharmacy (en este caso la farmacia llamada 1)
@@ -51,17 +55,21 @@ class PharmacyUpdate extends Component {
                 nPharmacy: pharmacy.nPharmacy,
             });
 
-            if (docSnap.exists()) {
+            if (docSnap.exists())
+            {
                 console.log("Document data:", pharmacy);
-            } else {
+            } else
+            {
                 console.log("No such document!");
             }
-        } catch (e) {
+        } catch (e)
+        {
             console.error("Error adding document: ", e);
         }
     }
 
-    render() {
+    render()
+    {
         return (
             <div class="account-update">
                 <form onSubmit={(e) => this.handleSubmit(e)}>
@@ -138,7 +146,8 @@ class PharmacyUpdate extends Component {
         );
     }
 
-    handleChangeLocation(e) {
+    handleChangeLocation(e)
+    {
         this.setState({
             location: {
                 ...this.state.location,
@@ -147,7 +156,8 @@ class PharmacyUpdate extends Component {
         })
     }
 
-    handleChange(e) {
+    handleChange(e)
+    {
         const name = e.target.name;
 
         this.setState({
@@ -155,19 +165,38 @@ class PharmacyUpdate extends Component {
         });
     }
 
-    async handleSubmit(e) {
+    async handleSubmit(e)
+    {
         e.preventDefault();
-        
-        try {
+
+        try
+        {
+            const { address, city, location, owner, phone, eClosing, eOpening, mClosing, mOpening, nPharmacy } = this.state;
+
             const currentUser = getAuth().currentUser.uid;
-            const ref = doc(db, "pharmacies", currentUser).withConverter(pharmacyConverter);
-            await setDoc(ref, new Pharmacy(this.state.address, this.state.city, this.state.location, this.state.owner, this.state.phone, this.state.eClosing, this.state.eOpening, this.state.mClosing, this.state.mOpening, this.state.nPharmacy));
+            const ref = doc(db, "pharmacies", currentUser);
+            await setDoc(ref, {
+
+                Address: address,
+                City: city,
+                Location: location,
+                Owner: owner,
+                Phone: phone,
+                eClosing: eClosing,
+                eOpening: eOpening,
+                mClosing: mClosing,
+                mOpening: mOpening,
+                nPharmacy: nPharmacy
+            }, { merge: true });
+
+
             this.setState({
                 message: 'Profile updated',
             })
 
-        } catch (e) {
-            console.error("Error adding document: ", e);
+        } catch (e)
+        {
+            console.error("Error updating document: ", e);
         }
     };
 }

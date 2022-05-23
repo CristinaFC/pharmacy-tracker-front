@@ -48,7 +48,7 @@ export const editPharmacyProduct = async (id, price = 0, stock = 0, productId) =
     {
 
         const ref = doc(db, "pharmacies", id);
-        await updateDoc(ref, {
+        await setDoc(ref, {
 
             products: {
                 [`${productId}`]: {
